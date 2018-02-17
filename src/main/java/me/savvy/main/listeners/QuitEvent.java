@@ -12,6 +12,6 @@ public class QuitEvent extends ApexListener implements Listener {
   public void onQuit(PlayerQuitEvent event) {
     Player player = event.getPlayer();
 
-    this.getPlayerCache().remove(player.getUniqueId());
+    this.removeFromCache(player.getUniqueId());
   }
 }

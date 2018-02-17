@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import me.savvy.api.players.ApexPlayer;
+import me.savvy.main.account.Account;
+import me.savvy.main.players.ApexPlayerImpl;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class ApexPlayerCache {
@@ -34,6 +37,12 @@ public class ApexPlayerCache {
   public void add(ApexPlayer apexPlayer) {
     if (this.has(apexPlayer.getUniqueId())) return;
     this.apexPlayers.put(apexPlayer.getUniqueId(), apexPlayer);
+  }
+  
+  public void add(UUID uuid) {
+      if (this.has(uuid)) return;
+      ApexPlayer apexPlayer = new ApexPlayerImpl(uuid);
+      add(apexPlayer);
   }
 
   public void remove(UUID uuid) {

@@ -12,8 +12,8 @@ public class JoinEvent extends ApexListener implements Listener {
 
   @EventHandler
   public void onJoin(PlayerJoinEvent event) {
-    ApexPlayer apexPlayer = new ApexPlayerImpl(event.getPlayer().getUniqueId());
+      this.addToCache(event.getPlayer().getUniqueId());
+    // What is this
     Bukkit.broadcastMessage(event.getPlayer().getName() + " just got BAMMED!");
-    this.getPlayerCache().add(apexPlayer);
   }
 }
