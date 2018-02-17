@@ -25,16 +25,16 @@ public class ApexPlayerCache {
     return this.get(player.getUniqueId());
   }
 
-  public Optional<ApexPlayer> get(UUID uuid) {
+  private Optional<ApexPlayer> get(UUID uuid) {
     if (!this.has(uuid)) return Optional.empty();
     return Optional.of(this.apexPlayers.get(uuid));
   }
 
-  public boolean has(UUID uuid) {
+  private boolean has(UUID uuid) {
     return this.apexPlayers.containsKey(uuid);
   }
 
-  public void add(ApexPlayer apexPlayer) {
+  private void add(ApexPlayer apexPlayer) {
     if (this.has(apexPlayer.getUniqueId())) return;
     this.apexPlayers.put(apexPlayer.getUniqueId(), apexPlayer);
   }
