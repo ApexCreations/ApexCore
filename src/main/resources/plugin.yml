@@ -1,0 +1,6 @@
+name: ApexCore
+version: ${project.version}
+main: me.savvy.ApexCore
+authors: [itsSavvy]
+description: ApexSuite Core Plugin
+website: http://github.com/Savvy
