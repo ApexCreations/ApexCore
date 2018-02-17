@@ -46,7 +46,7 @@ public class ApexPlayerCache {
   }
 
   public static ApexPlayerCache getInstance() {
-    return instance;
+    return instance == null ? new ApexPlayerCache() : instance;
   }
 
 }

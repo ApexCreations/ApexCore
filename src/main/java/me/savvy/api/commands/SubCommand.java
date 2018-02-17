@@ -21,25 +21,25 @@ public abstract class SubCommand {
     this.playerOnly = playerOnly;
   }
 
-  public abstract void onCommand(CommandSender commandSender, String[] args);
+  public abstract void execute(CommandSender commandSender, String[] args);
 
   public boolean isPlayerOnly() {
     return this.playerOnly;
   }
 
-  public String name() {
+  public String getName() {
     return this.name;
   }
 
-  public String info() {
+  public String getInfo() {
     return this.info;
   }
 
-  public String[] aliases() {
+  public String[] getAliases() {
     return this.aliases;
   }
 
-  public String permission() {
+  public String getPermission() {
     return this.permission;
   }
 }
