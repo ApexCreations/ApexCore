@@ -1,6 +1,6 @@
 package me.savvy.main.listeners;
 
-import me.savvy.ApexListener;
+import me.savvy.api.listeners.ApexListener;
 import me.savvy.api.players.ApexPlayer;
 import me.savvy.main.players.ApexPlayerImpl;
 import org.bukkit.Bukkit;
