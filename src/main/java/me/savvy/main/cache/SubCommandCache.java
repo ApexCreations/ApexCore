@@ -8,11 +8,9 @@ import me.savvy.api.commands.SubCommand;
 
 public class SubCommandCache {
 
-  private static SubCommandCache instance;
   private Set<SubCommand> subCommandSet;
 
-  private SubCommandCache() {
-    instance = this;
+  public SubCommandCache() {
     this.subCommandSet = new HashSet<>();
   }
 
@@ -22,10 +20,6 @@ public class SubCommandCache {
 
   public void remove(SubCommand subCommand) {
     this.subCommandSet.remove(subCommand);
-  }
-
-  public static SubCommandCache getInstance() {
-    return instance == null ? new SubCommandCache() : instance;
   }
 
   public Optional<SubCommand> search(String args) {

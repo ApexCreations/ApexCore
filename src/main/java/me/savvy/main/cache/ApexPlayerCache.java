@@ -12,12 +12,9 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class ApexPlayerCache {
-
-  private static ApexPlayerCache instance;
   private Map<UUID, ApexPlayer> apexPlayers;
 
   public ApexPlayerCache() {
-    instance = this;
     this.apexPlayers = new HashMap<>();
   }
 
@@ -53,9 +50,4 @@ public class ApexPlayerCache {
   public Map<UUID, ApexPlayer> getApexPlayers() {
     return Collections.unmodifiableMap(this.apexPlayers);
   }
-
-  public static ApexPlayerCache getInstance() {
-    return instance == null ? new ApexPlayerCache() : instance;
-  }
-
 }

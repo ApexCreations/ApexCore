@@ -12,14 +12,14 @@ public abstract class ApexListener {
   }
 
   protected ApexPlayerCache getPlayerCache() {
-    return ApexPlayerCache.getInstance();
+    return this.getPlugin().getApexAPI().getPlayerCache();
   }
   
   protected void removeFromCache(UUID uuid) {
-      ApexPlayerCache.getInstance().remove(uuid);
+      this.getPlayerCache().remove(uuid);
   }
   
   protected void addToCache(UUID uuid) {
-      ApexPlayerCache.getInstance().add(uuid);
+      this.getPlayerCache().add(uuid);
   }
 }
