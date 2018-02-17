@@ -1,6 +1,6 @@
 package me.savvy.main.listeners;
 
-import me.savvy.ApexListener;
+import me.savvy.api.listeners.ApexListener;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
