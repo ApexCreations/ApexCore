@@ -13,6 +13,7 @@ public class ApexPlayerImpl implements ApexPlayer {
   private final UUID uniqueId;
   private final Account account;
   private final Map<String, Location> homes;
+  private boolean staffChat;
 
   public ApexPlayerImpl(UUID uuid) {
     this.uniqueId = uuid;
@@ -33,5 +34,15 @@ public class ApexPlayerImpl implements ApexPlayer {
   @Override
   public UUID getUniqueId() {
     return this.uniqueId;
+  }
+
+  @Override
+  public boolean isInStaffChat() {
+    return this.staffChat;
+  }
+
+  @Override
+  public void setStaffChat(boolean staffChat) {
+    this.staffChat = staffChat;
   }
 }

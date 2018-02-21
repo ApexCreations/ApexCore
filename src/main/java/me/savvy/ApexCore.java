@@ -5,6 +5,7 @@ import java.util.HashMap;
 import me.savvy.api.commands.ApexCommand;
 import me.savvy.api.modules.Module;
 import me.savvy.main.listeners.JoinEvent;
+import me.savvy.main.modules.staffchat.StaffChatCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
@@ -35,6 +36,8 @@ public class ApexCore extends JavaPlugin {
 
   private void handleCommands() {
     this.accessCommandMap();
+    this.register(new StaffChatCommand("staffchat", "Use this for staff chat",
+        "You do not have permission for this", true, "sc"));
   }
 
   public void register(Listener... listeners) {

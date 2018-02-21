@@ -12,4 +12,8 @@ public interface ApexPlayer {
   Account getAccount();
 
   Map<String, Location> getHomes();
+
+  boolean isInStaffChat();
+
+  void setStaffChat(boolean b);
 }
