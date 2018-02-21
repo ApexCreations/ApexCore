@@ -40,8 +40,8 @@ public abstract class Module {
     return this.enabled;
   }
 
-  public void setEnabled(boolean b) {
-    this.enabled = b;
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
   }
 
   protected void generateConfig() {
