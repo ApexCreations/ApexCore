@@ -1,6 +1,8 @@
 package me.savvy;
 
+import me.savvy.api.commands.ApexCommand;
 import me.savvy.main.listeners.JoinEvent;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ApexCore extends JavaPlugin {
@@ -16,7 +18,12 @@ public class ApexCore extends JavaPlugin {
   }
 
   private void handleListeners() {
-    this.getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+      this.getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+  }
+  
+  private void registerCommands() {
+      
+        
   }
 
   @Override
