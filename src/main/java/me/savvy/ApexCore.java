@@ -40,13 +40,13 @@ public class ApexCore extends JavaPlugin {
         "You do not have permission for this", true, "sc"));
   }
 
-  public void register(Listener... listeners) {
+  private void register(Listener... listeners) {
     for (Listener listener : listeners) {
       this.getServer().getPluginManager().registerEvents(listener, this);
     }
   }
 
-  public void register(ApexCommand... commands) {
+  private void register(ApexCommand... commands) {
     for (ApexCommand nemeCommand : commands) {
       this.commandMap.register(nemeCommand.getName(), nemeCommand);
     }
@@ -75,7 +75,7 @@ public class ApexCore extends JavaPlugin {
     this.unregisterCommand(Bukkit.getPluginCommand(command));
   }
 
-  public void unregisterCommand(PluginCommand cmd) {
+  private void unregisterCommand(PluginCommand cmd) {
     try {
       Object map = getPrivateField(this.commandMap, "knownCommands");
       @SuppressWarnings("unchecked")
