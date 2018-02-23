@@ -22,7 +22,7 @@ public abstract class ApexCommand extends Command {
   }
 
   public ApexCommand(String name, boolean playerOnly) {
-    this(name, "apexcore.*", "Apex Command", playerOnly);
+    this(name, "Apex Command", "apexcore." + name, playerOnly);
   }
 
   public ApexCommand(String name, String description, String permission, boolean playerOnly,
@@ -34,6 +34,7 @@ public abstract class ApexCommand extends Command {
     this.setPermission(permission);
     this.playerOnly = playerOnly;
     this.setAliases(Arrays.asList(aliases));
+    this.setPermissionMessage(ChatColor.RED + "You do not have permission for this command!");
   }
 
   // Maybe handle usage messages in here in the future

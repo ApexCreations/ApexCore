@@ -3,7 +3,6 @@ package me.savvy;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import me.savvy.api.commands.ApexCommand;
-import me.savvy.api.database.DatabaseAdapter;
 import me.savvy.api.modules.Module;
 import me.savvy.main.commands.StaffChatCommand;
 import me.savvy.main.listeners.JoinEvent;
@@ -17,7 +16,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ApexCore extends JavaPlugin {
 
   private static ApexCore instance;
-  private DatabaseAdapter databaseAdapter;
   private CommandMap commandMap;
   private ApexAPI apexAPI;
 
@@ -34,18 +32,6 @@ public class ApexCore extends JavaPlugin {
     this.handleModules();
   }
 
-  private void handleDatabase() {
-    if (!this.getConfig().getBoolean("mysql.enabled")) {
-      return;
-    }
-    this.databaseAdapter = new DatabaseAdapter(
-        this.getConfig().getString("mysql.hostName"),
-        this.getConfig().getInt("mysql.port"),
-        this.getConfig().getString("mysql.userName"),
-        this.getConfig().getString("mysql.password"),
-        this.getConfig().getString("mysql.databaseName"));
-  }
-
   private void handleListeners() {
     this.register(new JoinEvent());
   }
@@ -54,8 +40,8 @@ public class ApexCore extends JavaPlugin {
     this.accessCommandMap();
     this.register(
         new StaffChatCommand("staffchat", "Use this for staff chat",
-            "You do not have permission for this", true, "sc"));
-  }
+            "apex.clearchat", true, "sc"));
+}
 
   private void register(Listener... listeners) {
     for (Listener listener : listeners) {

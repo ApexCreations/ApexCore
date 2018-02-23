@@ -2,17 +2,21 @@ package me.savvy.main.dao;
 
 import java.util.Optional;
 import java.util.UUID;
+import me.savvy.ApexCore;
 import me.savvy.api.dao.ApexDao;
 import me.savvy.api.database.DatabaseAdapter;
 import me.savvy.api.players.ApexPlayer;
 
 public class ApexMySQLDao implements ApexDao {
 
+  private ApexCore apexCore;
   private DatabaseAdapter databaseAdapter;
 
   public ApexMySQLDao() {
-    this.databaseAdapter = null;
+    this.apexCore = ApexCore.getInstance();
+    this.databaseAdapter = this.apexCore.getApexAPI().getDatabaseAdapter();
   }
+
   @Override
   public void insert(ApexPlayer apexPlayer) {
 
