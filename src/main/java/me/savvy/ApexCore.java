@@ -7,6 +7,7 @@ import me.savvy.api.database.DatabaseAdapter;
 import me.savvy.api.modules.Module;
 import me.savvy.main.commands.StaffChatCommand;
 import me.savvy.main.listeners.JoinEvent;
+import me.savvy.main.modules.chat.ChatModule;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
@@ -27,18 +28,16 @@ public class ApexCore extends JavaPlugin {
   @Override
   public void onEnable() {
     instance = this;
-    this.saveDefaultConfig();
     this.apexAPI = new ApexAPI();
-    this.handleDatabase();
     this.handleListeners();
     this.handleCommands();
+    this.handleModules();
   }
 
   private void handleDatabase() {
     if (!this.getConfig().getBoolean("mysql.enabled")) {
       return;
     }
-
     this.databaseAdapter = new DatabaseAdapter(
         this.getConfig().getString("mysql.hostName"),
         this.getConfig().getInt("mysql.port"),
@@ -67,6 +66,12 @@ public class ApexCore extends JavaPlugin {
   private void register(ApexCommand... commands) {
     for (ApexCommand apexCommand : commands) {
       this.commandMap.register(apexCommand.getName(), apexCommand);
+    }
+  }
+
+  private void register(Module... modules) {
+    for (Module module : modules) {
+      apexAPI.getApexModuleCache().register(module);
     }
   }
 
@@ -117,7 +122,7 @@ public class ApexCore extends JavaPlugin {
     return result;
   }
 
-  public DatabaseAdapter getDatabaseAdapter() {
-    return databaseAdapter;
+  private void handleModules() {
+    register(new ChatModule("Chat Module", "Handles all chat related activities"));
   }
 }
