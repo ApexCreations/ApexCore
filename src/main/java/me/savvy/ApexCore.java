@@ -5,7 +5,7 @@ import java.util.HashMap;
 import me.savvy.api.commands.ApexCommand;
 import me.savvy.api.modules.Module;
 import me.savvy.main.listeners.JoinEvent;
-import me.savvy.main.modules.staffchat.StaffChatCommand;
+import me.savvy.main.commands.StaffChatCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
@@ -40,13 +40,13 @@ public class ApexCore extends JavaPlugin {
         "You do not have permission for this", true, "sc"));
   }
 
-  public void register(Listener... listeners) {
+  private void register(Listener... listeners) {
     for (Listener listener : listeners) {
       this.getServer().getPluginManager().registerEvents(listener, this);
     }
   }
 
-  public void register(ApexCommand... commands) {
+  private void register(ApexCommand... commands) {
     for (ApexCommand apexCommand : commands) {
       this.commandMap.register(apexCommand.getName(), apexCommand);
     }
@@ -75,7 +75,7 @@ public class ApexCore extends JavaPlugin {
     this.unregisterCommand(Bukkit.getPluginCommand(command));
   }
 
-  public void unregisterCommand(PluginCommand cmd) {
+  private void unregisterCommand(PluginCommand cmd) {
     try {
       Object map = getPrivateField(this.commandMap, "knownCommands");
       @SuppressWarnings("unchecked")
