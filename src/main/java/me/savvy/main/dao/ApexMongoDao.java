@@ -1,13 +1,20 @@
 package me.savvy.main.dao;
 
 import me.savvy.api.dao.ApexDao;
+import me.savvy.api.database.DatabaseAdapter;
 import me.savvy.api.players.ApexPlayer;
 
 import java.util.Optional;
 import java.util.UUID;
 
 public class ApexMongoDao implements ApexDao {
-
+    
+    private DatabaseAdapter databaseAdapter;
+    
+    public ApexMongoDao() {
+        
+    }
+    
     @Override
     public void insert(ApexPlayer apexPlayer) {
         

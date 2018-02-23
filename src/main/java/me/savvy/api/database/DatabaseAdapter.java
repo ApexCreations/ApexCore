@@ -14,6 +14,7 @@ public class DatabaseAdapter {
   private ExecutorService executor;
   private ApexCore apexCore;
   private MySQL sql;
+  private Mongo mongo;
 
   public DatabaseAdapter(String host, int port, String user, String password,
       String database) {
@@ -75,4 +76,6 @@ public class DatabaseAdapter {
   public MySQL getMySQL() {
     return this.sql;
   }
+  
+  // TODO: Mongo
 }
