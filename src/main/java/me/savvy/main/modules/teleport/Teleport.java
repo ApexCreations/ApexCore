@@ -31,7 +31,7 @@ public class Teleport extends ApexCommand {
             MessageBuilder.create(this.getUsage()).send(player);
             return false;
         }
-        Player target = Bukkit.getPlayer(args[1]);
+        Player target = Bukkit.getPlayer(args[0]); // /tp <player> Player is args[0] in this case
         Location loc = target.getPlayer().getLocation();
         loc.setY(loc.getY() - 2);
 
