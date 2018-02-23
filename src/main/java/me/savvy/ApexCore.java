@@ -6,6 +6,7 @@ import me.savvy.api.commands.ApexCommand;
 import me.savvy.api.modules.Module;
 import me.savvy.main.listeners.JoinEvent;
 import me.savvy.main.commands.StaffChatCommand;
+import me.savvy.main.modules.chat.ChatModule;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
@@ -28,6 +29,7 @@ public class ApexCore extends JavaPlugin {
     this.apexAPI = new ApexAPI();
     this.handleListeners();
     this.handleCommands();
+    this.handleModules();
   }
 
   private void handleListeners() {
@@ -97,5 +99,9 @@ public class ApexCore extends JavaPlugin {
     Object result = objectField.get(object);
     objectField.setAccessible(false);
     return result;
+  }
+  
+  private void handleModules() {
+      getApexAPI().getApexModuleCache().register(new ChatModule("Chat", "handles all chat related activities"));
   }
 }
