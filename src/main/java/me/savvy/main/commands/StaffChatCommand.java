@@ -1,4 +1,4 @@
-package me.savvy.main.modules.staffchat;
+package me.savvy.main.commands;
 
 import java.util.Optional;
 import me.savvy.api.builders.MessageBuilder;

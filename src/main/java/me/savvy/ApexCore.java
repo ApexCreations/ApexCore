@@ -5,7 +5,7 @@ import java.util.HashMap;
 import me.savvy.api.commands.ApexCommand;
 import me.savvy.api.modules.Module;
 import me.savvy.main.listeners.JoinEvent;
-import me.savvy.main.modules.staffchat.StaffChatCommand;
+import me.savvy.main.commands.StaffChatCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
@@ -47,8 +47,8 @@ public class ApexCore extends JavaPlugin {
   }
 
   private void register(ApexCommand... commands) {
-    for (ApexCommand nemeCommand : commands) {
-      this.commandMap.register(nemeCommand.getName(), nemeCommand);
+    for (ApexCommand apexCommand : commands) {
+      this.commandMap.register(apexCommand.getName(), apexCommand);
     }
   }
 
