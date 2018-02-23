@@ -53,8 +53,9 @@ public class ApexCore extends JavaPlugin {
 
   private void handleCommands() {
     this.accessCommandMap();
-    this.register(new StaffChatCommand("staffchat", "Use this for staff chat",
-        "You do not have permission for this", true, "sc"));
+    this.register(
+        new StaffChatCommand("staffchat", "Use this for staff chat",
+            "You do not have permission for this", true, "sc"));
   }
 
   private void register(Listener... listeners) {
