@@ -47,8 +47,8 @@ public class ApexCore extends JavaPlugin {
   }
 
   public void register(ApexCommand... commands) {
-    for (ApexCommand nemeCommand : commands) {
-      this.commandMap.register(nemeCommand.getName(), nemeCommand);
+    for (ApexCommand apexCommand : commands) {
+      this.commandMap.register(apexCommand.getName(), apexCommand);
     }
   }
 
