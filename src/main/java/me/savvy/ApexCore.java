@@ -3,9 +3,10 @@ package me.savvy;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import me.savvy.api.commands.ApexCommand;
+import me.savvy.api.database.DatabaseAdapter;
 import me.savvy.api.modules.Module;
-import me.savvy.main.listeners.JoinEvent;
 import me.savvy.main.commands.StaffChatCommand;
+import me.savvy.main.listeners.JoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
@@ -15,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ApexCore extends JavaPlugin {
 
   private static ApexCore instance;
+  private DatabaseAdapter databaseAdapter;
   private CommandMap commandMap;
   private ApexAPI apexAPI;
 
@@ -25,9 +27,24 @@ public class ApexCore extends JavaPlugin {
   @Override
   public void onEnable() {
     instance = this;
+    this.saveDefaultConfig();
     this.apexAPI = new ApexAPI();
+    this.handleDatabase();
     this.handleListeners();
     this.handleCommands();
+  }
+
+  private void handleDatabase() {
+    if (!this.getConfig().getBoolean("mysql.enabled")) {
+      return;
+    }
+
+    this.databaseAdapter = new DatabaseAdapter(
+        this.getConfig().getString("mysql.hostName"),
+        this.getConfig().getInt("mysql.port"),
+        this.getConfig().getString("mysql.userName"),
+        this.getConfig().getString("mysql.password"),
+        this.getConfig().getString("mysql.databaseName"));
   }
 
   private void handleListeners() {
@@ -97,5 +114,9 @@ public class ApexCore extends JavaPlugin {
     Object result = objectField.get(object);
     objectField.setAccessible(false);
     return result;
+  }
+
+  public DatabaseAdapter getDatabaseAdapter() {
+    return databaseAdapter;
   }
 }

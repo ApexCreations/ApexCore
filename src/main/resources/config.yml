@@ -1,0 +1,7 @@
+mysql:
+  enabled: false
+  hostName: localhost
+  databaseName: ApexCore
+  port: 3306
+  userName: root
+  password: password
