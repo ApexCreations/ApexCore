@@ -49,8 +49,8 @@ public class ApexCore extends JavaPlugin {
       this.getServer().getPluginManager().registerEvents(listener, this);
     }
   }
-
-  private void register(ApexCommand... commands) {
+    // To use in Aerial
+  public void register(ApexCommand... commands) {
     for (ApexCommand apexCommand : commands) {
       this.commandMap.register(apexCommand.getName(), apexCommand);
     }
