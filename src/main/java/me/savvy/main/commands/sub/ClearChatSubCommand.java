@@ -2,6 +2,7 @@ package me.savvy.main.commands.sub;
 
 import me.savvy.api.builders.MessageBuilder;
 import me.savvy.api.commands.SubCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -14,7 +15,7 @@ public class ClearChatSubCommand extends SubCommand {
 
   @Override
   public void execute(CommandSender commandSender, String[] args) {
-    Player target = (Player) commandSender;
+    Player target = Bukkit.getPlayer(args[0]);
 
     if (target == null) {
       MessageBuilder.create("&cThat player is not currently online!").send(commandSender);
