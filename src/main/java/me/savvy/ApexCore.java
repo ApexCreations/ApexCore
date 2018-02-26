@@ -7,6 +7,7 @@ import me.savvy.api.modules.Module;
 import me.savvy.main.commands.StaffChatCommand;
 import me.savvy.main.listeners.JoinEvent;
 import me.savvy.main.modules.chat.ChatModule;
+import me.savvy.main.modules.chat.staff.StaffModule;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
@@ -110,5 +111,6 @@ public class ApexCore extends JavaPlugin {
 
   private void handleModules() {
     register(new ChatModule("Chat Module", "Handles all chat related activities"));
+    register(new StaffModule("Staff module", "For things like staff chat and staff mode"));
   }
 }
