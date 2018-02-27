@@ -18,7 +18,7 @@ public class SetSpawnCommand extends ApexCommand {
     Player player = (Player) commandSender;
 
     this.getAPI().getApexConfigCache().setSpawnLocation(player.getLocation());
-    MessageBuilder.create("&aYou have successfully update server spawn location");
+    MessageBuilder.create("&aYou have successfully updated server spawn location").send(player);
     return false;
   }
 }
