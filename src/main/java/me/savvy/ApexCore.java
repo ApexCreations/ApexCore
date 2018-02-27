@@ -6,6 +6,7 @@ import java.util.HashMap;
 import me.savvy.api.commands.ApexCommand;
 import me.savvy.api.modules.Module;
 import me.savvy.main.commands.SetSpawnCommand;
+import me.savvy.main.commands.SpawnCommand;
 import me.savvy.main.commands.StaffChatCommand;
 import me.savvy.main.listeners.JoinEvent;
 import me.savvy.main.modules.chat.ChatModule;
@@ -46,7 +47,7 @@ public class ApexCore extends JavaPlugin {
                 new StaffChatCommand("staffchat", "Use this for staff chat",
                         "apex.clearchat", true, "sc"), new SetSpawnCommand("setspawn",
                         "Set the spawn for the server/world", "apex.setspawn", true,
-                        "ss"));
+                        "ss"), new SpawnCommand("spawn", "Teleport to spawn", "aepx.spawn", true));
     }
 
     private void register(Listener... listeners) {
