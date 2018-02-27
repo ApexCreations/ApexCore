@@ -5,3 +5,7 @@ mysql:
   port: 3306
   userName: root
   password: password
+
+
+spawn:
+  teleportOnJoin: false

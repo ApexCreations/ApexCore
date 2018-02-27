@@ -1,23 +1,26 @@
 package me.savvy;
 
 import me.savvy.api.database.DatabaseAdapter;
+import me.savvy.main.cache.ApexConfigCache;
 import me.savvy.main.cache.ApexModuleCache;
 import me.savvy.main.cache.ApexPlayerCache;
 import me.savvy.main.cache.SubCommandCache;
 
 public class ApexAPI {
 
-  private ApexCore apexCore;
+  private final ApexCore apexCore;
+  private final ApexPlayerCache apexPlayerCache;
+  private final SubCommandCache subCommandCache;
+  private final ApexModuleCache apexModuleCache;
+  private final ApexConfigCache apexConfigCache;
   private DatabaseAdapter databaseAdapter;
-  private ApexPlayerCache apexPlayerCache;
-  private SubCommandCache subCommandCache;
-  private ApexModuleCache apexModuleCache;
 
   public ApexAPI() {
     this.apexCore = ApexCore.getInstance();
     this.apexPlayerCache = new ApexPlayerCache();
     this.apexModuleCache = new ApexModuleCache();
     this.subCommandCache = new SubCommandCache();
+    this.apexConfigCache = new ApexConfigCache(this.apexCore);
     this.handleDatabase();
   }
 
@@ -35,6 +38,10 @@ public class ApexAPI {
 
   public DatabaseAdapter getDatabaseAdapter() {
     return databaseAdapter;
+  }
+
+  public ApexConfigCache getApexConfigCache() {
+    return this.apexConfigCache;
   }
 
   private void handleDatabase() {
