@@ -12,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ApexCore extends JavaPlugin {
@@ -49,7 +50,7 @@ public class ApexCore extends JavaPlugin {
       this.getServer().getPluginManager().registerEvents(listener, this);
     }
   }
-    // To use in Aerial
+
   public void register(ApexCommand... commands) {
     for (ApexCommand apexCommand : commands) {
       this.commandMap.register(apexCommand.getName(), apexCommand);

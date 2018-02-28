@@ -2,7 +2,7 @@ package me.savvy.api.events.request;
 
 import org.bukkit.Location;
 
-public interface TeleportationRequest {
+public interface TeleportRequestHandler {
 
   /**
    * Reason why player can not teleport
