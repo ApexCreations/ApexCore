@@ -25,6 +25,8 @@ public class ClearChatSubCommand extends SubCommand {
     for (int i = 0; i < 201; i++) {
       target.sendMessage(" ");
     }
+
+    MessageBuilder.create("&aYour chat has been cleared!").send(commandSender);
     MessageBuilder.create(String.format("&aChat has been for %s!", target.getName()))
         .send(commandSender);
   }

@@ -10,9 +10,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class EconomyGiveSubCommand extends SubCommand {
+public class EconomyTakeSubCommand extends SubCommand {
 
-  public EconomyGiveSubCommand(String name, String info, String permission, boolean playerOnly,
+  public EconomyTakeSubCommand(String name, String info, String permission, boolean playerOnly,
       String... aliases) {
     super(name, info, permission, playerOnly, aliases);
   }
@@ -38,7 +38,7 @@ public class EconomyGiveSubCommand extends SubCommand {
 
     if (!Utils.isDouble(args[1])) {
       MessageBuilder.create(String
-          .format("&c&lERROR &7Incorrect Usage! Try /%s give <player> <amount>",
+          .format("&c&lERROR &7Incorrect Usage! Try /%s take <player> <amount>",
               this.getName())).send(commandSender);
       return;
     }
@@ -52,13 +52,13 @@ public class EconomyGiveSubCommand extends SubCommand {
     }
 
     double amount = Double.parseDouble(args[1]);
-    apexPlayer.getAccount().addToBalance(amount);
+    apexPlayer.getAccount().removeFromBalance(amount);
 
-    MessageBuilder.create("&a&lDEPOSIT &a" + amount + " &7has been deposited into your account!")
+    MessageBuilder.create("&a&lWITHDRAW &a" + amount + " &7has been withdrawn from your account!")
         .send(player);
 
     MessageBuilder.create(String
-        .format("&a&lDEPOSIT &a%s &7has been deposited into %s's account!", amount,
+        .format("&a&lWITHDRAW &a%s &7has been withdrawn from %s's account!", amount,
             player.getName())).send(commandSender);
   }
 }

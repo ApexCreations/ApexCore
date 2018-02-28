@@ -41,11 +41,11 @@ public abstract class ApexCommand extends Command {
   @Override
   public boolean execute(CommandSender commandSender, String label, String[] args) {
     if (!(commandSender instanceof Player) && this.playerOnly) {
-      MessageBuilder.create("&cThis command is for players only!").send(commandSender);
+      MessageBuilder.create("&cThis command is for players only!").withPrefix().send(commandSender);
       return true;
     }
     if (!commandSender.hasPermission(this.permission)) {
-      sendNoPermission(commandSender);
+      this.sendNoPermission(commandSender);
       return true;
     }
 
@@ -71,8 +71,7 @@ public abstract class ApexCommand extends Command {
   }
 
   private void sendNoPermission(CommandSender commandSender) {
-    MessageBuilder
-        .create(ChatColor.RED + this.getPermissionMessage())
+    MessageBuilder.create(ChatColor.RED + this.getPermissionMessage()).withPrefix()
         .send(commandSender);
   }
 

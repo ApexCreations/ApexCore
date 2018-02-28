@@ -1,5 +1,7 @@
 package me.savvy.api.commands;
 
+import me.savvy.ApexAPI;
+import me.savvy.ApexCore;
 import org.bukkit.command.CommandSender;
 
 public abstract class SubCommand {
@@ -41,5 +43,9 @@ public abstract class SubCommand {
 
   public String getPermission() {
     return this.permission;
+  }
+
+  public ApexAPI getAPI() {
+    return ApexCore.getInstance().getApexAPI();
   }
 }
