@@ -34,7 +34,7 @@ public class BalanceCommand extends ApexCommand {
 
     ApexPlayer apexPlayer = optionalApexPlayer.get();
 
-    if (apexPlayer.getAccount() != null) {
+    if (apexPlayer.getAccount() == null) {
       MessageBuilder.create("&cCould not find player account!").withPrefix().send(commandSender);
       return false;
     }

@@ -41,7 +41,7 @@ public class ApexCore extends JavaPlugin {
 
   private void handleCommands() {
     this.accessCommandMap();
-    // Looks pretty ugly if we're gonna do all the commands this way... will fix tomorrow
+    
     this.register(
         new StaffChatCommand("staffchat", "Use this for staff chat",
             "apex.clearchat", true, "sc"),
