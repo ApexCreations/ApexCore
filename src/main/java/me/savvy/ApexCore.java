@@ -6,7 +6,9 @@ import me.savvy.api.commands.ApexCommand;
 import me.savvy.api.modules.Module;
 import me.savvy.main.commands.SetSpawnCommand;
 import me.savvy.main.commands.SpawnCommand;
-import me.savvy.main.commands.StaffChatCommand;
+import me.savvy.main.listeners.QuitEvent;
+import me.savvy.main.modules.chat.staff.ChatListener;
+import me.savvy.main.modules.chat.staff.StaffChatCommand;
 import me.savvy.main.listeners.JoinEvent;
 import me.savvy.main.modules.chat.ChatModule;
 import me.savvy.main.modules.chat.staff.StaffModule;
@@ -36,12 +38,12 @@ public class ApexCore extends JavaPlugin {
   }
 
   private void handleListeners() {
-    this.register(new JoinEvent());
+    this.register(new JoinEvent(), new ChatListener(), new QuitEvent());
   }
 
   private void handleCommands() {
     this.accessCommandMap();
-    // Looks pretty ugly if we're gonna do all the commands this way... will fix tomorrow
+    
     this.register(
         new StaffChatCommand("staffchat", "Use this for staff chat",
             "apex.clearchat", true, "sc"),
