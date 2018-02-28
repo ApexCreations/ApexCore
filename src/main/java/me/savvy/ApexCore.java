@@ -6,7 +6,7 @@ import me.savvy.api.commands.ApexCommand;
 import me.savvy.api.modules.Module;
 import me.savvy.main.commands.SetSpawnCommand;
 import me.savvy.main.commands.SpawnCommand;
-import me.savvy.main.commands.StaffChatCommand;
+import me.savvy.main.modules.chat.staff.StaffChatCommand;
 import me.savvy.main.listeners.JoinEvent;
 import me.savvy.main.modules.chat.ChatModule;
 import me.savvy.main.modules.chat.staff.StaffModule;
