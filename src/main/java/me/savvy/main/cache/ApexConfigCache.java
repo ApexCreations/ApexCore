@@ -13,6 +13,8 @@ public class ApexConfigCache {
   private boolean teleportToSpawnOnJoin;
   private Location spawnLocation;
 
+  private int maxBalance, minBalance, defaultBalance;
+
   public ApexConfigCache(ApexCore apexCore) {
     this.apexCore = apexCore;
     this.config = this.apexCore.getConfig();
@@ -23,6 +25,18 @@ public class ApexConfigCache {
     this.teleportToSpawnOnJoin = this.config.getBoolean("teleportOnJoin", false);
     if (this.config.isSet("spawn.location")) {
       this.spawnLocation = Utils.fromString(this.config.getString("spawn.location"));
+    }
+
+    if (this.config.isSet("economy.defaultBalance")) {
+      this.defaultBalance = this.config.getInt("economy.defaultBalance");
+    }
+
+    if (this.config.isSet("economy.maxBalance")) {
+      this.maxBalance = this.config.getInt("economy.maxBalance");
+    }
+
+    if (this.config.isSet("economy.minBalance")) {
+      this.minBalance = this.config.getInt("economy.minBalance");
     }
   }
 
@@ -48,5 +62,17 @@ public class ApexConfigCache {
 
   public void setTeleportToSpawnOnJoin(boolean teleportToSpawnOnJoin) {
     this.teleportToSpawnOnJoin = teleportToSpawnOnJoin;
+  }
+
+  public int getDefaultBalance() {
+    return this.defaultBalance;
+  }
+
+  public int getMinBalance() {
+    return this.minBalance;
+  }
+
+  public int getMaxBalance() {
+    return this.maxBalance;
   }
 }

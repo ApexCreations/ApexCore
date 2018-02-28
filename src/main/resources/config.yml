@@ -6,6 +6,12 @@ mysql:
   userName: root
   password: password
 
+prefix: '&c&lApex&r'
+
+economy:
+  defaultBalance: 1000
+  maxBalance: 10000000
+  minBalance: 0
 
 spawn:
   teleportOnJoin: false

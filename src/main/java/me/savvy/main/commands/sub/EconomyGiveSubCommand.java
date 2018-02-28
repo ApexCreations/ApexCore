@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import me.savvy.api.builders.MessageBuilder;
 import me.savvy.api.commands.SubCommand;
+import me.savvy.api.exceptions.MaxMoneyException;
 import me.savvy.api.players.ApexPlayer;
 import me.savvy.main.utils.Utils;
 import org.bukkit.Bukkit;
@@ -52,7 +53,11 @@ public class EconomyGiveSubCommand extends SubCommand {
     }
 
     double amount = Double.parseDouble(args[1]);
-    apexPlayer.getAccount().addToBalance(amount);
+    try {
+      apexPlayer.getAccount().addToBalance(amount);
+    } catch (MaxMoneyException e) {
+      MessageBuilder.create("&c&lERROR &7" + e.getMessage());
+    }
 
     MessageBuilder.create("&a&lDEPOSIT &a" + amount + " &7has been deposited into your account!")
         .send(player);

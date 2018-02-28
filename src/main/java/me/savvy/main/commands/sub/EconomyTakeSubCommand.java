@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import me.savvy.api.builders.MessageBuilder;
 import me.savvy.api.commands.SubCommand;
+import me.savvy.api.exceptions.MaxMoneyException;
 import me.savvy.api.players.ApexPlayer;
 import me.savvy.main.utils.Utils;
 import org.bukkit.Bukkit;
@@ -52,10 +53,15 @@ public class EconomyTakeSubCommand extends SubCommand {
     }
 
     double amount = Double.parseDouble(args[1]);
-    apexPlayer.getAccount().removeFromBalance(amount);
+    try {
+      apexPlayer.getAccount().removeFromBalance(amount);
+    } catch (MaxMoneyException e) {
+      MessageBuilder.create("&c&lERROR &7" + e.getMessage());
+    }
 
-    MessageBuilder.create("&a&lWITHDRAW &a" + amount + " &7has been withdrawn from your account!")
-        .send(player);
+    MessageBuilder.create(String.
+        format("&a&lWITHDRAW &a%s &7has been withdrawn from your account!", amount
+        )).send(player);
 
     MessageBuilder.create(String
         .format("&a&lWITHDRAW &a%s &7has been withdrawn from %s's account!", amount,
