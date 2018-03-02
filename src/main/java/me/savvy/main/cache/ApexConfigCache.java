@@ -15,6 +15,8 @@ public class ApexConfigCache {
 
   private int maxBalance, minBalance, defaultBalance;
 
+  private String currencySymbol;
+
   public ApexConfigCache(ApexCore apexCore) {
     this.apexCore = apexCore;
     this.config = this.apexCore.getConfig();
@@ -31,13 +33,11 @@ public class ApexConfigCache {
       this.defaultBalance = this.config.getInt("economy.defaultBalance");
     }
 
-    if (this.config.isSet("economy.maxBalance")) {
-      this.maxBalance = this.config.getInt("economy.maxBalance");
-    }
+    this.maxBalance = this.config.getInt("economy.maxBalance", 10000000);
 
-    if (this.config.isSet("economy.minBalance")) {
-      this.minBalance = this.config.getInt("economy.minBalance");
-    }
+    this.minBalance = this.config.getInt("economy.minBalance", 0);
+
+    this.currencySymbol = this.getConfig().getString("economy.currencySymbol", "$");
   }
 
   public FileConfiguration getConfig() {
@@ -74,5 +74,13 @@ public class ApexConfigCache {
 
   public int getMaxBalance() {
     return this.maxBalance;
+  }
+
+  public String getCurrencySymbol() {
+    return currencySymbol;
+  }
+
+  public void setCurrencySymbol(String currencySymbol) {
+    this.currencySymbol = currencySymbol;
   }
 }

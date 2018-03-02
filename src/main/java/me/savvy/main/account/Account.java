@@ -15,6 +15,11 @@ public class Account {
   public Account(UUID accountOwner) {
     this.accountOwner = accountOwner;
     this.api = ApexCore.getInstance().getApexAPI();
+    this.load();
+  }
+
+  private void load() {
+    this.balance = BigDecimal.ZERO;
   }
 
   public BigDecimal getBalance() {
@@ -30,7 +35,7 @@ public class Account {
   }
 
   public void addToBalance(double amount) throws MaxMoneyException {
-    if (balance.intValueExact() + amount > api.getApexConfigCache().getMaxBalance()) {
+    if ((balance.intValueExact() + amount) > api.getApexConfigCache().getMaxBalance()) {
       throw new MaxMoneyException();
     }
 

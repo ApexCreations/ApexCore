@@ -40,8 +40,9 @@ public class BalanceCommand extends ApexCommand {
     }
 
     Account account = apexPlayer.getAccount();
-
-    MessageBuilder.create("&a&lBALANCE &7&l>> &a&l" + Utils.formatCurrency(account.getBalance()));
+    String currency = this.getAPI().getApexConfigCache().getCurrencySymbol();
+    MessageBuilder.create("&a&lBALANCE &7&l>> &a&l" + currency + Utils.formatCurrency(account.getBalance()))
+        .send(commandSender);
 
     return false;
   }

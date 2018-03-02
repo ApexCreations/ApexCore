@@ -20,19 +20,19 @@ public class EconomyGiveSubCommand extends SubCommand {
 
   @Override
   public void execute(CommandSender commandSender, String[] args) {
-    args = Arrays.copyOfRange(args, 1, args.length - 1);
-
+    args = Arrays.copyOfRange(args, 1, args.length);
+    System.out.println(Arrays.toString(args));
     Player player = Bukkit.getPlayer(args[0]);
 
     if (player == null) {
-      MessageBuilder.create("&c&lERROR &7Could not find player!").withPrefix().send(commandSender);
+      MessageBuilder.create("&c&lERROR &7Could not find player!").send(commandSender);
       return;
     }
 
     Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player);
 
     if (!optionalApexPlayer.isPresent()) {
-      MessageBuilder.create("&c&lERROR &7Could not find player data!").withPrefix()
+      MessageBuilder.create("&c&lERROR &7Could not find player data!")
           .send(commandSender);
       return;
     }
@@ -53,10 +53,12 @@ public class EconomyGiveSubCommand extends SubCommand {
     }
 
     double amount = Double.parseDouble(args[1]);
+
     try {
       apexPlayer.getAccount().addToBalance(amount);
     } catch (MaxMoneyException e) {
-      MessageBuilder.create("&c&lERROR &7" + e.getMessage());
+      MessageBuilder.create("&c&lERROR &7" + e.getMessage()).send(commandSender);
+      return;
     }
 
     MessageBuilder.create("&a&lDEPOSIT &a" + amount + " &7has been deposited into your account!")

@@ -4,13 +4,17 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import me.savvy.api.commands.ApexCommand;
 import me.savvy.api.modules.Module;
+import me.savvy.main.commands.BalanceCommand;
+import me.savvy.main.commands.ClearChatCommand;
+import me.savvy.main.commands.EconomyCommand;
 import me.savvy.main.commands.SetSpawnCommand;
 import me.savvy.main.commands.SpawnCommand;
+import me.savvy.main.commands.TeleportCommand;
+import me.savvy.main.listeners.JoinEvent;
 import me.savvy.main.listeners.QuitEvent;
+import me.savvy.main.modules.chat.ChatModule;
 import me.savvy.main.modules.chat.staff.ChatListener;
 import me.savvy.main.modules.chat.staff.StaffChatCommand;
-import me.savvy.main.listeners.JoinEvent;
-import me.savvy.main.modules.chat.ChatModule;
 import me.savvy.main.modules.chat.staff.StaffModule;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
@@ -43,7 +47,7 @@ public class ApexCore extends JavaPlugin {
 
   private void handleCommands() {
     this.accessCommandMap();
-    
+
     this.register(
         new StaffChatCommand("staffchat", "Use this for staff chat",
             "apex.clearchat", true, "sc"),
@@ -51,7 +55,20 @@ public class ApexCore extends JavaPlugin {
         new SetSpawnCommand("setspawn", "Set the spawn for the server/world",
             "apex.setspawn", true, "ss"),
 
-        new SpawnCommand("spawn", "Teleport to spawn", "apex.spawn", true));
+        new SpawnCommand("spawn", "Teleport to spawn",
+            "apex.spawn", true),
+
+        new BalanceCommand("balance", "Check a player's balance!",
+            "apex.balance", false, "bal", "money"),
+
+        new EconomyCommand("economy", "Manage your player's balance!",
+            "apex.economy", false, "eco"),
+
+        new ClearChatCommand("clearchat", "Clear global chat!",
+            "apex.clearchat", false, "cc"),
+
+        new TeleportCommand("teleport", "Teleport to a player",
+            "apex.teleport", true, "tp"));
   }
 
   private void register(Listener... listeners) {

@@ -7,7 +7,17 @@ import org.bukkit.Location;
 
 public class Utils {
 
-  private static DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
+  private static DecimalFormat decimalFormat;
+
+  private static DecimalFormat getDecimalFormat() {
+    if (decimalFormat == null) {
+      decimalFormat = new DecimalFormat();
+      decimalFormat.setMaximumFractionDigits(2);
+      decimalFormat.setMinimumFractionDigits(0);
+      decimalFormat.setGroupingUsed(false);
+    }
+    return decimalFormat;
+  }
 
   public static boolean isDouble(String s) {
     try {
@@ -41,7 +51,7 @@ public class Utils {
   }
 
   public static String formatCurrency(BigDecimal bigDecimal) {
-    return decimalFormat.format(bigDecimal.stripTrailingZeros());
+    return getDecimalFormat().format(bigDecimal);
   }
 
   public static Location fromString(String string) {
