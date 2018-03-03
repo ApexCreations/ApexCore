@@ -49,7 +49,7 @@ public class ApexCore extends JavaPlugin {
     if (Bukkit.getServer().getPluginManager().getPlugin("Vault") != null) {
       Bukkit.getServer().getServicesManager().register(Economy.class, new ApexEconomy(this), this, ServicePriority.Highest);
     } else {
-      getLogger().severe("Could not find vault shutting down! Avoiding economy registration");
+      getLogger().severe("Could not find vault, avoiding economy registration");
       this.getApexAPI().getApexConfigCache().setEconomyEnabled(false);
     }
   }
