@@ -105,4 +105,8 @@ public class ApexConfigCache {
   public String getCurrencyNameSingular() {
     return currencyNameSingular;
   }
+
+  public void setEconomyEnabled(boolean economyEnabled) {
+    this.economyEnabled = economyEnabled;
+  }
 }

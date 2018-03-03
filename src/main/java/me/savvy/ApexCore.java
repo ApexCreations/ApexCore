@@ -3,6 +3,7 @@ package me.savvy;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import me.savvy.api.commands.ApexCommand;
+import me.savvy.api.economy.ApexEconomy;
 import me.savvy.api.modules.Module;
 import me.savvy.main.commands.BalanceCommand;
 import me.savvy.main.commands.ClearChatCommand;
@@ -16,10 +17,12 @@ import me.savvy.main.modules.chat.ChatModule;
 import me.savvy.main.modules.chat.staff.ChatListener;
 import me.savvy.main.modules.chat.staff.StaffChatCommand;
 import me.savvy.main.modules.chat.staff.StaffModule;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ApexCore extends JavaPlugin {
@@ -39,6 +42,16 @@ public class ApexCore extends JavaPlugin {
     this.handleListeners();
     this.handleCommands();
     this.handleModules();
+    this.handleVault();
+  }
+
+  private void handleVault() {
+    if (Bukkit.getServer().getPluginManager().getPlugin("Vault") != null) {
+      Bukkit.getServer().getServicesManager().register(Economy.class, new ApexEconomy(this), this, ServicePriority.Highest);
+    } else {
+      getLogger().severe("Could not find vault shutting down! Avoiding economy registration");
+      this.getApexAPI().getApexConfigCache().setEconomyEnabled(false);
+    }
   }
 
   private void handleListeners() {
