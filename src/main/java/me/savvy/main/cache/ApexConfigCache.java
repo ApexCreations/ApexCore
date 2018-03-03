@@ -25,25 +25,40 @@ public class ApexConfigCache {
   }
 
   private void load() {
-    this.teleportToSpawnOnJoin = this.config.getBoolean("teleportOnJoin", false);
+    this.teleportToSpawnOnJoin = this.config.getBoolean("spawn.teleportOnJoin", false);
     if (this.config.isSet("spawn.location")) {
       this.spawnLocation = Utils.fromString(this.config.getString("spawn.location"));
     }
-
     if (this.config.isSet("economy.defaultBalance")) {
-      this.defaultBalance = this.config.getInt("economy.defaultBalance");
+      this.defaultBalance = this.config.getInt("economy.defaultBalance", 1000);
     }
-
-    this.maxBalance = this.config.getInt("economy.maxBalance", 10000000);
-
-    this.minBalance = this.config.getInt("economy.minBalance", 0);
-
-    this.currencySymbol = this.getConfig().getString("economy.currencySymbol", "$");
-
-    this.economyEnabled = this.getConfig().getBoolean("economy.enabled", true);
     this.economyName = this.getConfig().getString("economy.name", "Apex");
+    this.economyEnabled = this.getConfig().getBoolean("economy.enabled", true);
+    this.currencySymbol = this.getConfig().getString("economy.currencySymbol", "$");
     this.currencyNameSingular = this.getConfig().getString("economy.singularName", "Dollar");
     this.currencyNameSingular = this.getConfig().getString("economy.pluralName", "Dollars");
+    this.minBalance = this.config.getInt("economy.minBalance", 0);
+    this.maxBalance = this.config.getInt("economy.maxBalance", 10000000);
+  }
+
+  public void save() {
+    this.config.set("spawn.teleportOnJoin", this.teleportToSpawnOnJoin);
+    if (this.spawnLocation != null) {
+      this.config.set("spawn.location", Utils.toString(this.spawnLocation));
+    }
+    this.config.set("economy.name", this.economyName);
+    this.config.set("economy.enabled", this.economyEnabled);
+    this.config.set("economy.currencySymbol", this.currencySymbol);
+    this.config.set("economy.singularName", this.currencyNameSingular);
+    this.config.set("economy.pluralName", this.currencyNamePlural);
+    this.config.set("economy.defaultBalance", this.defaultBalance);
+    this.config.set("economy.minBalance", this.minBalance);
+    this.config.set("economy.maxBalance", this.maxBalance);
+    this.saveConfig();
+  }
+
+  private void saveConfig() {
+    this.apexCore.saveConfig();
   }
 
   public FileConfiguration getConfig() {
@@ -94,6 +109,10 @@ public class ApexConfigCache {
     return economyEnabled;
   }
 
+  public void setEconomyEnabled(boolean economyEnabled) {
+    this.economyEnabled = economyEnabled;
+  }
+
   public String getEconomyName() {
     return economyName;
   }
@@ -104,9 +123,5 @@ public class ApexConfigCache {
 
   public String getCurrencyNameSingular() {
     return currencyNameSingular;
-  }
-
-  public void setEconomyEnabled(boolean economyEnabled) {
-    this.economyEnabled = economyEnabled;
   }
 }

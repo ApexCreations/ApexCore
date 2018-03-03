@@ -105,6 +105,7 @@ public class ApexCore extends JavaPlugin {
   @Override
   public void onDisable() {
     this.getApexAPI().getApexModuleCache().getAllModules().forEach(Module::terminate);
+    this.apexAPI.getApexConfigCache().save();
   }
 
   public ApexAPI getApexAPI() {
