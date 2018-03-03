@@ -27,13 +27,12 @@ public class Account {
   }
 
   public void setBalance(BigDecimal balance) throws MaxMoneyException {
-    if (balance.doubleValue() + this.balance.doubleValue() > api.getApexConfigCache().getMaxBalance() ||
-        balance.doubleValue() - this.balance.doubleValue() < api.getApexConfigCache().getMinBalance()) {
-
-
+    if ((balance.doubleValue() + this.balance.doubleValue()) >
+        api.getApexConfigCache().getMaxBalance() ||
+        (balance.doubleValue() - this.balance.doubleValue()) <
+            api.getApexConfigCache().getMinBalance()) {
       throw new MaxMoneyException();
     }
-
     this.balance = balance;
   }
 

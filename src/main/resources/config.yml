@@ -9,7 +9,10 @@ mysql:
 prefix: '&c&lApex&r'
 
 economy:
+  enabled: true
   currencySymbol: '$'
+  singularName: 'Dollar'
+  pluralName: 'Dollars'
   defaultBalance: 1000
   maxBalance: 10000000
   minBalance: 0

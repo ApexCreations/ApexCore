@@ -12,7 +12,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class ApexPlayerCache {
-  private Map<UUID, ApexPlayer> apexPlayers;
+
+  private final Map<UUID, ApexPlayer> apexPlayers;
 
   public ApexPlayerCache() {
     this.apexPlayers = new HashMap<>();
@@ -22,16 +23,16 @@ public class ApexPlayerCache {
     return this.get(player.getUniqueId());
   }
 
-  private Optional<ApexPlayer> get(UUID uuid) {
+  public Optional<ApexPlayer> get(UUID uuid) {
     if (!this.has(uuid)) return Optional.empty();
     return Optional.of(this.apexPlayers.get(uuid));
   }
 
-  private boolean has(UUID uuid) {
+  public boolean has(UUID uuid) {
     return this.apexPlayers.containsKey(uuid);
   }
 
-  private void add(ApexPlayer apexPlayer) {
+  public void add(ApexPlayer apexPlayer) {
     if (this.has(apexPlayer.getUniqueId())) return;
     this.apexPlayers.put(apexPlayer.getUniqueId(), apexPlayer);
   }

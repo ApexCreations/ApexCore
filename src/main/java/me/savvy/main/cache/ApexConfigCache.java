@@ -15,7 +15,8 @@ public class ApexConfigCache {
 
   private int maxBalance, minBalance, defaultBalance;
 
-  private String currencySymbol;
+  private String currencySymbol, economyName, currencyNameSingular, currencyNamePlural;
+  private boolean economyEnabled;
 
   public ApexConfigCache(ApexCore apexCore) {
     this.apexCore = apexCore;
@@ -38,6 +39,11 @@ public class ApexConfigCache {
     this.minBalance = this.config.getInt("economy.minBalance", 0);
 
     this.currencySymbol = this.getConfig().getString("economy.currencySymbol", "$");
+
+    this.economyEnabled = this.getConfig().getBoolean("economy.enabled", true);
+    this.economyName = this.getConfig().getString("economy.name", "Apex");
+    this.currencyNameSingular = this.getConfig().getString("economy.singularName", "Dollar");
+    this.currencyNameSingular = this.getConfig().getString("economy.pluralName", "Dollars");
   }
 
   public FileConfiguration getConfig() {
@@ -82,5 +88,21 @@ public class ApexConfigCache {
 
   public void setCurrencySymbol(String currencySymbol) {
     this.currencySymbol = currencySymbol;
+  }
+
+  public boolean isEconomyEnabled() {
+    return economyEnabled;
+  }
+
+  public String getEconomyName() {
+    return economyName;
+  }
+
+  public String getCurrencyNamePlural() {
+    return currencyNamePlural;
+  }
+
+  public String getCurrencyNameSingular() {
+    return currencyNameSingular;
   }
 }
