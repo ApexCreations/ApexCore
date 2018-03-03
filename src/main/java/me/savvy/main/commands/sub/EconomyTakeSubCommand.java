@@ -1,5 +1,6 @@
 package me.savvy.main.commands.sub;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Optional;
 import me.savvy.api.builders.MessageBuilder;
@@ -20,26 +21,26 @@ public class EconomyTakeSubCommand extends SubCommand {
 
   @Override
   public void execute(CommandSender commandSender, String[] args) {
-    args = Arrays.copyOfRange(args, 1, args.length - 1);
+    args = Arrays.copyOfRange(args, 1, args.length);
 
     Player player = Bukkit.getPlayer(args[0]);
 
     if (player == null) {
-      MessageBuilder.create("&c&lERROR &7Could not find player!").withPrefix().send(commandSender);
+      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player!").withPrefix().send(commandSender);
       return;
     }
 
     Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player);
 
     if (!optionalApexPlayer.isPresent()) {
-      MessageBuilder.create("&c&lERROR &7Could not find player data!").withPrefix()
+      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player data!").withPrefix()
           .send(commandSender);
       return;
     }
 
     if (!Utils.isDouble(args[1])) {
       MessageBuilder.create(String
-          .format("&c&lERROR &7Incorrect Usage! Try /%s take <player> <amount>",
+          .format("&c&lERROR &7&l>> &cIncorrect Usage! Try /%s take <player> <amount>",
               this.getName())).send(commandSender);
       return;
     }
@@ -47,7 +48,7 @@ public class EconomyTakeSubCommand extends SubCommand {
     ApexPlayer apexPlayer = optionalApexPlayer.get();
 
     if (apexPlayer.getAccount() == null) {
-      MessageBuilder.create("&c&lERROR &7Could not find player account!").withPrefix()
+      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player account!").withPrefix()
           .send(commandSender);
       return;
     }
@@ -56,15 +57,19 @@ public class EconomyTakeSubCommand extends SubCommand {
     try {
       apexPlayer.getAccount().removeFromBalance(amount);
     } catch (MaxMoneyException e) {
-      MessageBuilder.create("&c&lERROR &7" + e.getMessage());
+      MessageBuilder.create("&c&lERROR &7&l>> &c" + e.getMessage());
+      return;
     }
 
+    String amt = Utils.formatCurrency(BigDecimal.valueOf(amount));
+    String currency = this.getAPI().getApexConfigCache().getCurrencySymbol();
+
     MessageBuilder.create(String.
-        format("&a&lWITHDRAW &a%s &7has been withdrawn from your account!", amount
+        format("&c&lWITHDRAW &7&l>> &c&l%s%s &7has been withdrawn from your account!", currency, amt
         )).send(player);
 
     MessageBuilder.create(String
-        .format("&a&lWITHDRAW &a%s &7has been withdrawn from %s's account!", amount,
+        .format("&c&lWITHDRAW &7&l>> &c&l%s%s &7has been withdrawn from %s's account!", currency, amt,
             player.getName())).send(commandSender);
   }
 }

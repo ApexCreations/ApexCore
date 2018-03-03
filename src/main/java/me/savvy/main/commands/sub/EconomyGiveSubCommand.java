@@ -1,5 +1,6 @@
 package me.savvy.main.commands.sub;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Optional;
 import me.savvy.api.builders.MessageBuilder;
@@ -25,21 +26,21 @@ public class EconomyGiveSubCommand extends SubCommand {
     Player player = Bukkit.getPlayer(args[0]);
 
     if (player == null) {
-      MessageBuilder.create("&c&lERROR &7Could not find player!").send(commandSender);
+      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player!").send(commandSender);
       return;
     }
 
     Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player);
 
     if (!optionalApexPlayer.isPresent()) {
-      MessageBuilder.create("&c&lERROR &7Could not find player data!")
+      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player data!")
           .send(commandSender);
       return;
     }
 
     if (!Utils.isDouble(args[1])) {
       MessageBuilder.create(String
-          .format("&c&lERROR &7Incorrect Usage! Try /%s give <player> <amount>",
+          .format("&c&lERROR &7&l>> &cIncorrect Usage! Try /%s give <player> <amount>",
               this.getName())).send(commandSender);
       return;
     }
@@ -47,7 +48,7 @@ public class EconomyGiveSubCommand extends SubCommand {
     ApexPlayer apexPlayer = optionalApexPlayer.get();
 
     if (apexPlayer.getAccount() == null) {
-      MessageBuilder.create("&c&lERROR &7Could not find player account!").withPrefix()
+      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player account!").withPrefix()
           .send(commandSender);
       return;
     }
@@ -61,11 +62,15 @@ public class EconomyGiveSubCommand extends SubCommand {
       return;
     }
 
-    MessageBuilder.create("&a&lDEPOSIT &a" + amount + " &7has been deposited into your account!")
+    String amt = Utils.formatCurrency(BigDecimal.valueOf(amount));
+    String currency = this.getAPI().getApexConfigCache().getCurrencySymbol();
+
+    MessageBuilder.create(String.
+        format("&a&lDEPOSIT &7&l>> &a&l%s%s &7has been deposited into your account!", currency, amt))
         .send(player);
 
     MessageBuilder.create(String
-        .format("&a&lDEPOSIT &a%s &7has been deposited into %s's account!", amount,
+        .format("&a&lDEPOSIT &7&l>> &a&l%s%s &7has been deposited into %s's account!", currency, amt,
             player.getName())).send(commandSender);
   }
 }
