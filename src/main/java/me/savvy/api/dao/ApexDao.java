@@ -42,6 +42,6 @@ public interface ApexDao {
    * @param uniqueId
    * @return Optional instance of {@link ApexPlayer} if exists in data storage
    */
-  Optional<ApexPlayer> findByUniqueId(UUID uniqueId);
+  Optional<ApexPlayer> findByUniqueId(UUID uniqueId) throws Exception;
 
 }
