@@ -88,7 +88,7 @@ public class ApexCore extends JavaPlugin {
 
   private void register(Module... modules) {
     for (Module module : modules) {
-      apexAPI.getApexModuleCache().register(module);
+      apexAPI.getApexModuleCache().add(module);
     }
   }
 

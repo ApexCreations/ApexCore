@@ -16,7 +16,7 @@ public class ChatListener extends ApexListener implements Listener {
         Player player = event.getPlayer();
 
         // This specific event can be moved under staff chat module.
-        Optional<ApexPlayer> optionalPlayer = this.getPlayerCache().get(player);
+        Optional<ApexPlayer> optionalPlayer = this.getPlayerCache().get(player.getUniqueId());
 
         if (!optionalPlayer.isPresent()) {
             // Player can not be found please handle this.
@@ -27,7 +27,7 @@ public class ChatListener extends ApexListener implements Listener {
         // This can be easily cleaned. Will do at later date
         if (apexPlayer.isInStaffChat()) {
             for (Player recipient : event.getRecipients()) {
-                Optional<ApexPlayer> optionalApexPlayer = this.getPlayerCache().get(recipient);
+                Optional<ApexPlayer> optionalApexPlayer = this.getPlayerCache().get(recipient.getUniqueId());
                 if (optionalApexPlayer.isPresent()) {
                     ApexPlayer apex = optionalApexPlayer.get();
                     if (!apex.isInStaffChat()) {

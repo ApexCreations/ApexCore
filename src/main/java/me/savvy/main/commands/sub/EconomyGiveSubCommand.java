@@ -30,7 +30,7 @@ public class EconomyGiveSubCommand extends SubCommand {
       return;
     }
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player);
+    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
       MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player data!")

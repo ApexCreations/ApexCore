@@ -27,7 +27,7 @@ public class BalancePlayerSubCommand extends SubCommand {
       return;
     }
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player);
+    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
       MessageBuilder.create("&c&lERROR &7Could not find player data!").withPrefix().send(commandSender);

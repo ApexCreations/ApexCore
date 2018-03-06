@@ -8,6 +8,7 @@ import me.savvy.ApexCore;
 import me.savvy.api.exceptions.MaxMoneyException;
 import me.savvy.api.players.ApexPlayer;
 import me.savvy.main.account.Account;
+import me.savvy.main.players.ApexPlayerImpl;
 import me.savvy.main.utils.Utils;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -108,7 +109,8 @@ public class ApexEconomy implements Economy {
     Account account = optionalPlayer.get().getAccount();
     EconomyResponse response;
     if (!this.has(player, amount)) {
-      response = new EconomyResponse(amount, account.getBalance().doubleValue(), EconomyResponse.ResponseType.FAILURE,
+      response = new EconomyResponse(amount, account.getBalance().doubleValue(),
+          EconomyResponse.ResponseType.FAILURE,
           "You do not have enough funds for this transaction!");
     } else {
       try {
@@ -116,7 +118,8 @@ public class ApexEconomy implements Economy {
         response = new EconomyResponse(amount, account.getBalance().doubleValue(),
             EconomyResponse.ResponseType.SUCCESS, "");
       } catch (MaxMoneyException e) {
-        response = new EconomyResponse(amount, account.getBalance().doubleValue(), EconomyResponse.ResponseType.FAILURE,
+        response = new EconomyResponse(amount, account.getBalance().doubleValue(),
+            EconomyResponse.ResponseType.FAILURE,
             e.getMessage());
       }
     }
@@ -159,10 +162,12 @@ public class ApexEconomy implements Economy {
     if (!offlinePlayer.isOnline()) {
       return false;
     }
-    Optional<ApexPlayer> optionalPlayer = this.apexAPI.getPlayerCache().get(offlinePlayer.getUniqueId());
+    Optional<ApexPlayer> optionalPlayer = this.apexAPI.getPlayerCache()
+        .get(offlinePlayer.getUniqueId());
 
     if (!optionalPlayer.isPresent()) {
-      this.apexAPI.getPlayerCache().add(offlinePlayer.getUniqueId());
+      this.apexAPI.getPlayerCache()
+          .add(offlinePlayer.getUniqueId(), new ApexPlayerImpl(offlinePlayer.getUniqueId()));
     }
     return true;
   }

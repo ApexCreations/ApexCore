@@ -25,7 +25,7 @@ public class BalanceCommand extends ApexCommand {
 
     Player player = (Player) commandSender;
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player);
+    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
       MessageBuilder.create("&cCould not find player data!").withPrefix().send(commandSender);

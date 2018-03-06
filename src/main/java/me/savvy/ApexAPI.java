@@ -2,7 +2,9 @@ package me.savvy;
 
 import java.util.UUID;
 import me.savvy.api.cache.ApexMapCache;
+import me.savvy.api.cache.ApexSetCache;
 import me.savvy.api.database.DatabaseAdapter;
+import me.savvy.api.modules.Module;
 import me.savvy.api.players.ApexPlayer;
 import me.savvy.main.cache.ApexConfigCache;
 import me.savvy.main.cache.ApexModuleCache;
@@ -12,24 +14,26 @@ import me.savvy.main.cache.SubCommandCache;
 public class ApexAPI {
 
   private final ApexCore apexCore;
-  private final ApexMapCache<UUID, ApexPlayer> cacheMap;
-  private final ApexPlayerCache apexPlayerCache;
+  private final ApexMapCache<UUID, ApexPlayer> apexPlayerCache;
+  private final ApexSetCache<Module> apexModuleCache;
+ //private final ApexPlayerCache apexPlayerCache;
   private final SubCommandCache subCommandCache;
-  private final ApexModuleCache apexModuleCache;
+ // private final ApexModuleCache apexModuleCache;
   private final ApexConfigCache apexConfigCache;
   private DatabaseAdapter databaseAdapter;
 
   public ApexAPI() {
     this.apexCore = ApexCore.getInstance();
-    this.apexPlayerCache = new ApexPlayerCache();
-    this.apexModuleCache = new ApexModuleCache();
+ //   this.apexPlayerCache = new ApexPlayerCache();
+   // this.apexModuleCache = new ApexModuleCache();
     this.subCommandCache = new SubCommandCache();
     this.apexConfigCache = new ApexConfigCache(this.apexCore);
-    this.cacheMap = new ApexMapCache<>();
+    this.apexPlayerCache = new ApexMapCache<>();
+    this.apexModuleCache = new ApexSetCache<>();
     this.handleDatabase();
   }
 
-  public ApexPlayerCache getPlayerCache() {
+  public ApexMapCache<UUID, ApexPlayer> getPlayerCache() {
     return this.apexPlayerCache;
   }
 
@@ -37,7 +41,7 @@ public class ApexAPI {
     return this.subCommandCache;
   }
 
-  public ApexModuleCache getApexModuleCache() {
+  public ApexSetCache<Module> getApexModuleCache() {
     return this.apexModuleCache;
   }
 

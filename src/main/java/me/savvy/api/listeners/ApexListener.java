@@ -2,9 +2,12 @@ package me.savvy.api.listeners;
 
 import me.savvy.ApexAPI;
 import me.savvy.ApexCore;
+import me.savvy.api.cache.ApexMapCache;
+import me.savvy.api.players.ApexPlayer;
 import me.savvy.main.cache.ApexPlayerCache;
 
 import java.util.UUID;
+import me.savvy.main.players.ApexPlayerImpl;
 
 public abstract class ApexListener {
 
@@ -16,7 +19,7 @@ public abstract class ApexListener {
     return this.getPlugin().getApexAPI();
   }
 
-  protected ApexPlayerCache getPlayerCache() {
+  protected ApexMapCache<UUID, ApexPlayer> getPlayerCache() {
     return this.getAPI().getPlayerCache();
   }
 
@@ -25,6 +28,6 @@ public abstract class ApexListener {
   }
 
   protected void addToCache(UUID uuid) {
-    this.getPlayerCache().add(uuid);
+    this.getPlayerCache().add(uuid, new ApexPlayerImpl(uuid));
   }
 }
