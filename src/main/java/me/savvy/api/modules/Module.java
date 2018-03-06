@@ -1,6 +1,7 @@
 package me.savvy.api.modules;
 
 import java.io.File;
+import java.util.logging.Logger;
 import me.savvy.ApexCore;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -62,5 +63,9 @@ public abstract class Module {
 
   protected ApexCore getPlugin() {
     return ApexCore.getInstance();
+  }
+
+  protected Logger getLogger() {
+    return ApexCore.getInstance().getLogger();
   }
 }
