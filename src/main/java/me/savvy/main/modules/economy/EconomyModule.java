@@ -1,4 +1,4 @@
-package me.savvy.main.modules.chat.economy;
+package me.savvy.main.modules.economy;
 
 import me.savvy.api.modules.Module;
 
@@ -10,7 +10,7 @@ public class EconomyModule extends Module {
 
     @Override
     public void initialize() {
-
+        
     }
 
     @Override
