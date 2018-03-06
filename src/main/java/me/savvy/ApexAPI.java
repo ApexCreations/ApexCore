@@ -1,6 +1,9 @@
 package me.savvy;
 
+import java.util.UUID;
+import me.savvy.api.cache.ApexMapCache;
 import me.savvy.api.database.DatabaseAdapter;
+import me.savvy.api.players.ApexPlayer;
 import me.savvy.main.cache.ApexConfigCache;
 import me.savvy.main.cache.ApexModuleCache;
 import me.savvy.main.cache.ApexPlayerCache;
@@ -9,6 +12,7 @@ import me.savvy.main.cache.SubCommandCache;
 public class ApexAPI {
 
   private final ApexCore apexCore;
+  private final ApexMapCache<UUID, ApexPlayer> cacheMap;
   private final ApexPlayerCache apexPlayerCache;
   private final SubCommandCache subCommandCache;
   private final ApexModuleCache apexModuleCache;
@@ -21,6 +25,7 @@ public class ApexAPI {
     this.apexModuleCache = new ApexModuleCache();
     this.subCommandCache = new SubCommandCache();
     this.apexConfigCache = new ApexConfigCache(this.apexCore);
+    this.cacheMap = new ApexMapCache<>();
     this.handleDatabase();
   }
 
