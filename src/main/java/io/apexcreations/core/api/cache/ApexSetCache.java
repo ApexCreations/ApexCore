@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public class ApexSetCache<T> {
   
@@ -18,16 +19,15 @@ public class ApexSetCache<T> {
   }
   
   public void remove(T object) {
-    this.remove(object.toString());
+    this.remove(obj -> obj.equals(object));
   }
 
-  public void remove(String string) {
-    this.getModule(string).ifPresent(this.setCache::remove);
+  public void remove(Predicate<? super T> predicate) {
+    this.getModule(predicate).ifPresent(this.setCache::remove);
   }
   
-  public Optional<T> getModule(String string) {
-    return this.setCache.stream().filter(module ->
-        module.toString().equalsIgnoreCase(string)).findFirst();
+  public Optional<T> getModule(Predicate<? super T> predicate) {
+    return this.setCache.stream().filter(predicate).findFirst();
   }
   
   public Set<T> getAllModules() {

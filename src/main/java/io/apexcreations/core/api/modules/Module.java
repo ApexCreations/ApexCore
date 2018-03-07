@@ -69,9 +69,4 @@ public abstract class Module {
   protected Logger getLogger() {
     return ApexCore.getInstance().getLogger();
   }
-
-  @Override
-  public String toString() {
-    return this.name;
-  }
 }
