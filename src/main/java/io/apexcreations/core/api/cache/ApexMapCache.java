@@ -4,13 +4,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ApexMapCache<K, V> {
 
   private final Map<K, V> cacheMap;
 
-  public ApexMapCache() {
-    this.cacheMap = new HashMap<>();
+  public ApexMapCache(boolean concurrent) {
+    this.cacheMap = (concurrent) ? new ConcurrentHashMap<>() : new HashMap<>();
   }
 
   public Optional<V> get(K key) {

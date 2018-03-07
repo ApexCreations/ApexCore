@@ -81,13 +81,13 @@ public class ApexCore extends JavaPlugin {
 
   private void register(Module... modules) {
     for (Module module : modules) {
-      apexAPI.getApexModuleCache().add(module);
+      apexAPI.getApexModuleCache().add(module.getName(), module);
     }
   }
 
   @Override
   public void onDisable() {
-    this.getApexAPI().getApexModuleCache().getAllModules().forEach(Module::terminate);
+    this.getApexAPI().getApexModuleCache().getMap().values().forEach(Module::terminate);
     this.apexAPI.getApexConfigCache().save();
   }
 

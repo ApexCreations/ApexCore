@@ -15,7 +15,7 @@ public class ApexAPI {
 
   private final ApexCore apexCore;
   private final ApexMapCache<UUID, ApexPlayer> apexPlayerCache;
-  private final ApexSetCache<Module> apexModuleCache;
+  private final ApexMapCache<String, Module> apexModuleCache;
  //private final ApexPlayerCache apexPlayerCache;
   private final SubCommandCache subCommandCache;
  // private final ApexModuleCache apexModuleCache;
@@ -28,8 +28,8 @@ public class ApexAPI {
    // this.apexModuleCache = new ApexModuleCache();
     this.subCommandCache = new SubCommandCache();
     this.apexConfigCache = new ApexConfigCache(this.apexCore);
-    this.apexPlayerCache = new ApexMapCache<>();
-    this.apexModuleCache = new ApexSetCache<>();
+    this.apexPlayerCache = new ApexMapCache<>(true);
+    this.apexModuleCache = new ApexMapCache<>(true);
     this.handleDatabase();
   }
 
@@ -41,7 +41,7 @@ public class ApexAPI {
     return this.subCommandCache;
   }
 
-  public ApexSetCache<Module> getApexModuleCache() {
+  public ApexMapCache<String, Module> getApexModuleCache() {
     return this.apexModuleCache;
   }
 
