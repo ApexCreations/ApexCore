@@ -1,16 +1,18 @@
 package io.apexcreations.core.main.dao;
 
+import io.apexcreations.core.ApexCore;
+import io.apexcreations.core.api.dao.ApexDao;
+import io.apexcreations.core.api.database.DatabaseAdapter;
+import io.apexcreations.core.api.exceptions.MaxMoneyException;
+import io.apexcreations.core.api.players.ApexPlayer;
+import io.apexcreations.core.main.players.ApexPlayerImpl;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
-import me.savvy.ApexCore;
-import me.savvy.api.dao.ApexDao;
-import me.savvy.api.database.DatabaseAdapter;
-import me.savvy.api.exceptions.MaxMoneyException;
-import me.savvy.api.players.ApexPlayer;
-import me.savvy.main.players.ApexPlayerImpl;
+
 
 public class ApexMySQLDao implements ApexDao {
 

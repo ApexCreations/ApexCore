@@ -1,7 +1,6 @@
 package io.apexcreations.core.main.modules.chat.staff;
 
 import io.apexcreations.core.api.modules.Module;
-import me.savvy.api.modules.Module;
 
 public class StaffModule extends Module {
     

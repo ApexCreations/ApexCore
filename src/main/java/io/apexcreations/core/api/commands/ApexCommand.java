@@ -2,9 +2,10 @@ package io.apexcreations.core.api.commands;
 
 import java.util.Arrays;
 import java.util.Optional;
-import me.savvy.ApexAPI;
-import me.savvy.ApexCore;
-import me.savvy.api.builders.MessageBuilder;
+
+import io.apexcreations.core.ApexAPI;
+import io.apexcreations.core.ApexCore;
+import io.apexcreations.core.api.builders.MessageBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

@@ -3,7 +3,6 @@ package io.apexcreations.core.api.players;
 import io.apexcreations.core.main.account.Account;
 import java.util.Map;
 import java.util.UUID;
-import me.savvy.main.account.Account;
 import org.bukkit.Location;
 
 public interface ApexPlayer {

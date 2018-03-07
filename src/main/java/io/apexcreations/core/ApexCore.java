@@ -2,8 +2,7 @@ package io.apexcreations.core;
 
 import io.apexcreations.core.api.commands.ApexCommand;
 import io.apexcreations.core.api.modules.Module;
-import io.apexcreations.core.main.commands.SetSpawnCommand;
-import io.apexcreations.core.main.commands.TeleportCommand;
+import io.apexcreations.core.main.commands.*;
 import io.apexcreations.core.main.listeners.JoinEvent;
 import io.apexcreations.core.main.listeners.QuitEvent;
 import io.apexcreations.core.main.modules.chat.ChatModule;
@@ -11,27 +10,12 @@ import io.apexcreations.core.main.modules.chat.staff.ChatListener;
 import io.apexcreations.core.main.modules.chat.staff.StaffChatCommand;
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import me.savvy.api.commands.ApexCommand;
-import me.savvy.api.economy.ApexEconomy;
-import me.savvy.api.modules.Module;
-import me.savvy.main.commands.BalanceCommand;
-import me.savvy.main.commands.ClearChatCommand;
-import me.savvy.main.commands.EconomyCommand;
-import me.savvy.main.commands.SetSpawnCommand;
-import me.savvy.main.commands.SpawnCommand;
-import me.savvy.main.commands.TeleportCommand;
-import me.savvy.main.listeners.JoinEvent;
-import me.savvy.main.listeners.QuitEvent;
-import me.savvy.main.modules.chat.ChatModule;
-import me.savvy.main.modules.chat.staff.ChatListener;
-import me.savvy.main.modules.chat.staff.StaffChatCommand;
-import me.savvy.main.modules.chat.staff.StaffModule;
-import net.milkbowl.vault.economy.Economy;
+
+import io.apexcreations.core.main.modules.chat.staff.StaffModule;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ApexCore extends JavaPlugin {

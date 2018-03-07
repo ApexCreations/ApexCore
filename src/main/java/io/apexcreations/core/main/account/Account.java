@@ -1,10 +1,11 @@
 package io.apexcreations.core.main.account;
 
+import io.apexcreations.core.ApexAPI;
+import io.apexcreations.core.ApexCore;
+import io.apexcreations.core.api.exceptions.MaxMoneyException;
+
 import java.math.BigDecimal;
 import java.util.UUID;
-import me.savvy.ApexAPI;
-import me.savvy.ApexCore;
-import me.savvy.api.exceptions.MaxMoneyException;
 
 public class Account {
 

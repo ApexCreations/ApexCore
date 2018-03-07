@@ -1,17 +1,15 @@
 package io.apexcreations.core;
 
+import io.apexcreations.core.api.cache.ApexMapCache;
+import io.apexcreations.core.api.cache.ApexSetCache;
 import io.apexcreations.core.api.database.DatabaseAdapter;
 import io.apexcreations.core.api.modules.Module;
+import io.apexcreations.core.api.players.ApexPlayer;
+import io.apexcreations.core.main.cache.ApexConfigCache;
+import io.apexcreations.core.main.cache.SubCommandCache;
+
 import java.util.UUID;
-import me.savvy.api.cache.ApexMapCache;
-import me.savvy.api.cache.ApexSetCache;
-import me.savvy.api.database.DatabaseAdapter;
-import me.savvy.api.modules.Module;
-import me.savvy.api.players.ApexPlayer;
-import me.savvy.main.cache.ApexConfigCache;
-import me.savvy.main.cache.ApexModuleCache;
-import me.savvy.main.cache.ApexPlayerCache;
-import me.savvy.main.cache.SubCommandCache;
+
 
 public class ApexAPI {
 

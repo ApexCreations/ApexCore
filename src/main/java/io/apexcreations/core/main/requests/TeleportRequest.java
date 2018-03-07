@@ -1,7 +1,6 @@
 package io.apexcreations.core.main.requests;
 
 import io.apexcreations.core.api.events.request.TeleportRequestHandler;
-import me.savvy.api.events.request.TeleportRequestHandler;
 import org.bukkit.Location;
 
 public class TeleportRequest implements TeleportRequestHandler {

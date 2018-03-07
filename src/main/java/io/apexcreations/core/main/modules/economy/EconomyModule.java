@@ -1,7 +1,7 @@
 package io.apexcreations.core.main.modules.economy;
 
-import me.savvy.api.economy.ApexEconomy;
-import me.savvy.api.modules.Module;
+import io.apexcreations.core.api.economy.ApexEconomy;
+import io.apexcreations.core.api.modules.Module;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.ServicePriority;

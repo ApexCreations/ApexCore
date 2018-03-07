@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import me.savvy.api.modules.Module;
 
 public class ApexModuleCache {
 

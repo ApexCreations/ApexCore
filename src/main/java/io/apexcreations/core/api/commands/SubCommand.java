@@ -1,7 +1,8 @@
 package io.apexcreations.core.api.commands;
 
-import me.savvy.ApexAPI;
-import me.savvy.ApexCore;
+
+import io.apexcreations.core.ApexAPI;
+import io.apexcreations.core.ApexCore;
 import org.bukkit.command.CommandSender;
 
 public abstract class SubCommand {

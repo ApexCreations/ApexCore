@@ -1,7 +1,8 @@
 package io.apexcreations.core.main.commands.sub;
 
-import me.savvy.api.builders.MessageBuilder;
-import me.savvy.api.commands.SubCommand;
+
+import io.apexcreations.core.api.builders.MessageBuilder;
+import io.apexcreations.core.api.commands.SubCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

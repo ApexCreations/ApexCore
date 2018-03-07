@@ -3,9 +3,7 @@ package io.apexcreations.core.main.commands;
 import io.apexcreations.core.api.commands.ApexCommand;
 import io.apexcreations.core.main.commands.sub.EconomyGiveSubCommand;
 import io.apexcreations.core.main.commands.sub.EconomyTakeSubCommand;
-import me.savvy.api.commands.ApexCommand;
-import me.savvy.main.commands.sub.EconomyGiveSubCommand;
-import me.savvy.main.commands.sub.EconomyTakeSubCommand;
+
 import org.bukkit.command.CommandSender;
 
 public class EconomyCommand extends ApexCommand {

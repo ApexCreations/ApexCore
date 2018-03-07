@@ -1,6 +1,7 @@
 package io.apexcreations.core.main.modules.chat;
 
-import me.savvy.api.modules.Module;
+
+import io.apexcreations.core.api.modules.Module;
 
 public class ChatModule extends Module {
 

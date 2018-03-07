@@ -2,7 +2,8 @@ package io.apexcreations.core.api.dao;
 
 import java.util.Optional;
 import java.util.UUID;
-import me.savvy.api.players.ApexPlayer;
+
+import io.apexcreations.core.api.players.ApexPlayer;
 
 public interface ApexDao {
 
