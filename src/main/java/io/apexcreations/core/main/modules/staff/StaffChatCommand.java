@@ -1,4 +1,4 @@
-package io.apexcreations.core.main.modules.chat.staff;
+package io.apexcreations.core.main.modules.staff;
 
 import io.apexcreations.core.api.builders.MessageBuilder;
 import io.apexcreations.core.api.commands.ApexCommand;
