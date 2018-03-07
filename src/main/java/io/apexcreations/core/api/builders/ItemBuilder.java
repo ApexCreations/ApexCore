@@ -17,7 +17,8 @@ public class ItemBuilder {
 
   public ItemBuilder(ItemStack itemStack, boolean skullMeta) {
     this.itemStack = itemStack.clone();
-    this.meta = (skullMeta) ? (SkullMeta) this.itemStack.getItemMeta() : this.itemStack.getItemMeta();
+    this.meta =
+        (skullMeta) ? (SkullMeta) this.itemStack.getItemMeta() : this.itemStack.getItemMeta();
     this.lore = (this.meta.hasLore() ? this.meta.getLore() : new ArrayList<>());
   }
 
@@ -27,6 +28,18 @@ public class ItemBuilder {
 
   public ItemBuilder(Material mat) {
     this(new ItemStack(mat));
+  }
+
+  public static ItemBuilder create(ItemStack item, boolean skullMeta) {
+    return new ItemBuilder(item, skullMeta);
+  }
+
+  public static ItemBuilder create(Material mat) {
+    return create(new ItemStack(mat));
+  }
+
+  public static ItemBuilder create(ItemStack item) {
+    return create(item, false);
   }
 
   public ItemBuilder amount(int amount) {
@@ -77,17 +90,5 @@ public class ItemBuilder {
 
   private String translate(String s) {
     return ChatColor.translateAlternateColorCodes('&', s);
-  }
-
-  public static ItemBuilder create(ItemStack item, boolean skullMeta) {
-    return new ItemBuilder(item, skullMeta);
-  }
-
-  public static ItemBuilder create(Material mat) {
-    return create(new ItemStack(mat));
-  }
-
-  public static ItemBuilder create(ItemStack item) {
-    return create(item, false);
   }
 }

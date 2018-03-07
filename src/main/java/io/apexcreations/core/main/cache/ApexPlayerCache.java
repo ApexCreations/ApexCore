@@ -1,9 +1,12 @@
 package io.apexcreations.core.main.cache;
 
-import java.util.*;
-
 import io.apexcreations.core.api.players.ApexPlayer;
 import io.apexcreations.core.main.players.ApexPlayerImpl;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import org.bukkit.entity.Player;
 
 public class ApexPlayerCache {
@@ -19,7 +22,9 @@ public class ApexPlayerCache {
   }
 
   public Optional<ApexPlayer> get(UUID uuid) {
-    if (!this.has(uuid)) return Optional.empty();
+    if (!this.has(uuid)) {
+      return Optional.empty();
+    }
     return Optional.of(this.apexPlayers.get(uuid));
   }
 
@@ -28,18 +33,24 @@ public class ApexPlayerCache {
   }
 
   public void add(ApexPlayer apexPlayer) {
-    if (this.has(apexPlayer.getUniqueId())) return;
+    if (this.has(apexPlayer.getUniqueId())) {
+      return;
+    }
     this.apexPlayers.put(apexPlayer.getUniqueId(), apexPlayer);
   }
-  
+
   public void add(UUID uuid) {
-      if (this.has(uuid)) return;
-      ApexPlayer apexPlayer = new ApexPlayerImpl(uuid);
-      add(apexPlayer);
+    if (this.has(uuid)) {
+      return;
+    }
+    ApexPlayer apexPlayer = new ApexPlayerImpl(uuid);
+    add(apexPlayer);
   }
 
   public void remove(UUID uuid) {
-    if (!this.has(uuid)) return;
+    if (!this.has(uuid)) {
+      return;
+    }
     this.apexPlayers.remove(uuid);
   }
 

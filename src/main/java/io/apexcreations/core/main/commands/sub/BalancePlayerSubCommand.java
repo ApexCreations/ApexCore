@@ -4,9 +4,8 @@ import io.apexcreations.core.api.builders.MessageBuilder;
 import io.apexcreations.core.api.commands.SubCommand;
 import io.apexcreations.core.api.players.ApexPlayer;
 import io.apexcreations.core.main.account.Account;
-import java.util.Optional;
-
 import io.apexcreations.core.main.utils.Utils;
+import java.util.Optional;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,24 +27,28 @@ public class BalancePlayerSubCommand extends SubCommand {
       return;
     }
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player.getUniqueId());
+    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache()
+        .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
-      MessageBuilder.create("&c&lERROR &7Could not find player data!").withPrefix().send(commandSender);
+      MessageBuilder.create("&c&lERROR &7Could not find player data!").withPrefix()
+          .send(commandSender);
       return;
     }
 
     ApexPlayer apexPlayer = optionalApexPlayer.get();
 
     if (apexPlayer.getAccount() == null) {
-      MessageBuilder.create("&c&lERROR &7Could not find player account!").withPrefix().send(commandSender);
+      MessageBuilder.create("&c&lERROR &7Could not find player account!").withPrefix()
+          .send(commandSender);
       return;
     }
 
     Account account = apexPlayer.getAccount();
 
-    MessageBuilder.create("&a&l" + player.getName() + "'s BALANCE &7&l>> &a&l" + Utils.formatCurrency(account.getBalance()))
-    .send(commandSender);
+    MessageBuilder.create("&a&l" + player.getName() + "'s BALANCE &7&l>> &a&l" + Utils
+        .formatCurrency(account.getBalance()))
+        .send(commandSender);
 
   }
 }

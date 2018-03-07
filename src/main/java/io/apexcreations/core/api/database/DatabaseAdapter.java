@@ -1,13 +1,12 @@
 package io.apexcreations.core.api.database;
 
+import io.apexcreations.core.ApexCore;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
-
-import io.apexcreations.core.ApexCore;
 import org.bukkit.Bukkit;
 
 public class DatabaseAdapter {
@@ -76,6 +75,6 @@ public class DatabaseAdapter {
   public MySQL getMySQL() {
     return this.sql;
   }
-  
+
   // TODO: Mongo
 }

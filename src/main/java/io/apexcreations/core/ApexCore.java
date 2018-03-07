@@ -2,16 +2,20 @@ package io.apexcreations.core;
 
 import io.apexcreations.core.api.commands.ApexCommand;
 import io.apexcreations.core.api.modules.Module;
-import io.apexcreations.core.main.commands.*;
+import io.apexcreations.core.main.commands.BalanceCommand;
+import io.apexcreations.core.main.commands.ClearChatCommand;
+import io.apexcreations.core.main.commands.EconomyCommand;
+import io.apexcreations.core.main.commands.SetSpawnCommand;
+import io.apexcreations.core.main.commands.SpawnCommand;
+import io.apexcreations.core.main.commands.TeleportCommand;
 import io.apexcreations.core.main.listeners.JoinEvent;
 import io.apexcreations.core.main.listeners.QuitEvent;
 import io.apexcreations.core.main.modules.chat.ChatModule;
 import io.apexcreations.core.main.modules.chat.staff.ChatListener;
 import io.apexcreations.core.main.modules.chat.staff.StaffChatCommand;
+import io.apexcreations.core.main.modules.chat.staff.StaffModule;
 import java.lang.reflect.Field;
 import java.util.HashMap;
-
-import io.apexcreations.core.main.modules.chat.staff.StaffModule;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;

@@ -37,6 +37,7 @@ public class ApexModuleCache {
 
   /**
    * @param moduleName - Name of the module you're searching for
+   *
    * @return - Optional Module
    */
   public Optional<Module> getModule(String moduleName) {

@@ -22,27 +22,27 @@ public class ChatModule extends Module {
   public void terminate() {
   }
 
-    public boolean isChatStopped() {
-        return chatStopped;
-    }
+  public boolean isChatStopped() {
+    return chatStopped;
+  }
 
-    public void setChatStopped(boolean chatStopped) {
-        this.chatStopped = chatStopped;
-    }
+  public void setChatStopped(boolean chatStopped) {
+    this.chatStopped = chatStopped;
+  }
 
-    public boolean isChatSlowed() {
-        return chatSlowed;
-    }
+  public boolean isChatSlowed() {
+    return chatSlowed;
+  }
 
-    public void setChatSlowed(boolean chatSlowed) {
-        this.chatSlowed = chatSlowed;
-    }
+  public void setChatSlowed(boolean chatSlowed) {
+    this.chatSlowed = chatSlowed;
+  }
 
-    public int getSlowTime() {
-        return slowTime;
-    }
+  public int getSlowTime() {
+    return slowTime;
+  }
 
-    public void setSlowTime(int slowTime) {
-        this.slowTime = slowTime;
-    }
+  public void setSlowTime(int slowTime) {
+    this.slowTime = slowTime;
+  }
 }

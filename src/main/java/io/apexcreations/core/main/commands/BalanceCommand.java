@@ -4,10 +4,9 @@ import io.apexcreations.core.api.builders.MessageBuilder;
 import io.apexcreations.core.api.commands.ApexCommand;
 import io.apexcreations.core.api.players.ApexPlayer;
 import io.apexcreations.core.main.account.Account;
-import java.util.Optional;
-
 import io.apexcreations.core.main.commands.sub.BalancePlayerSubCommand;
 import io.apexcreations.core.main.utils.Utils;
+import java.util.Optional;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -16,7 +15,7 @@ public class BalanceCommand extends ApexCommand {
   public BalanceCommand(String name, String description, String permission, boolean playerOnly,
       String... aliases) {
     super(name, description, permission, playerOnly, aliases);
-    this.getAPI().getSubCommandCache().add(
+    this.getAPI().getSubCommandCache().add("other",
         new BalancePlayerSubCommand("other", "Check the balance of a player's account!",
             "apex.balance.other", false));
   }
@@ -26,7 +25,8 @@ public class BalanceCommand extends ApexCommand {
 
     Player player = (Player) commandSender;
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player.getUniqueId());
+    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache()
+        .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
       MessageBuilder.create("&cCould not find player data!").withPrefix().send(commandSender);
@@ -42,7 +42,8 @@ public class BalanceCommand extends ApexCommand {
 
     Account account = apexPlayer.getAccount();
     String currency = this.getAPI().getApexConfigCache().getCurrencySymbol();
-    MessageBuilder.create("&a&lBALANCE &7&l>> &a&l" + currency + Utils.formatCurrency(account.getBalance()))
+    MessageBuilder
+        .create("&a&lBALANCE &7&l>> &a&l" + currency + Utils.formatCurrency(account.getBalance()))
         .send(commandSender);
 
     return false;

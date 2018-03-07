@@ -1,7 +1,6 @@
 package io.apexcreations.core.main.cache;
 
 import io.apexcreations.core.ApexCore;
-
 import io.apexcreations.core.main.utils.Utils;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;

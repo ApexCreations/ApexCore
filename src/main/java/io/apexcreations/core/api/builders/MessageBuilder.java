@@ -17,6 +17,10 @@ public class MessageBuilder {
     this.prefix = ApexCore.getInstance().getConfig().getString("prefix");
   }
 
+  public static MessageBuilder create(String string) {
+    return new MessageBuilder(string);
+  }
+
   public MessageBuilder append(String[] strings) {
     return this.append(strings, " ");
   }
@@ -69,11 +73,7 @@ public class MessageBuilder {
     commandSender.sendMessage(this.message);
   }
 
-  public static MessageBuilder create(String string) {
-    return new MessageBuilder(string);
-  }
-
   private String translate(String string) {
     return ChatColor.translateAlternateColorCodes('&', string);
   }
-  }
+}

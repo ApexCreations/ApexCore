@@ -1,13 +1,11 @@
 package io.apexcreations.core.api.listeners;
 
 
-
 import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.api.cache.ApexMapCache;
 import io.apexcreations.core.api.players.ApexPlayer;
 import io.apexcreations.core.main.players.ApexPlayerImpl;
-
 import java.util.UUID;
 
 public abstract class ApexListener {

@@ -2,7 +2,6 @@ package io.apexcreations.core.main.commands;
 
 import io.apexcreations.core.api.builders.MessageBuilder;
 import io.apexcreations.core.api.commands.ApexCommand;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.BlockFace;

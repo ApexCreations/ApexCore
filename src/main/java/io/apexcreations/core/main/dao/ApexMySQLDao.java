@@ -6,7 +6,6 @@ import io.apexcreations.core.api.database.DatabaseAdapter;
 import io.apexcreations.core.api.exceptions.MaxMoneyException;
 import io.apexcreations.core.api.players.ApexPlayer;
 import io.apexcreations.core.main.players.ApexPlayerImpl;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -76,7 +75,7 @@ public class ApexMySQLDao implements ApexDao {
       }
       ApexPlayer apexPlayer = new ApexPlayerImpl(uniqueId);
       try {
-      apexPlayer.setStaffChat(resultSet.getBoolean("staffChatEnabled"));
+        apexPlayer.setStaffChat(resultSet.getBoolean("staffChatEnabled"));
         apexPlayer.getAccount().setBalance(resultSet.getBigDecimal("economyBalance"));
       } catch (MaxMoneyException | SQLException e) {
         e.printStackTrace();

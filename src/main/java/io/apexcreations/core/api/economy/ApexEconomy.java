@@ -10,7 +10,6 @@ import io.apexcreations.core.main.utils.Utils;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import net.milkbowl.vault.economy.EconomyResponse.ResponseType;

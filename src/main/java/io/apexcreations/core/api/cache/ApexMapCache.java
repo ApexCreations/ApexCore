@@ -15,7 +15,9 @@ public class ApexMapCache<K, V> {
   }
 
   public Optional<V> get(K key) {
-    if (!this.has(key)) return Optional.empty();
+    if (!this.has(key)) {
+      return Optional.empty();
+    }
     return Optional.of(this.cacheMap.get(key));
   }
 
@@ -24,12 +26,16 @@ public class ApexMapCache<K, V> {
   }
 
   public void add(K key, V value) {
-    if (this.has(key)) return;
+    if (this.has(key)) {
+      return;
+    }
     this.cacheMap.put(key, value);
   }
 
   public void remove(K key) {
-    if (!this.has(key)) return;
+    if (!this.has(key)) {
+      return;
+    }
     this.cacheMap.remove(key);
   }
 

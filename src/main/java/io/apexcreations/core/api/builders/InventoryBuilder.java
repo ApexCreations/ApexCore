@@ -33,6 +33,18 @@ public class InventoryBuilder implements Listener {
     this("", slots);
   }
 
+  public static InventoryBuilder create(String inventoryName, int slots) {
+    return new InventoryBuilder(inventoryName, slots);
+  }
+
+  public static InventoryBuilder create(String inventoryName) {
+    return new InventoryBuilder(inventoryName);
+  }
+
+  public static InventoryBuilder create(int slots) {
+    return new InventoryBuilder(slots);
+  }
+
   public InventoryBuilder clearItem(int slot) {
     this.inventory.setItem(slot, null);
     return this;
@@ -104,17 +116,5 @@ public class InventoryBuilder implements Listener {
 
   public void clearItems() {
     this.inventory.clear();
-  }
-
-  public static InventoryBuilder create(String inventoryName, int slots) {
-    return new InventoryBuilder(inventoryName, slots);
-  }
-
-  public static InventoryBuilder create(String inventoryName) {
-    return new InventoryBuilder(inventoryName);
-  }
-
-  public static InventoryBuilder create(int slots) {
-    return new InventoryBuilder(slots);
   }
 }

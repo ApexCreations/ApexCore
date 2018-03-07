@@ -4,11 +4,10 @@ import io.apexcreations.core.api.builders.MessageBuilder;
 import io.apexcreations.core.api.commands.SubCommand;
 import io.apexcreations.core.api.exceptions.MaxMoneyException;
 import io.apexcreations.core.api.players.ApexPlayer;
+import io.apexcreations.core.main.utils.Utils;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Optional;
-
-import io.apexcreations.core.main.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -31,7 +30,8 @@ public class EconomyGiveSubCommand extends SubCommand {
       return;
     }
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache().get(player.getUniqueId());
+    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache()
+        .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
       MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player data!")
@@ -67,11 +67,13 @@ public class EconomyGiveSubCommand extends SubCommand {
     String currency = this.getAPI().getApexConfigCache().getCurrencySymbol();
 
     MessageBuilder.create(String.
-        format("&a&lDEPOSIT &7&l>> &a&l%s%s &7has been deposited into your account!", currency, amt))
+        format("&a&lDEPOSIT &7&l>> &a&l%s%s &7has been deposited into your account!", currency,
+            amt))
         .send(player);
 
     MessageBuilder.create(String
-        .format("&a&lDEPOSIT &7&l>> &a&l%s%s &7has been deposited into %s's account!", currency, amt,
+        .format("&a&lDEPOSIT &7&l>> &a&l%s%s &7has been deposited into %s's account!", currency,
+            amt,
             player.getName())).send(commandSender);
   }
 }

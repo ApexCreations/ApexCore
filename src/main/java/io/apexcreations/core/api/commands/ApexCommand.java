@@ -1,11 +1,10 @@
 package io.apexcreations.core.api.commands;
 
-import java.util.Arrays;
-import java.util.Optional;
-
 import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.api.builders.MessageBuilder;
+import java.util.Arrays;
+import java.util.Optional;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -68,7 +67,7 @@ public abstract class ApexCommand extends Command {
   public abstract boolean executeCommand(CommandSender commandSender, String label, String[] args);
 
   private Optional<SubCommand> getSubCommand(String args) {
-    return ApexCore.getInstance().getApexAPI().getSubCommandCache().search(args);
+    return ApexCore.getInstance().getApexAPI().getSubCommandCache().get(args);
   }
 
   private void sendNoPermission(CommandSender commandSender) {
