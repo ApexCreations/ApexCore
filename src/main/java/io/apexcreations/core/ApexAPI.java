@@ -1,12 +1,12 @@
 package io.apexcreations.core;
 
 import com.google.inject.Inject;
-import io.apexcreations.core.api.cache.ApexMapCache;
-import io.apexcreations.core.api.commands.SubCommand;
-import io.apexcreations.core.api.database.DatabaseAdapter;
-import io.apexcreations.core.api.modules.Module;
-import io.apexcreations.core.api.players.ApexPlayer;
+import io.apexcreations.core.database.DatabaseAdapter;
 import io.apexcreations.core.main.cache.ApexConfigCache;
+import io.apexcreations.core.main.cache.ApexMapCache;
+import io.apexcreations.core.main.commands.SubCommand;
+import io.apexcreations.core.modules.Module;
+import io.apexcreations.core.players.ApexPlayer;
 import java.util.UUID;
 
 
@@ -17,7 +17,8 @@ public class ApexAPI {
   private final ApexMapCache<String, Module> apexModuleCache;
   private final ApexConfigCache apexConfigCache;
   private DatabaseAdapter databaseAdapter;
-  @Inject private ApexCore apexCore;
+  @Inject
+  private ApexCore apexCore;
 
   ApexAPI() {
     this.apexConfigCache = new ApexConfigCache();
