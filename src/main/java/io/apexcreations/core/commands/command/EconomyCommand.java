@@ -10,10 +10,10 @@ public class EconomyCommand extends ApexCommand {
   public EconomyCommand(String name, String description, String permission, boolean playerOnly,
       String... aliases) {
     super(name, description, permission, playerOnly, aliases);
-    this.getAPI().getSubCommandCache().add("give",
+    this.getPlugin().getSubCommandCache().add("give",
         new EconomyGiveSubCommand("give", "Deposit money into a player's account!",
             "apex.eco.give", false));
-    this.getAPI().getSubCommandCache().add("take",
+    this.getPlugin().getSubCommandCache().add("take",
         new EconomyTakeSubCommand("take", "Withdraw money from a player's account!",
             "apex.eco.take", false));
   }

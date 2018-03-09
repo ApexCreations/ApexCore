@@ -12,9 +12,9 @@ public class JoinEvent extends ApexListener implements Listener {
     Player player = event.getPlayer();
     this.addToCache(player.getUniqueId());
 
-    if (this.getAPI().getApexConfigCache().isSpawnSet() &&
-        this.getAPI().getApexConfigCache().shouldTeleportToSpawnOnJoin()) {
-      player.teleport(this.getAPI().getApexConfigCache().getSpawnLocation());
+    if (this.getPlugin().getApexConfigCache().isSpawnSet() &&
+        this.getPlugin().getApexConfigCache().shouldTeleportToSpawnOnJoin()) {
+      player.teleport(this.getPlugin().getApexConfigCache().getSpawnLocation());
     }
   }
 }

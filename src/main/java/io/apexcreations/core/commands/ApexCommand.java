@@ -1,7 +1,6 @@
 package io.apexcreations.core.commands;
 
 import com.google.inject.Inject;
-import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.builders.MessageBuilder;
 import java.util.Arrays;
@@ -52,8 +51,7 @@ public abstract class ApexCommand extends Command {
     }
 
     if (args.length > 0) {
-      Optional<io.apexcreations.core.main.commands.SubCommand> optionalSubCommand = this
-          .getSubCommand(args[0]);
+      Optional<SubCommand> optionalSubCommand = this.getSubCommand(args[0]);
       optionalSubCommand.ifPresent(subCommand -> {
         if (!commandSender.hasPermission(subCommand.getPermission())) {
           this.sendNoPermission(commandSender);
@@ -69,8 +67,8 @@ public abstract class ApexCommand extends Command {
 
   public abstract boolean executeCommand(CommandSender commandSender, String label, String[] args);
 
-  private Optional<io.apexcreations.core.main.commands.SubCommand> getSubCommand(String args) {
-    return this.apexCore.getApexAPI().getSubCommandCache().get(args);
+  private Optional<SubCommand> getSubCommand(String args) {
+    return this.getPlugin().getSubCommandCache().get(args);
   }
 
   private void sendNoPermission(CommandSender commandSender) {
@@ -78,7 +76,7 @@ public abstract class ApexCommand extends Command {
         .send(commandSender);
   }
 
-  protected ApexAPI getAPI() {
-    return this.apexCore.getApexAPI();
+  protected ApexCore getPlugin() {
+    return this.apexCore;
   }
 }

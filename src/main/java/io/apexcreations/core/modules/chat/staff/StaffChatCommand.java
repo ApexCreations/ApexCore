@@ -27,7 +27,7 @@ public class StaffChatCommand extends ApexCommand {
       return false;
     }
 
-    Optional<ApexPlayer> optionalPlayer = this.getAPI().getPlayerCache().get(player.getUniqueId());
+    Optional<ApexPlayer> optionalPlayer = this.getPlugin().getPlayerCache().get(player.getUniqueId());
 
     if (!optionalPlayer.isPresent()) {
       // Only way this is possible is if they weren't loaded on join

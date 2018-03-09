@@ -2,7 +2,7 @@ package io.apexcreations.core.commands.command.sub;
 
 
 import io.apexcreations.core.builders.MessageBuilder;
-import io.apexcreations.core.main.commands.SubCommand;
+import io.apexcreations.core.commands.SubCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

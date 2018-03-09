@@ -15,7 +15,7 @@ public class BalanceCommand extends ApexCommand {
   public BalanceCommand(String name, String description, String permission, boolean playerOnly,
       String... aliases) {
     super(name, description, permission, playerOnly, aliases);
-    this.getAPI().getSubCommandCache().add("other",
+    this.getPlugin().getSubCommandCache().add("other",
         new BalancePlayerSubCommand("other", "Check the balance of a player's account!",
             "apex.balance.other", false));
   }
@@ -25,7 +25,7 @@ public class BalanceCommand extends ApexCommand {
 
     Player player = (Player) commandSender;
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache()
+    Optional<ApexPlayer> optionalApexPlayer = this.getPlugin().getPlayerCache()
         .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
@@ -41,7 +41,7 @@ public class BalanceCommand extends ApexCommand {
     }
 
     Account account = apexPlayer.getAccount();
-    String currency = this.getAPI().getApexConfigCache().getCurrencySymbol();
+    String currency = this.getPlugin().getApexConfigCache().getCurrencySymbol();
     MessageBuilder
         .create("&a&lBALANCE &7&l>> &a&l" + currency + Utils.formatCurrency(account.getBalance()))
         .send(commandSender);

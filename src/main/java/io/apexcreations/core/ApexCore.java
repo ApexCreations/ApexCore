@@ -2,26 +2,35 @@ package io.apexcreations.core;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import io.apexcreations.core.cache.ApexConfigCache;
+import io.apexcreations.core.cache.ApexMapCache;
 import io.apexcreations.core.commands.CommandHandler;
+import io.apexcreations.core.commands.SubCommand;
+import io.apexcreations.core.database.DatabaseAdapter;
 import io.apexcreations.core.listeners.JoinEvent;
 import io.apexcreations.core.listeners.QuitEvent;
 import io.apexcreations.core.modules.Module;
 import io.apexcreations.core.modules.chat.ChatModule;
 import io.apexcreations.core.modules.chat.staff.ChatListener;
 import io.apexcreations.core.modules.chat.staff.StaffModule;
+import io.apexcreations.core.players.ApexPlayer;
+import java.util.UUID;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ApexCore extends JavaPlugin {
-
-  private ApexAPI apexAPI;
   private CommandHandler commandHandler;
+  private final ApexMapCache<String, SubCommand> subCommandCache = new ApexMapCache<>(true);
+  private final ApexMapCache<UUID, ApexPlayer> apexPlayerCache = new ApexMapCache<>(true);
+  private final ApexMapCache<String, Module> apexModuleCache = new ApexMapCache<>(true);
+  private final ApexConfigCache apexConfigCache = new ApexConfigCache();;
+  private DatabaseAdapter databaseAdapter;
   private Injector injector;
 
   @Override
   public void onEnable() {
     this.injector = Guice.createInjector(new DependencyModule(this));
-    this.apexAPI = new ApexAPI();
+    this.handleDatabase();
     this.handleListeners();
     this.handleModules();
     this.commandHandler = new CommandHandler();
@@ -40,22 +49,50 @@ public class ApexCore extends JavaPlugin {
 
   private void register(Module... modules) {
     for (Module module : modules) {
-      apexAPI.getApexModuleCache().add(module.getName(), module);
+      this.getApexModuleCache().add(module.getName(), module);
     }
   }
 
   @Override
   public void onDisable() {
-    this.getApexAPI().getApexModuleCache().getMap().values().forEach(Module::terminate);
-    this.apexAPI.getApexConfigCache().save();
-  }
-
-  public ApexAPI getApexAPI() {
-    return this.apexAPI;
+    this.getApexModuleCache().getMap().values().forEach(Module::terminate);
+    this.getApexConfigCache().save();
   }
 
   private void handleModules() {
     register(new ChatModule("Chat Module", "Handles all chat related activities"));
     register(new StaffModule("Staff module", "For things like staff chat and staff mode"));
+  }
+
+  private void handleDatabase() {
+    if (!getConfig().getBoolean("mysql.enabled")) {
+      return;
+    }
+    this.databaseAdapter = new DatabaseAdapter(
+        this.getConfig().getString("mysql.hostName"),
+        this.getConfig().getInt("mysql.port"),
+        this.getConfig().getString("mysql.userName"),
+        this.getConfig().getString("mysql.password"),
+        this.getConfig().getString("mysql.databaseName"));
+  }
+
+  public ApexMapCache<String, Module> getApexModuleCache() {
+    return this.apexModuleCache;
+  }
+
+  public DatabaseAdapter getDatabaseAdapter() {
+    return databaseAdapter;
+  }
+
+  public ApexConfigCache getApexConfigCache() {
+    return this.apexConfigCache;
+  }
+
+  public ApexMapCache<UUID, ApexPlayer> getPlayerCache() {
+    return this.apexPlayerCache;
+  }
+
+  public ApexMapCache<String, SubCommand> getSubCommandCache() {
+    return this.subCommandCache;
   }
 }

@@ -2,9 +2,8 @@ package io.apexcreations.core.listeners;
 
 
 import com.google.inject.Inject;
-import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
-import io.apexcreations.core.main.cache.ApexMapCache;
+import io.apexcreations.core.cache.ApexMapCache;
 import io.apexcreations.core.players.ApexPlayer;
 import io.apexcreations.core.players.impl.ApexPlayerImpl;
 import java.util.UUID;
@@ -18,12 +17,9 @@ public abstract class ApexListener {
     return apexCore;
   }
 
-  protected ApexAPI getAPI() {
-    return this.getPlugin().getApexAPI();
-  }
 
   protected ApexMapCache<UUID, ApexPlayer> getPlayerCache() {
-    return this.getAPI().getPlayerCache();
+    return this.apexCore.getPlayerCache();
   }
 
   protected void removeFromCache(UUID uuid) {

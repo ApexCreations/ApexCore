@@ -1,8 +1,7 @@
-package io.apexcreations.core.main.commands;
+package io.apexcreations.core.commands;
 
 
 import com.google.inject.Inject;
-import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
 import org.bukkit.command.CommandSender;
 
@@ -49,7 +48,7 @@ public abstract class SubCommand {
     return this.permission;
   }
 
-  public ApexAPI getAPI() {
-    return this.apexCore.getApexAPI();
+  protected ApexCore getPlugin() {
+    return apexCore;
   }
 }

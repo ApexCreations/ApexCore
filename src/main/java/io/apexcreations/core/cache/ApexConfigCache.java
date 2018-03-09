@@ -1,4 +1,4 @@
-package io.apexcreations.core.main.cache;
+package io.apexcreations.core.cache;
 
 import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;

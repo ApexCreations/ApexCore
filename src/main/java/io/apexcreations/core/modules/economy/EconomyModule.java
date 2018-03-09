@@ -30,7 +30,7 @@ public class EconomyModule extends Module {
           .register(Economy.class, this.apexEconomy, this.getPlugin(), ServicePriority.Highest);
     } else {
       getLogger().severe("Could not find vault, avoiding economy registration");
-      this.getPlugin().getApexAPI().getApexConfigCache().setEconomyEnabled(false);
+      this.getPlugin().getApexConfigCache().setEconomyEnabled(false);
     }
   }
 

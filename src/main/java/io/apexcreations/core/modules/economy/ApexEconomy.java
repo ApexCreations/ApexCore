@@ -1,7 +1,6 @@
 package io.apexcreations.core.modules.economy;
 
 import com.google.inject.Inject;
-import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.exceptions.MaxMoneyException;
 import io.apexcreations.core.main.modules.economy.account.Account;
@@ -20,23 +19,17 @@ import org.bukkit.OfflinePlayer;
  * Please avoid using any of the deprecated methods as they are <b>NOT</b> implemented.
  */
 public class ApexEconomy implements Economy {
-
-  private final ApexAPI apexAPI;
   @Inject
   private ApexCore apexCore;
 
-  public ApexEconomy() {
-    this.apexAPI = this.apexCore.getApexAPI();
-  }
-
   @Override
   public boolean isEnabled() {
-    return this.apexAPI.getApexConfigCache().isEconomyEnabled();
+    return this.apexCore.getApexConfigCache().isEconomyEnabled();
   }
 
   @Override
   public String getName() {
-    return this.apexAPI.getApexConfigCache().getEconomyName();
+    return this.apexCore.getApexConfigCache().getEconomyName();
   }
 
   @Override
@@ -56,29 +49,29 @@ public class ApexEconomy implements Economy {
 
   @Override
   public String currencyNameSingular() {
-    return this.apexAPI.getApexConfigCache().getCurrencyNameSingular();
+    return this.apexCore.getApexConfigCache().getCurrencyNameSingular();
   }
 
   @Override
   public String currencyNamePlural() {
-    return this.apexAPI.getApexConfigCache().getCurrencyNamePlural();
+    return this.apexCore.getApexConfigCache().getCurrencyNamePlural();
   }
 
   @Override
   public boolean hasAccount(OfflinePlayer offlinePlayer) {
-    return this.apexAPI.getPlayerCache().get(offlinePlayer.getUniqueId())
+    return this.apexCore.getPlayerCache().get(offlinePlayer.getUniqueId())
         .filter(apexPlayer -> apexPlayer.getAccount() != null).isPresent();
   }
 
   @Override
   public boolean hasAccount(OfflinePlayer offlinePlayer, String worldName) {
-    return this.apexAPI.getPlayerCache().get(offlinePlayer.getUniqueId())
+    return this.apexCore.getPlayerCache().get(offlinePlayer.getUniqueId())
         .filter(apexPlayer -> apexPlayer.getAccount() != null).isPresent();
   }
 
   @Override
   public double getBalance(OfflinePlayer offlinePlayer) {
-    return this.apexAPI.getPlayerCache().get(offlinePlayer.getUniqueId())
+    return this.apexCore.getPlayerCache().get(offlinePlayer.getUniqueId())
         .map(apexPlayer -> apexPlayer.getAccount().getBalance().doubleValue()).orElse(0.0);
   }
 
@@ -89,7 +82,7 @@ public class ApexEconomy implements Economy {
 
   @Override
   public boolean has(OfflinePlayer offlinePlayer, double amount) {
-    return this.apexAPI.getPlayerCache().get(offlinePlayer.getUniqueId())
+    return this.apexCore.getPlayerCache().get(offlinePlayer.getUniqueId())
         .map(apexPlayer -> apexPlayer.getAccount().getBalance().doubleValue() >= amount)
         .orElse(false);
   }
@@ -101,7 +94,7 @@ public class ApexEconomy implements Economy {
 
   @Override
   public EconomyResponse withdrawPlayer(OfflinePlayer player, double amount) {
-    Optional<ApexPlayer> optionalPlayer = this.apexAPI.getPlayerCache().get(player.getUniqueId());
+    Optional<ApexPlayer> optionalPlayer = this.apexCore.getPlayerCache().get(player.getUniqueId());
 
     if (!optionalPlayer.isPresent()) {
       return new EconomyResponse(amount, 0.0, EconomyResponse.ResponseType.FAILURE,
@@ -134,7 +127,7 @@ public class ApexEconomy implements Economy {
 
   @Override
   public EconomyResponse depositPlayer(OfflinePlayer player, double amount) {
-    Optional<ApexPlayer> optionalPlayer = this.apexAPI.getPlayerCache().get(player.getUniqueId());
+    Optional<ApexPlayer> optionalPlayer = this.apexCore.getPlayerCache().get(player.getUniqueId());
 
     if (!optionalPlayer.isPresent()) {
       return new EconomyResponse(amount, 0.0, EconomyResponse.ResponseType.FAILURE,
@@ -163,11 +156,11 @@ public class ApexEconomy implements Economy {
     if (!offlinePlayer.isOnline()) {
       return false;
     }
-    Optional<ApexPlayer> optionalPlayer = this.apexAPI.getPlayerCache()
+    Optional<ApexPlayer> optionalPlayer = this.apexCore.getPlayerCache()
         .get(offlinePlayer.getUniqueId());
 
     if (!optionalPlayer.isPresent()) {
-      this.apexAPI.getPlayerCache()
+      this.apexCore.getPlayerCache()
           .add(offlinePlayer.getUniqueId(), new ApexPlayerImpl(offlinePlayer.getUniqueId()));
     }
     return true;

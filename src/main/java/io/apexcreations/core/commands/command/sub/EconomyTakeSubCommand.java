@@ -1,8 +1,8 @@
 package io.apexcreations.core.commands.command.sub;
 
 import io.apexcreations.core.builders.MessageBuilder;
+import io.apexcreations.core.commands.SubCommand;
 import io.apexcreations.core.exceptions.MaxMoneyException;
-import io.apexcreations.core.main.commands.SubCommand;
 import io.apexcreations.core.players.ApexPlayer;
 import io.apexcreations.core.utils.Utils;
 import java.math.BigDecimal;
@@ -31,7 +31,7 @@ public class EconomyTakeSubCommand extends SubCommand {
       return;
     }
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getAPI().getPlayerCache()
+    Optional<ApexPlayer> optionalApexPlayer = this.getPlugin().getPlayerCache()
         .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
@@ -64,7 +64,7 @@ public class EconomyTakeSubCommand extends SubCommand {
     }
 
     String amt = Utils.formatCurrency(BigDecimal.valueOf(amount));
-    String currency = this.getAPI().getApexConfigCache().getCurrencySymbol();
+    String currency = this.getPlugin().getApexConfigCache().getCurrencySymbol();
 
     MessageBuilder.create(String.
         format("&c&lWITHDRAW &7&l>> &c&l%s%s &7has been withdrawn from your account!", currency, amt
