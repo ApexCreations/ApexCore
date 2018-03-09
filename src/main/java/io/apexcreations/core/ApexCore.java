@@ -1,27 +1,31 @@
 package io.apexcreations.core;
 
 import com.google.inject.Guice;
+import com.google.inject.Injector;
+import io.apexcreations.core.commands.CommandHandler;
 import io.apexcreations.core.listeners.JoinEvent;
 import io.apexcreations.core.listeners.QuitEvent;
 import io.apexcreations.core.modules.Module;
 import io.apexcreations.core.modules.chat.ChatModule;
 import io.apexcreations.core.modules.chat.staff.ChatListener;
 import io.apexcreations.core.modules.chat.staff.StaffModule;
-import org.bukkit.command.CommandMap;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ApexCore extends JavaPlugin {
 
-  private CommandMap commandMap;
   private ApexAPI apexAPI;
+  private CommandHandler commandHandler;
+  private Injector injector;
 
   @Override
   public void onEnable() {
-    Guice.createInjector(new DependencyModule(this));
+    this.injector = Guice.createInjector(new DependencyModule(this));
     this.apexAPI = new ApexAPI();
     this.handleListeners();
     this.handleModules();
+    this.commandHandler = new CommandHandler();
+    this.commandHandler.handleCommands();
   }
 
   private void handleListeners() {
