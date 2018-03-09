@@ -1,5 +1,6 @@
 package io.apexcreations.core.api.commands;
 
+import com.google.inject.Inject;
 import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.api.builders.MessageBuilder;
@@ -13,9 +14,10 @@ import org.bukkit.entity.Player;
 public abstract class ApexCommand extends Command {
 
   private String name;
-  private ApexCore apexCore;
   private String permission;
   private boolean playerOnly;
+  @Inject
+  private ApexCore apexCore;
 
   public ApexCommand(String name) {
     this(name, false);
@@ -67,7 +69,7 @@ public abstract class ApexCommand extends Command {
   public abstract boolean executeCommand(CommandSender commandSender, String label, String[] args);
 
   private Optional<SubCommand> getSubCommand(String args) {
-    return ApexCore.getInstance().getApexAPI().getSubCommandCache().get(args);
+    return this.apexCore.getApexAPI().getSubCommandCache().get(args);
   }
 
   private void sendNoPermission(CommandSender commandSender) {
@@ -76,6 +78,6 @@ public abstract class ApexCommand extends Command {
   }
 
   protected ApexAPI getAPI() {
-    return ApexCore.getInstance().getApexAPI();
+    return this.apexCore.getApexAPI();
   }
 }

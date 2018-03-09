@@ -1,5 +1,6 @@
 package io.apexcreations.core.api.modules;
 
+import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import java.io.File;
 import java.util.logging.Logger;
@@ -12,6 +13,8 @@ public abstract class Module {
   private File file;
   private FileConfiguration config;
   private boolean enabled;
+  @Inject
+  private ApexCore apexCore;
 
   public Module(String name, String description) {
     this.name = name;
@@ -62,10 +65,10 @@ public abstract class Module {
   }
 
   protected ApexCore getPlugin() {
-    return ApexCore.getInstance();
+    return this.apexCore;
   }
 
   protected Logger getLogger() {
-    return ApexCore.getInstance().getLogger();
+    return this.apexCore.getLogger();
   }
 }

@@ -1,5 +1,6 @@
 package io.apexcreations.core.main.cache;
 
+import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.main.utils.Utils;
 import org.bukkit.Location;
@@ -7,7 +8,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class ApexConfigCache {
 
-  private final ApexCore apexCore;
+  @Inject
+  private ApexCore apexCore;
   private final FileConfiguration config;
 
   private boolean teleportToSpawnOnJoin;
@@ -18,8 +20,7 @@ public class ApexConfigCache {
   private String currencySymbol, economyName, currencyNameSingular, currencyNamePlural;
   private boolean economyEnabled;
 
-  public ApexConfigCache(ApexCore apexCore) {
-    this.apexCore = apexCore;
+  public ApexConfigCache() {
     this.config = this.apexCore.getConfig();
     this.load();
   }
@@ -36,7 +37,7 @@ public class ApexConfigCache {
     this.economyEnabled = this.getConfig().getBoolean("economy.enabled", true);
     this.currencySymbol = this.getConfig().getString("economy.currencySymbol", "$");
     this.currencyNameSingular = this.getConfig().getString("economy.singularName", "Dollar");
-    this.currencyNameSingular = this.getConfig().getString("economy.pluralName", "Dollars");
+    this.currencyNamePlural = this.getConfig().getString("economy.pluralName", "Dollars");
     this.minBalance = this.config.getInt("economy.minBalance", 0);
     this.maxBalance = this.config.getInt("economy.maxBalance", 10000000);
   }

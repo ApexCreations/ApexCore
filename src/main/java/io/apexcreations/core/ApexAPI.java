@@ -1,5 +1,6 @@
 package io.apexcreations.core;
 
+import com.google.inject.Inject;
 import io.apexcreations.core.api.cache.ApexMapCache;
 import io.apexcreations.core.api.commands.SubCommand;
 import io.apexcreations.core.api.database.DatabaseAdapter;
@@ -15,12 +16,11 @@ public class ApexAPI {
   private final ApexMapCache<UUID, ApexPlayer> apexPlayerCache;
   private final ApexMapCache<String, Module> apexModuleCache;
   private final ApexConfigCache apexConfigCache;
-  private final ApexCore apexCore;
   private DatabaseAdapter databaseAdapter;
+  @Inject private ApexCore apexCore;
 
-  public ApexAPI() {
-    this.apexCore = ApexCore.getInstance();
-    this.apexConfigCache = new ApexConfigCache(this.apexCore);
+  ApexAPI() {
+    this.apexConfigCache = new ApexConfigCache();
     this.apexPlayerCache = new ApexMapCache<>(true);
     this.apexModuleCache = new ApexMapCache<>(true);
     this.subCommandCache = new ApexMapCache<>(true);

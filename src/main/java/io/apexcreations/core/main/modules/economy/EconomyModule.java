@@ -27,7 +27,7 @@ public class EconomyModule extends Module {
 
   private void registerVault() {
     if (Bukkit.getServer().getPluginManager().getPlugin("Vault") != null) {
-      this.apexEconomy = new ApexEconomy(this.getPlugin());
+      this.apexEconomy = new ApexEconomy();
       Bukkit.getServer().getServicesManager()
           .register(Economy.class, this.apexEconomy, this.getPlugin(), ServicePriority.Highest);
     } else {

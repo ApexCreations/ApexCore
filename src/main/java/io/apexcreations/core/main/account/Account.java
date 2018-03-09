@@ -1,5 +1,6 @@
 package io.apexcreations.core.main.account;
 
+import com.google.inject.Inject;
 import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.api.exceptions.MaxMoneyException;
@@ -12,9 +13,12 @@ public class Account {
   private ApexAPI api;
   private BigDecimal balance;
 
+  @Inject
+  private ApexCore apexCore;
+
   public Account(UUID accountOwner) {
     this.accountOwner = accountOwner;
-    this.api = ApexCore.getInstance().getApexAPI();
+    this.api = this.apexCore.getApexAPI();
     this.load();
   }
 

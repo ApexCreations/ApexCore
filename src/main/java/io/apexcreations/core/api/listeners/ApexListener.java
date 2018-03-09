@@ -1,6 +1,7 @@
 package io.apexcreations.core.api.listeners;
 
 
+import com.google.inject.Inject;
 import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.api.cache.ApexMapCache;
@@ -10,8 +11,10 @@ import java.util.UUID;
 
 public abstract class ApexListener {
 
+  @Inject
+  private ApexCore apexCore;
   public ApexCore getPlugin() {
-    return ApexCore.getInstance();
+    return apexCore;
   }
 
   protected ApexAPI getAPI() {

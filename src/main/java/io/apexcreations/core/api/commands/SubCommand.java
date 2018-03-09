@@ -1,6 +1,7 @@
 package io.apexcreations.core.api.commands;
 
 
+import com.google.inject.Inject;
 import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
 import org.bukkit.command.CommandSender;
@@ -10,6 +11,8 @@ public abstract class SubCommand {
   private String name, info, permission;
   private boolean playerOnly;
   private String[] aliases;
+  @Inject
+  private ApexCore apexCore;
 
   public SubCommand(String name, String info, boolean playerOnly) {
     this(name, info, "", playerOnly);
@@ -47,6 +50,6 @@ public abstract class SubCommand {
   }
 
   public ApexAPI getAPI() {
-    return ApexCore.getInstance().getApexAPI();
+    return this.apexCore.getApexAPI();
   }
 }

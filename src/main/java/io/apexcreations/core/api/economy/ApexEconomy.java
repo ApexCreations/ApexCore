@@ -1,5 +1,6 @@
 package io.apexcreations.core.api.economy;
 
+import com.google.inject.Inject;
 import io.apexcreations.core.ApexAPI;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.api.exceptions.MaxMoneyException;
@@ -20,11 +21,11 @@ import org.bukkit.OfflinePlayer;
  */
 public class ApexEconomy implements Economy {
 
-  private final ApexCore apexCore;
+  @Inject
+  private ApexCore apexCore;
   private final ApexAPI apexAPI;
 
-  public ApexEconomy(ApexCore apexCore) {
-    this.apexCore = apexCore;
+  public ApexEconomy() {
     this.apexAPI = this.apexCore.getApexAPI();
   }
 

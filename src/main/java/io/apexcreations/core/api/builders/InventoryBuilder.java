@@ -1,5 +1,6 @@
 package io.apexcreations.core.api.builders;
 
+import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -18,6 +19,9 @@ public class InventoryBuilder implements Listener {
   private int inventorySlots;
   private Inventory inventory;
   private Consumer<InventoryClickEvent> eventConsumer;
+
+  @Inject
+  private ApexCore apexCore;
 
   private InventoryBuilder(String inventoryName, int slots) {
     this.inventoryName = inventoryName;
@@ -97,7 +101,7 @@ public class InventoryBuilder implements Listener {
   }
 
   public InventoryBuilder registerAsListener() {
-    Bukkit.getServer().getPluginManager().registerEvents(this, ApexCore.getInstance());
+    Bukkit.getServer().getPluginManager().registerEvents(this, apexCore);
     return this;
   }
 

@@ -1,5 +1,7 @@
 package io.apexcreations.core;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import io.apexcreations.core.api.commands.ApexCommand;
 import io.apexcreations.core.api.modules.Module;
 import io.apexcreations.core.main.commands.BalanceCommand;
@@ -23,18 +25,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ApexCore extends JavaPlugin {
-
-  private static ApexCore instance;
   private CommandMap commandMap;
   private ApexAPI apexAPI;
 
-  public static ApexCore getInstance() {
-    return instance;
-  }
-
   @Override
   public void onEnable() {
-    instance = this;
+    Guice.createInjector(new DependencyModule(this));
     this.apexAPI = new ApexAPI();
     this.handleListeners();
     this.handleCommands();

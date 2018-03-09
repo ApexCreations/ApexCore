@@ -19,8 +19,8 @@ public class ApexMySQLDao implements ApexDao {
   private final DatabaseAdapter databaseAdapter;
   private final String tableName;
 
-  public ApexMySQLDao(DatabaseAdapter databaseAdapter) {
-    this.apexCore = ApexCore.getInstance();
+  public ApexMySQLDao(ApexCore apexCore, DatabaseAdapter databaseAdapter) {
+    this.apexCore = apexCore;
     this.databaseAdapter = databaseAdapter;
     this.tableName = "ApexCore-USERS";
   }

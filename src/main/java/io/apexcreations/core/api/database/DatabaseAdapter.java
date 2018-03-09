@@ -1,5 +1,6 @@
 package io.apexcreations.core.api.database;
 
+import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,13 +13,13 @@ import org.bukkit.Bukkit;
 public class DatabaseAdapter {
 
   private ExecutorService executor;
+  @Inject
   private ApexCore apexCore;
   private MySQL sql;
 
   public DatabaseAdapter(String host, int port, String user, String password,
       String database) {
     try {
-      this.apexCore = ApexCore.getInstance();
       this.sql = new MySQL(host, port, user, password, database);
       this.executor = Executors.newCachedThreadPool();
     } catch (Exception e) {

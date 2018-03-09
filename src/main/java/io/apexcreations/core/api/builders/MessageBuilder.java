@@ -1,5 +1,6 @@
 package io.apexcreations.core.api.builders;
 
+import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import java.util.Collection;
 import java.util.Map;
@@ -11,10 +12,12 @@ import org.bukkit.entity.Player;
 public class MessageBuilder {
 
   private String message, prefix;
+  @Inject
+  private ApexCore apexCore;
 
   private MessageBuilder(String string) {
     this.message = translate(string);
-    this.prefix = ApexCore.getInstance().getConfig().getString("prefix");
+    this.prefix = this.apexCore.getConfig().getString("prefix");
   }
 
   public static MessageBuilder create(String string) {
