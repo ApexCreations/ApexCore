@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+// TODO: Base command /chat with subcommands clear, mute, slow
 public class ClearChatCommand extends ApexCommand {
 
   public ClearChatCommand(String name, String description, String permission, boolean playerOnly,
