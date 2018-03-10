@@ -1,4 +1,4 @@
-package io.apexcreations.core.modules.staff;
+package io.apexcreations.core.modules.staff.commands;
 
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.ApexCommand;

@@ -30,7 +30,7 @@ public class EconomyGiveSubCommand extends SubCommand {
       return;
     }
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getPlugin().getPlayerCache()
+    Optional<ApexPlayer> optionalApexPlayer = this.getApexCore().getPlayerCache()
         .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
@@ -64,7 +64,7 @@ public class EconomyGiveSubCommand extends SubCommand {
     }
 
     String amt = Utils.formatCurrency(BigDecimal.valueOf(amount));
-    String currency = this.getPlugin().getApexConfigCache().getCurrencySymbol();
+    String currency = this.getApexCore().getApexConfigCache().getCurrencySymbol();
 
     MessageBuilder.create(String.
         format("&a&lDEPOSIT &7&l>> &a&l%s%s &7has been deposited into your account!", currency,

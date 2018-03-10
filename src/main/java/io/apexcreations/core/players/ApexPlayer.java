@@ -16,5 +16,9 @@ public interface ApexPlayer {
 
   boolean isInStaffChat();
 
-  void setStaffChat(boolean b);
+  void setStaffChat(boolean staffChat);
+  
+  boolean isInStaffMode();
+  
+  void setStaffMode(boolean staffMode);
 }

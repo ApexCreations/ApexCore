@@ -27,7 +27,7 @@ public class BalancePlayerSubCommand extends SubCommand {
       return;
     }
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getPlugin().getPlayerCache()
+    Optional<ApexPlayer> optionalApexPlayer = this.getApexCore().getPlayerCache()
         .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
