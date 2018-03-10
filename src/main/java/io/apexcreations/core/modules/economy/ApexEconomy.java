@@ -3,7 +3,7 @@ package io.apexcreations.core.modules.economy;
 import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.exceptions.MaxMoneyException;
-import io.apexcreations.core.main.modules.economy.account.Account;
+import io.apexcreations.core.modules.economy.account.Account;
 import io.apexcreations.core.players.ApexPlayer;
 import io.apexcreations.core.players.impl.ApexPlayerImpl;
 import io.apexcreations.core.utils.Utils;
@@ -21,15 +21,21 @@ import org.bukkit.OfflinePlayer;
 public class ApexEconomy implements Economy {
   @Inject
   private ApexCore apexCore;
+  
+  private final EconomyModule economyModule;
+  
+  public ApexEconomy(EconomyModule economyModule) {
+    this.economyModule = economyModule;
+  }
 
   @Override
   public boolean isEnabled() {
-    return this.apexCore.getApexConfigCache().isEconomyEnabled();
+    return this.economyModule.isEconomyEnabled();
   }
 
   @Override
   public String getName() {
-    return this.apexCore.getApexConfigCache().getEconomyName();
+    return this.economyModule.getEconomyName();
   }
 
   @Override
@@ -49,12 +55,12 @@ public class ApexEconomy implements Economy {
 
   @Override
   public String currencyNameSingular() {
-    return this.apexCore.getApexConfigCache().getCurrencyNameSingular();
+    return this.economyModule.getCurrencyNameSingular();
   }
 
   @Override
   public String currencyNamePlural() {
-    return this.apexCore.getApexConfigCache().getCurrencyNamePlural();
+    return this.economyModule.getCurrencyNamePlural();
   }
 
   @Override

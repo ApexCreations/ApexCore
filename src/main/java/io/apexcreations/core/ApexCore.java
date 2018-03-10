@@ -8,11 +8,8 @@ import io.apexcreations.core.commands.SubCommand;
 import io.apexcreations.core.database.DatabaseAdapter;
 import io.apexcreations.core.listeners.JoinEvent;
 import io.apexcreations.core.listeners.QuitEvent;
-import io.apexcreations.core.modules.Module;
-import io.apexcreations.core.modules.chat.ChatModule;
+import io.apexcreations.core.modules.ModuleManager;
 import io.apexcreations.core.modules.staff.ChatListener;
-import io.apexcreations.core.modules.staff.StaffModule;
-import io.apexcreations.core.modules.economy.EconomyModule;
 import io.apexcreations.core.players.ApexPlayer;
 import java.util.UUID;
 import org.bukkit.event.Listener;
@@ -22,9 +19,9 @@ public class ApexCore extends JavaPlugin {
   private CommandHandler commandHandler;
   private final ApexMapCache<String, SubCommand> subCommandCache = new ApexMapCache<>(true);
   private final ApexMapCache<UUID, ApexPlayer> apexPlayerCache = new ApexMapCache<>(true);
-  private final ApexMapCache<String, Module> apexModuleCache = new ApexMapCache<>(true);
   private final ApexConfigCache apexConfigCache = new ApexConfigCache();;
   private DatabaseAdapter databaseAdapter;
+  private ModuleManager moduleManager;
   //private Injector injector;
 
   @Override
@@ -32,9 +29,10 @@ public class ApexCore extends JavaPlugin {
     Guice.createInjector(new DependencyModule(this));
     this.handleDatabase();
     this.handleListeners();
-    this.handleModules();
     this.commandHandler = new CommandHandler();
     this.commandHandler.handleCommands();
+    this.moduleManager = new ModuleManager();
+    this.moduleManager.handleModules();
   }
 
   private void handleListeners() {
@@ -47,22 +45,10 @@ public class ApexCore extends JavaPlugin {
     }
   }
 
-  private void register(Module... modules) {
-    for (Module module : modules) {
-      this.getApexModuleCache().add(module.getName(), module);
-    }
-  }
-
   @Override
   public void onDisable() {
-    this.getApexModuleCache().getMap().values().forEach(Module::terminate);
+    this.getModuleManager().handleFullTermination();
     this.getApexConfigCache().save();
-  }
-
-  private void handleModules() {
-    register(new ChatModule("Chat Module", "Handles all chat related activities"));
-    register(new StaffModule("Staff module", "For things like staff chat and staff mode"));
-    register(new EconomyModule("Economy Module", "For player balances and server economy"));
   }
 
   private void handleDatabase() {
@@ -77,11 +63,11 @@ public class ApexCore extends JavaPlugin {
         this.getConfig().getString("mysql.databaseName"));
   }
 
-  public ApexMapCache<String, Module> getApexModuleCache() {
-    return this.apexModuleCache;
-  }
+    public ModuleManager getModuleManager() {
+        return this.moduleManager;
+    }
 
-  public DatabaseAdapter getDatabaseAdapter() {
+    public DatabaseAdapter getDatabaseAdapter() {
     return databaseAdapter;
   }
 

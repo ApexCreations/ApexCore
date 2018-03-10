@@ -2,6 +2,7 @@ package io.apexcreations.core.modules.chat;
 
 
 import io.apexcreations.core.modules.Module;
+import org.bukkit.configuration.file.FileConfiguration;
 
 public class ChatModule extends Module {
 
@@ -15,11 +16,20 @@ public class ChatModule extends Module {
 
   @Override
   public void initialize() {
-    this.generateConfig();
   }
 
   @Override
   public void terminate() {
+  }
+
+  @Override
+  public void loadConfig(FileConfiguration config) {
+
+  }
+
+  @Override
+  public void saveConfig(FileConfiguration config) {
+
   }
 
   public boolean isChatStopped() {

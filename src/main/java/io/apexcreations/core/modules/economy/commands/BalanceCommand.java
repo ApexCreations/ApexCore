@@ -2,8 +2,10 @@ package io.apexcreations.core.modules.economy.commands;
 
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.ApexCommand;
-import io.apexcreations.core.modules.economy.commands.sub.BalancePlayerSubCommand;
+import io.apexcreations.core.modules.Module;
+import io.apexcreations.core.modules.economy.EconomyModule;
 import io.apexcreations.core.modules.economy.account.Account;
+import io.apexcreations.core.modules.economy.commands.sub.BalancePlayerSubCommand;
 import io.apexcreations.core.players.ApexPlayer;
 import io.apexcreations.core.utils.Utils;
 import java.util.Optional;
@@ -41,7 +43,14 @@ public class BalanceCommand extends ApexCommand {
     }
 
     Account account = apexPlayer.getAccount();
-    String currency = this.getApexCore().getApexConfigCache().getCurrencySymbol();
+    Optional<Module> optionalEconomyModule =
+            this.getApexCore().getModuleManager().getModuleCache().get("Economy");
+    if (!optionalEconomyModule.isPresent()) {
+      // Do something
+      return false;
+    }
+    EconomyModule economyModule = (EconomyModule) optionalEconomyModule.get();
+    String currency =  economyModule.getCurrencySymbol();
     MessageBuilder
         .create("&a&lBALANCE &7&l>> &a&l" + currency + Utils.formatCurrency(account.getBalance()))
         .send(commandSender);

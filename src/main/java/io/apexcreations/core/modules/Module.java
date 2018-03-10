@@ -2,19 +2,14 @@ package io.apexcreations.core.modules;
 
 import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
-import java.io.File;
 import java.util.logging.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 public abstract class Module {
 
   private final String name, description;
-  private File file;
-  private FileConfiguration config;
   private boolean enabled;
-  @Inject
-  private ApexCore apexCore;
+  @Inject private ApexCore apexCore;
 
   public Module(String name, String description) {
     this.name = name;
@@ -24,6 +19,9 @@ public abstract class Module {
   public abstract void initialize();
 
   public abstract void terminate();
+
+    public abstract void loadConfig(FileConfiguration config);
+    public abstract void saveConfig(FileConfiguration config);
 
   public void reload() {
     if (this.isEnabled()) {
@@ -46,22 +44,6 @@ public abstract class Module {
 
   public void setEnabled(boolean enabled) {
     this.enabled = enabled;
-  }
-
-  protected void generateConfig() {
-    this.getPlugin()
-        .saveResource(String.format("modules/%s.yml", this.getName().toLowerCase()), false);
-    this.config = YamlConfiguration.loadConfiguration(
-        new File(this.getPlugin().getDataFolder(),
-            String.format("modules/%s.yml", this.getName().toLowerCase())));
-  }
-
-  public File getFile() {
-    return this.file;
-  }
-
-  public FileConfiguration getConfig() {
-    return this.config;
   }
 
   protected ApexCore getPlugin() {

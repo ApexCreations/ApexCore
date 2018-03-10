@@ -3,6 +3,8 @@ package io.apexcreations.core.modules.economy.commands.sub;
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.SubCommand;
 import io.apexcreations.core.exceptions.MaxMoneyException;
+import io.apexcreations.core.modules.Module;
+import io.apexcreations.core.modules.economy.EconomyModule;
 import io.apexcreations.core.players.ApexPlayer;
 import io.apexcreations.core.utils.Utils;
 import java.math.BigDecimal;
@@ -64,7 +66,14 @@ public class EconomyTakeSubCommand extends SubCommand {
     }
 
     String amt = Utils.formatCurrency(BigDecimal.valueOf(amount));
-    String currency = this.getApexCore().getApexConfigCache().getCurrencySymbol();
+    Optional<Module> optionalEconomyModule =
+            this.getApexCore().getModuleManager().getModuleCache().get("Economy");
+    if (!optionalEconomyModule.isPresent()) {
+      // Do something
+      return;
+    }
+    EconomyModule economyModule = (EconomyModule) optionalEconomyModule.get();
+    String currency = economyModule.getCurrencySymbol();
 
     MessageBuilder.create(String.
         format("&c&lWITHDRAW &7&l>> &c&l%s%s &7has been withdrawn from your account!", currency, amt

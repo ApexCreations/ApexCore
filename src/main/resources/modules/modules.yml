@@ -1,0 +1,9 @@
+economy:
+  enabled: true
+  name: 'Apex'
+  currencySymbol: '$'
+  singularName: 'Dollar'
+  pluralName: 'Dollars'
+  defaultBalance: 1000
+  minBalance: 0
+  maxBalance: 10000000

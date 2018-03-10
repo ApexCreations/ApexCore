@@ -3,53 +3,63 @@ package io.apexcreations.core.modules.economy.account;
 import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.exceptions.MaxMoneyException;
+import io.apexcreations.core.modules.Module;
+import io.apexcreations.core.modules.economy.EconomyModule;
 import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Account {
 
-  private final UUID accountOwner;
-  private BigDecimal balance;
+    private final UUID accountOwner;
+    private BigDecimal balance;
+    private EconomyModule economyModule;
+    @Inject
+    private ApexCore apexCore;
 
-  @Inject
-  private ApexCore apexCore;
-
-  public Account(UUID accountOwner) {
-    this.accountOwner = accountOwner;
-    this.load();
-  }
-
-  private void load() {
-    this.balance = BigDecimal.ZERO;
-  }
-
-  public BigDecimal getBalance() {
-    return this.balance;
-  }
-
-  public void setBalance(BigDecimal balance) throws MaxMoneyException {
-    if ((balance.doubleValue() + this.balance.doubleValue()) >
-        this.apexCore.getApexConfigCache().getMaxBalance() ||
-        (balance.doubleValue() - this.balance.doubleValue()) <
-            this.apexCore.getApexConfigCache().getMinBalance()) {
-      throw new MaxMoneyException();
+    public Account(UUID accountOwner) {
+        this.accountOwner = accountOwner;
+        this.load();
     }
-    this.balance = balance;
-  }
 
-  public void addToBalance(double amount) throws MaxMoneyException {
-    this.setBalance(this.balance.add(this.toBigDecimal(amount)));
-  }
+    private void load() {
+        Optional<Module> optionalEconomyModule = this.apexCore.
+                getModuleManager().getModuleCache().get("Economy");
+        if (!optionalEconomyModule.isPresent()) {
+            // Do something
+            return;
+        }
+        this.economyModule = (EconomyModule) optionalEconomyModule.get();
+        this.balance = BigDecimal.ZERO;
+    }
 
-  public void removeFromBalance(double amount) throws MaxMoneyException {
-    this.setBalance(this.balance.subtract(this.toBigDecimal(amount)));
-  }
+    public BigDecimal getBalance() {
+        return this.balance;
+    }
 
-  public UUID getAccountOwner() {
-    return this.accountOwner;
-  }
+    public void setBalance(BigDecimal balance) throws MaxMoneyException {
+        if ((balance.doubleValue() + this.balance.doubleValue()) >
+                this.economyModule.getMaxBalance() ||
+                (balance.doubleValue() - this.balance.doubleValue()) <
+                        this.economyModule.getMinBalance()) {
+            throw new MaxMoneyException();
+        }
+        this.balance = balance;
+    }
 
-  private BigDecimal toBigDecimal(double amount) {
-    return BigDecimal.valueOf(amount);
-  }
+    public void addToBalance(double amount) throws MaxMoneyException {
+        this.setBalance(this.balance.add(this.toBigDecimal(amount)));
+    }
+
+    public void removeFromBalance(double amount) throws MaxMoneyException {
+        this.setBalance(this.balance.subtract(this.toBigDecimal(amount)));
+    }
+
+    public UUID getAccountOwner() {
+        return this.accountOwner;
+    }
+
+    private BigDecimal toBigDecimal(double amount) {
+        return BigDecimal.valueOf(amount);
+    }
 }
