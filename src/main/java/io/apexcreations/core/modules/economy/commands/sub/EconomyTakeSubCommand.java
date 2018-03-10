@@ -1,4 +1,4 @@
-package io.apexcreations.core.commands.command.sub;
+package io.apexcreations.core.modules.economy.commands.sub;
 
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.SubCommand;
@@ -12,9 +12,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class EconomyGiveSubCommand extends SubCommand {
+public class EconomyTakeSubCommand extends SubCommand {
 
-  public EconomyGiveSubCommand(String name, String info, String permission, boolean playerOnly,
+  public EconomyTakeSubCommand(String name, String info, String permission, boolean playerOnly,
       String... aliases) {
     super(name, info, permission, playerOnly, aliases);
   }
@@ -22,11 +22,12 @@ public class EconomyGiveSubCommand extends SubCommand {
   @Override
   public void execute(CommandSender commandSender, String[] args) {
     args = Arrays.copyOfRange(args, 1, args.length);
-    System.out.println(Arrays.toString(args));
+
     Player player = Bukkit.getPlayer(args[0]);
 
     if (player == null) {
-      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player!").send(commandSender);
+      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player!").withPrefix()
+          .send(commandSender);
       return;
     }
 
@@ -34,14 +35,14 @@ public class EconomyGiveSubCommand extends SubCommand {
         .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
-      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player data!")
+      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player data!").withPrefix()
           .send(commandSender);
       return;
     }
 
     if (!Utils.isDouble(args[1])) {
       MessageBuilder.create(String
-          .format("&c&lERROR &7&l>> &cIncorrect Usage! Try /%s give <player> <amount>",
+          .format("&c&lERROR &7&l>> &cIncorrect Usage! Try /%s take <player> <amount>",
               this.getName())).send(commandSender);
       return;
     }
@@ -55,11 +56,10 @@ public class EconomyGiveSubCommand extends SubCommand {
     }
 
     double amount = Double.parseDouble(args[1]);
-
     try {
-      apexPlayer.getAccount().addToBalance(amount);
+      apexPlayer.getAccount().removeFromBalance(amount);
     } catch (MaxMoneyException e) {
-      MessageBuilder.create("&c&lERROR &7" + e.getMessage()).send(commandSender);
+      MessageBuilder.create("&c&lERROR &7&l>> &c" + e.getMessage());
       return;
     }
 
@@ -67,12 +67,11 @@ public class EconomyGiveSubCommand extends SubCommand {
     String currency = this.getPlugin().getApexConfigCache().getCurrencySymbol();
 
     MessageBuilder.create(String.
-        format("&a&lDEPOSIT &7&l>> &a&l%s%s &7has been deposited into your account!", currency,
-            amt))
-        .send(player);
+        format("&c&lWITHDRAW &7&l>> &c&l%s%s &7has been withdrawn from your account!", currency, amt
+        )).send(player);
 
     MessageBuilder.create(String
-        .format("&a&lDEPOSIT &7&l>> &a&l%s%s &7has been deposited into %s's account!", currency,
+        .format("&c&lWITHDRAW &7&l>> &c&l%s%s &7has been withdrawn from %s's account!", currency,
             amt,
             player.getName())).send(commandSender);
   }

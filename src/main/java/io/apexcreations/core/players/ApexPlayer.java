@@ -1,8 +1,9 @@
 package io.apexcreations.core.players;
 
-import io.apexcreations.core.main.modules.economy.account.Account;
 import java.util.Map;
 import java.util.UUID;
+
+import io.apexcreations.core.modules.economy.account.Account;
 import org.bukkit.Location;
 
 public interface ApexPlayer {

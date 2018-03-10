@@ -68,7 +68,7 @@ public abstract class ApexCommand extends Command {
   public abstract boolean executeCommand(CommandSender commandSender, String label, String[] args);
 
   private Optional<SubCommand> getSubCommand(String args) {
-    return this.getPlugin().getSubCommandCache().get(args);
+    return this.getApexCore().getSubCommandCache().get(args);
   }
 
   private void sendNoPermission(CommandSender commandSender) {
@@ -76,7 +76,7 @@ public abstract class ApexCommand extends Command {
         .send(commandSender);
   }
 
-  protected ApexCore getPlugin() {
+  protected ApexCore getApexCore() {
     return this.apexCore;
   }
 }

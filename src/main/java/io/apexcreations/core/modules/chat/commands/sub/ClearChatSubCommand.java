@@ -1,4 +1,4 @@
-package io.apexcreations.core.commands.command.sub;
+package io.apexcreations.core.modules.chat.commands.sub;
 
 
 import io.apexcreations.core.builders.MessageBuilder;
@@ -9,9 +9,8 @@ import org.bukkit.entity.Player;
 
 public class ClearChatSubCommand extends SubCommand {
 
-  public ClearChatSubCommand(String name, String info, String permission, boolean playerOnly,
-      String... aliases) {
-    super(name, info, permission, playerOnly, aliases);
+  public ClearChatSubCommand(String name, String info, String permission, boolean playerOnly) {
+    super(name, info, permission, playerOnly);
   }
 
   @Override

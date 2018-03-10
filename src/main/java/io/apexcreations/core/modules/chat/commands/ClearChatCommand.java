@@ -1,7 +1,8 @@
-package io.apexcreations.core.commands.command;
+package io.apexcreations.core.modules.chat.commands;
 
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.ApexCommand;
+import io.apexcreations.core.modules.chat.commands.sub.ClearChatSubCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -11,7 +12,7 @@ public class ClearChatCommand extends ApexCommand {
   public ClearChatCommand(String name, String description, String permission, boolean playerOnly,
       String... aliases) {
     super(name, description, permission, playerOnly, aliases);
-    //this.getAPI().getSubCommandCache().add(new ClearChatSubCommand());
+    this.getApexCore().getSubCommandCache().add("clear" ,new ClearChatSubCommand("Clear chat", "Clears chat", "apex.clearchat", false));
   }
 
   @Override
