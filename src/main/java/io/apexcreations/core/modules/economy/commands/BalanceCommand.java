@@ -1,9 +1,9 @@
-package io.apexcreations.core.commands.command;
+package io.apexcreations.core.modules.economy.commands;
 
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.ApexCommand;
-import io.apexcreations.core.commands.command.sub.BalancePlayerSubCommand;
-import io.apexcreations.core.main.modules.economy.account.Account;
+import io.apexcreations.core.modules.economy.commands.sub.BalancePlayerSubCommand;
+import io.apexcreations.core.modules.economy.account.Account;
 import io.apexcreations.core.players.ApexPlayer;
 import io.apexcreations.core.utils.Utils;
 import java.util.Optional;
@@ -15,7 +15,7 @@ public class BalanceCommand extends ApexCommand {
   public BalanceCommand(String name, String description, String permission, boolean playerOnly,
       String... aliases) {
     super(name, description, permission, playerOnly, aliases);
-    this.getPlugin().getSubCommandCache().add("other",
+    this.getApexCore().getSubCommandCache().add("other",
         new BalancePlayerSubCommand("other", "Check the balance of a player's account!",
             "apex.balance.other", false));
   }
@@ -25,7 +25,7 @@ public class BalanceCommand extends ApexCommand {
 
     Player player = (Player) commandSender;
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getPlugin().getPlayerCache()
+    Optional<ApexPlayer> optionalApexPlayer = this.getApexCore().getPlayerCache()
         .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
@@ -41,7 +41,7 @@ public class BalanceCommand extends ApexCommand {
     }
 
     Account account = apexPlayer.getAccount();
-    String currency = this.getPlugin().getApexConfigCache().getCurrencySymbol();
+    String currency = this.getApexCore().getApexConfigCache().getCurrencySymbol();
     MessageBuilder
         .create("&a&lBALANCE &7&l>> &a&l" + currency + Utils.formatCurrency(account.getBalance()))
         .send(commandSender);

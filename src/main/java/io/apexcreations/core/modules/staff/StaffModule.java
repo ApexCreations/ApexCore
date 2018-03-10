@@ -1,4 +1,4 @@
-package io.apexcreations.core.modules.chat.staff;
+package io.apexcreations.core.modules.staff;
 
 import io.apexcreations.core.modules.Module;
 

@@ -10,8 +10,9 @@ import io.apexcreations.core.listeners.JoinEvent;
 import io.apexcreations.core.listeners.QuitEvent;
 import io.apexcreations.core.modules.Module;
 import io.apexcreations.core.modules.chat.ChatModule;
-import io.apexcreations.core.modules.chat.staff.ChatListener;
-import io.apexcreations.core.modules.chat.staff.StaffModule;
+import io.apexcreations.core.modules.staff.ChatListener;
+import io.apexcreations.core.modules.staff.StaffModule;
+import io.apexcreations.core.modules.economy.EconomyModule;
 import io.apexcreations.core.players.ApexPlayer;
 import java.util.UUID;
 import org.bukkit.event.Listener;
@@ -61,6 +62,7 @@ public class ApexCore extends JavaPlugin {
   private void handleModules() {
     register(new ChatModule("Chat Module", "Handles all chat related activities"));
     register(new StaffModule("Staff module", "For things like staff chat and staff mode"));
+    register(new EconomyModule("Economy Module", "For player balances and server economy"));
   }
 
   private void handleDatabase() {

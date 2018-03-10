@@ -1,6 +1,6 @@
 package io.apexcreations.core.players.impl;
 
-import io.apexcreations.core.main.modules.economy.account.Account;
+import io.apexcreations.core.modules.economy.account.Account;
 import io.apexcreations.core.players.ApexPlayer;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ public class ApexPlayerImpl implements ApexPlayer {
   private final UUID uniqueId;
   private final Account account;
   private final Map<String, Location> homes;
-  private boolean staffChat;
+  private boolean staffChat, staffMode;
 
   public ApexPlayerImpl(UUID uuid) {
     this.uniqueId = uuid;
@@ -45,4 +45,14 @@ public class ApexPlayerImpl implements ApexPlayer {
   public void setStaffChat(boolean staffChat) {
     this.staffChat = staffChat;
   }
+
+    @Override
+    public boolean isInStaffMode() {
+        return this.staffMode;
+    }
+
+    @Override
+    public void setStaffMode(boolean staffMode) {
+        this.staffMode = staffMode;
+    }
 }

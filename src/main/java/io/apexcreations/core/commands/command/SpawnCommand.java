@@ -16,13 +16,13 @@ public class SpawnCommand extends ApexCommand {
   public boolean executeCommand(CommandSender commandSender, String label, String[] args) {
     Player player = (Player) commandSender;
 
-    if (!this.getPlugin().getApexConfigCache().isSpawnSet()) { // Spawn has not yet been set
+    if (!this.getApexCore().getApexConfigCache().isSpawnSet()) { // Spawn has not yet been set
       MessageBuilder.create("&cSpawn has not yet been set.").send(player);
       return true;
     }
 
     // Replace this with a teleportation request.
-    player.teleport(this.getPlugin().getApexConfigCache().getSpawnLocation());
+    player.teleport(this.getApexCore().getApexConfigCache().getSpawnLocation());
     MessageBuilder.create("&aYou have been teleported to spawn!").send(player);
     return true;
   }

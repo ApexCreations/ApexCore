@@ -1,4 +1,4 @@
-package io.apexcreations.core.main.modules.economy.account;
+package io.apexcreations.core.modules.economy.account;
 
 import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;

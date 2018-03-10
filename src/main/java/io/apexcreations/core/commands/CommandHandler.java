@@ -2,15 +2,17 @@ package io.apexcreations.core.commands;
 
 import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
-import io.apexcreations.core.commands.command.BalanceCommand;
-import io.apexcreations.core.commands.command.ClearChatCommand;
-import io.apexcreations.core.commands.command.EconomyCommand;
+import io.apexcreations.core.modules.economy.commands.BalanceCommand;
+import io.apexcreations.core.modules.chat.commands.ClearChatCommand;
+import io.apexcreations.core.modules.economy.commands.EconomyCommand;
 import io.apexcreations.core.commands.command.SetSpawnCommand;
 import io.apexcreations.core.commands.command.SpawnCommand;
 import io.apexcreations.core.commands.command.TeleportCommand;
-import io.apexcreations.core.modules.chat.staff.StaffChatCommand;
+import io.apexcreations.core.modules.staff.commands.StaffChatCommand;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+
+import io.apexcreations.core.modules.staff.commands.StaffModeCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
@@ -29,7 +31,7 @@ public class CommandHandler {
     this.register(
         new StaffChatCommand("staffchat",
             "Use this for staff chat",
-            "apex.clearchat", true, "sc"),
+            "apex.staffchat", true, "sc"),
 
         new SetSpawnCommand("setspawn",
             "Set the spawn for the server/world",
@@ -53,6 +55,10 @@ public class CommandHandler {
         new TeleportCommand("teleport",
             "Teleport to a player",
             "apex.teleport", true, "tp"));
+        
+        new StaffModeCommand("staffmode",
+                "Toggles your staff mode",
+                "apex.staffmode", true, "sm");
   }
 
   public void register(ApexCommand... commands) {

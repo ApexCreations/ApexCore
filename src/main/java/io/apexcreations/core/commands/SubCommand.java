@@ -48,7 +48,7 @@ public abstract class SubCommand {
     return this.permission;
   }
 
-  protected ApexCore getPlugin() {
+  protected ApexCore getApexCore() {
     return apexCore;
   }
 }

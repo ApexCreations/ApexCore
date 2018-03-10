@@ -1,8 +1,8 @@
-package io.apexcreations.core.commands.command.sub;
+package io.apexcreations.core.modules.economy.commands.sub;
 
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.SubCommand;
-import io.apexcreations.core.main.modules.economy.account.Account;
+import io.apexcreations.core.modules.economy.account.Account;
 import io.apexcreations.core.players.ApexPlayer;
 import io.apexcreations.core.utils.Utils;
 import java.util.Optional;
@@ -27,7 +27,7 @@ public class BalancePlayerSubCommand extends SubCommand {
       return;
     }
 
-    Optional<ApexPlayer> optionalApexPlayer = this.getPlugin().getPlayerCache()
+    Optional<ApexPlayer> optionalApexPlayer = this.getApexCore().getPlayerCache()
         .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
