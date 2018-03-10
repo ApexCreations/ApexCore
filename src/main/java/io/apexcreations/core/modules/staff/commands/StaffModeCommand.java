@@ -29,8 +29,8 @@ public class StaffModeCommand extends ApexCommand {
         ApexPlayer apexPlayer = optionalPLayer.get();
         apexPlayer.setStaffMode(!apexPlayer.isInStaffMode());
         
-        String staement = ChatColor.YELLOW + "You have toggled staff mode " + (apexPlayer.isInStaffMode() ? ChatColor.GREEN + "ON" : ChatColor.RED + "OFF");
-        MessageBuilder.create(staement).send(player);
+        String statement = ChatColor.YELLOW + "You have toggled staff mode " + (apexPlayer.isInStaffMode() ? ChatColor.GREEN + "ON" : ChatColor.RED + "OFF");
+        MessageBuilder.create(statement).send(player);
         
         return true;
     }
