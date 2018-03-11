@@ -26,10 +26,7 @@ public class ApexMapCache<K, V> {
   }
 
   public void add(K key, V value) {
-    if (this.has(key)) {
-      return;
-    }
-    this.cacheMap.put(key, value);
+    this.cacheMap.putIfAbsent(key, value);
   }
 
   public void remove(K key) {

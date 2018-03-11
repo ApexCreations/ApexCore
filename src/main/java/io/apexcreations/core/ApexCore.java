@@ -1,6 +1,7 @@
 package io.apexcreations.core;
 
 import com.google.inject.Guice;
+import com.google.inject.Injector;
 import io.apexcreations.core.cache.ApexConfigCache;
 import io.apexcreations.core.cache.ApexMapCache;
 import io.apexcreations.core.commands.CommandHandler;
@@ -22,11 +23,13 @@ public class ApexCore extends JavaPlugin {
   private final ApexConfigCache apexConfigCache = new ApexConfigCache();;
   private DatabaseAdapter databaseAdapter;
   private ModuleManager moduleManager;
-  //private Injector injector;
+  private Injector injector;
 
   @Override
   public void onEnable() {
-    Guice.createInjector(new DependencyModule(this));
+    this.injector =  Guice.createInjector(new DependencyModule(this));
+    this.injector.injectMembers(this);
+    this.saveDefaultConfig();
     this.handleDatabase();
     this.handleListeners();
     this.commandHandler = new CommandHandler();

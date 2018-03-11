@@ -1,6 +1,10 @@
 package io.apexcreations.core.modules.economy;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+import io.apexcreations.core.cache.ApexMapCache;
 import io.apexcreations.core.modules.Module;
+import io.apexcreations.core.players.ApexPlayer;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,49 +12,51 @@ import org.bukkit.plugin.ServicePriority;
 
 public class EconomyModule extends Module {
 
-    private ApexEconomy apexEconomy;
-    private int maxBalance, minBalance, defaultBalance;
     private String currencySymbol, economyName, currencyNameSingular, currencyNamePlural;
-    private boolean economyEnabled;
+    private int maxBalance, minBalance, defaultBalance;
+    private ApexEconomy apexEconomy;
+    @Inject
+    @Named("PlayerCache")
+    private ApexMapCache<String, ApexPlayer> playerCache;
 
-    public EconomyModule(String name, String description) {
-        super(name, description);
+
+    public EconomyModule(FileConfiguration config, String name, String description) {
+        super(config, name, description);
     }
 
     @Override
     public void initialize() {
+        if (!this.isEnabled()) {
+            return;
+        }
+        if (this.getConfig().isSet("economy.defaultBalance")) {
+            this.defaultBalance = this.getConfig().getInt("economy.defaultBalance", 1000);
+        }
+        this.economyName = this.getConfig().getString("economy.name", "Apex");
+        this.currencySymbol = this.getConfig().getString("economy.currencySymbol", "$");
+        this.currencyNameSingular = this.getConfig().getString("economy.singularName", "Dollar");
+        this.currencyNamePlural = this.getConfig().getString("economy.pluralName", "Dollars");
+        this.minBalance = this.getConfig().getInt("economy.minBalance", 0);
+        this.maxBalance = this.getConfig().getInt("economy.maxBalance", 10000000);
         this.registerVault();
     }
-    
+
     @Override
     public void terminate() {
+        this.saveConfig();
         this.unregisterVault();
     }
 
     @Override
-    public void loadConfig(FileConfiguration config) {
-        if (config.isSet("economy.defaultBalance")) {
-            this.defaultBalance = config.getInt("economy.defaultBalance", 1000);
-        }
-        this.economyName = config.getString("economy.name", "Apex");
-        this.economyEnabled = config.getBoolean("economy.enabled", true);
-        this.currencySymbol = config.getString("economy.currencySymbol", "$");
-        this.currencyNameSingular = config.getString("economy.singularName", "Dollar");
-        this.currencyNamePlural = config.getString("economy.pluralName", "Dollars");
-        this.minBalance = config.getInt("economy.minBalance", 0);
-        this.maxBalance = config.getInt("economy.maxBalance", 10000000);
-    }
-
-    @Override
-    public void saveConfig(FileConfiguration config) {
-        config.set("economy.name", this.economyName);
-        config.set("economy.enabled", this.economyEnabled);
-        config.set("economy.currencySymbol", this.currencySymbol);
-        config.set("economy.singularName", this.currencyNameSingular);
-        config.set("economy.pluralName", this.currencyNamePlural);
-        config.set("economy.defaultBalance", this.defaultBalance);
-        config.set("economy.minBalance", this.minBalance);
-        config.set("economy.maxBalance", this.maxBalance);
+    public void saveConfig() {
+        this.getConfig().set(this.getName() + ".enabled", this.isEnabled());
+        this.getConfig().set(this.getName() + ".name", this.economyName);
+        this.getConfig().set(this.getName() + ".currencySymbol", this.currencySymbol);
+        this.getConfig().set(this.getName() + ".singularName", this.currencyNameSingular);
+        this.getConfig().set(this.getName() + ".pluralName", this.currencyNamePlural);
+        this.getConfig().set(this.getName() + ".defaultBalance", this.defaultBalance);
+        this.getConfig().set(this.getName() + ".minBalance", this.minBalance);
+        this.getConfig().set(this.getName() + ".maxBalance", this.maxBalance);
     }
 
     private void registerVault() {
@@ -61,7 +67,7 @@ public class EconomyModule extends Module {
                             ServicePriority.Highest);
         } else {
             getLogger().severe("Could not find vault, avoiding economy registration");
-            this.economyEnabled = false;
+            this.setEnabled(false);
         }
     }
 
@@ -97,9 +103,5 @@ public class EconomyModule extends Module {
 
     public String getCurrencyNamePlural() {
         return this.currencyNamePlural;
-    }
-
-    public boolean isEconomyEnabled() {
-        return this.economyEnabled;
     }
 }

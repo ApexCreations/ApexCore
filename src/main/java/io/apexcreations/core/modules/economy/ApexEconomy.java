@@ -30,7 +30,7 @@ public class ApexEconomy implements Economy {
 
   @Override
   public boolean isEnabled() {
-    return this.economyModule.isEconomyEnabled();
+    return this.economyModule.isEnabled();
   }
 
   @Override

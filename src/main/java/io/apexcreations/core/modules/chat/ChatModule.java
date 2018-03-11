@@ -10,8 +10,8 @@ public class ChatModule extends Module {
   private boolean chatSlowed, chatStopped;
   private int slowTime;
 
-  public ChatModule(String name, String description) {
-    super(name, description);
+  public ChatModule(FileConfiguration config, String name, String description) {
+    super(config, name, description);
   }
 
   @Override
@@ -23,12 +23,7 @@ public class ChatModule extends Module {
   }
 
   @Override
-  public void loadConfig(FileConfiguration config) {
-
-  }
-
-  @Override
-  public void saveConfig(FileConfiguration config) {
+  public void saveConfig() {
 
   }
 

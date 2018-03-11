@@ -15,9 +15,9 @@ public class ModuleManager {
 
     private final ApexMapCache<String, Module> moduleCache = new ApexMapCache<>(true);
     private final FileConfiguration config;
+    private final File file;
     @Inject
     private ApexCore apexCore;
-    private final File file;
 
     public ModuleManager() {
         this.apexCore.saveResource(this.apexCore.getDataFolder() + "/modules/modules.yml", false);
@@ -27,13 +27,11 @@ public class ModuleManager {
 
     public void handleModules() {
         this.register(
-                new ChatModule("Chat Module", "Handles all chat related activities"),
-                new StaffModule("Staff module", "For things like staff chat and staff mode"),
-                new EconomyModule("Economy Module", "For player balances and server economy"));
-    }
+                new ChatModule(config, "Chat Module", "Handles all chat related activities"),
 
-    public void saveModule(Module module) {
-        module.saveConfig(this.config);
+                new StaffModule(config, "Staff module", "For things like staff chat and staff mode"),
+
+                new EconomyModule(config, "Economy Module", "For player balances and server economy"));
     }
 
     public void handleFullTermination() {
@@ -46,6 +44,13 @@ public class ModuleManager {
     }
 
     private void register(Module module) {
+        if (!this.config.isSet(module.getName())) {
+            this.apexCore.getLogger()
+                    .warning("Could not find configuration section for module `%s`. Disabling...");
+            module.setEnabled(false);
+            return;
+        }
+        module.setEnabled(this.config.getBoolean(module.getName() + ".enabled"));
         this.moduleCache.add(module.getName(), module);
     }
 

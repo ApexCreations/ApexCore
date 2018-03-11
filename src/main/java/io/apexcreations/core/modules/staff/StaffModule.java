@@ -5,8 +5,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class StaffModule extends Module {
 
-  public StaffModule(String name, String description) {
-    super(name, description);
+  public StaffModule(FileConfiguration config, String name, String description) {
+    super(config, name, description);
   }
 
   @Override
@@ -20,12 +20,7 @@ public class StaffModule extends Module {
   }
 
   @Override
-  public void loadConfig(FileConfiguration config) {
-
-  }
-
-  @Override
-  public void saveConfig(FileConfiguration config) {
+  public void saveConfig() {
 
   }
 }
