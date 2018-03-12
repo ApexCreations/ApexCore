@@ -8,8 +8,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 public abstract class Module {
 
     private final String name, description;
+    private final FileConfiguration config;
     private boolean enabled;
-    private FileConfiguration config;
     @Inject
     private ApexCore apexCore;
 
@@ -32,12 +32,12 @@ public abstract class Module {
         this.initialize();
     }
 
-    public FileConfiguration getConfig() {
-        return this.config;
-    }
-
     public String getName() {
         return this.name;
+    }
+
+    public String getSimpleName() {
+        return this.name.replaceAll("\\s+", "");
     }
 
     public String getDescription() {
@@ -58,5 +58,9 @@ public abstract class Module {
 
     protected Logger getLogger() {
         return this.apexCore.getLogger();
+    }
+
+    public FileConfiguration getConfig() {
+        return config;
     }
 }

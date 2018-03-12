@@ -49,14 +49,14 @@ public class EconomyModule extends Module {
 
     @Override
     public void saveConfig() {
-        this.getConfig().set(this.getName() + ".enabled", this.isEnabled());
-        this.getConfig().set(this.getName() + ".name", this.economyName);
-        this.getConfig().set(this.getName() + ".currencySymbol", this.currencySymbol);
-        this.getConfig().set(this.getName() + ".singularName", this.currencyNameSingular);
-        this.getConfig().set(this.getName() + ".pluralName", this.currencyNamePlural);
-        this.getConfig().set(this.getName() + ".defaultBalance", this.defaultBalance);
-        this.getConfig().set(this.getName() + ".minBalance", this.minBalance);
-        this.getConfig().set(this.getName() + ".maxBalance", this.maxBalance);
+        this.getConfig().set(this.getSimpleName() + ".enabled", this.isEnabled());
+        this.getConfig().set(this.getSimpleName() + ".name", this.economyName);
+        this.getConfig().set(this.getSimpleName() + ".currencySymbol", this.currencySymbol);
+        this.getConfig().set(this.getSimpleName() + ".singularName", this.currencyNameSingular);
+        this.getConfig().set(this.getSimpleName() + ".pluralName", this.currencyNamePlural);
+        this.getConfig().set(this.getSimpleName() + ".defaultBalance", this.defaultBalance);
+        this.getConfig().set(this.getSimpleName() + ".minBalance", this.minBalance);
+        this.getConfig().set(this.getSimpleName() + ".maxBalance", this.maxBalance);
     }
 
     private void registerVault() {

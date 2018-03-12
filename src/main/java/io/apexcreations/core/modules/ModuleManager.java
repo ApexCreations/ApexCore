@@ -27,11 +27,11 @@ public class ModuleManager {
 
     public void handleModules() {
         this.register(
-                new ChatModule(config, "Chat Module", "Handles all chat related activities"),
+                new ChatModule(config, "Chat", "Handles all chat related activities"),
 
-                new StaffModule(config, "Staff module", "For things like staff chat and staff mode"),
+                new StaffModule(config, "Staff", "For things like staff chat and staff mode"),
 
-                new EconomyModule(config, "Economy Module", "For player balances and server economy"));
+                new EconomyModule(config, "Economy", "For player balances and server economy"));
     }
 
     public void handleFullTermination() {
@@ -50,7 +50,7 @@ public class ModuleManager {
             module.setEnabled(false);
             return;
         }
-        module.setEnabled(this.config.getBoolean(module.getName() + ".enabled"));
+        module.setEnabled(this.config.getBoolean(module.getSimpleName() + ".enabled"));
         this.moduleCache.add(module.getName(), module);
     }
 

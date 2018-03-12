@@ -27,7 +27,7 @@ public class ApexCore extends JavaPlugin {
 
   @Override
   public void onEnable() {
-    this.injector =  Guice.createInjector(new DependencyModule(this));
+    this.injector = Guice.createInjector(new DependencyModule(this));
     this.injector.injectMembers(this);
     this.saveDefaultConfig();
     this.handleDatabase();
