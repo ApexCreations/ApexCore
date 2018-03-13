@@ -2,6 +2,8 @@ package io.apexcreations.core.modules.economy;
 
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.modules.Module;
+import io.apexcreations.core.modules.economy.commands.BalanceCommand;
+import io.apexcreations.core.modules.economy.commands.EconomyCommand;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,7 +16,8 @@ public class EconomyModule extends Module {
     private ApexEconomy apexEconomy;
 
 
-    public EconomyModule(ApexCore apexCore, FileConfiguration config, String name, String description) {
+    public EconomyModule(ApexCore apexCore, FileConfiguration config, String name,
+            String description) {
         super(apexCore, config, name, description);
     }
 
@@ -32,6 +35,13 @@ public class EconomyModule extends Module {
         this.currencyNamePlural = this.getConfig().getString("economy.pluralName", "Dollars");
         this.minBalance = this.getConfig().getInt("economy.minBalance", 0);
         this.maxBalance = this.getConfig().getInt("economy.maxBalance", 10000000);
+        this.getPlugin().getCommandHandler().register(
+                new EconomyCommand(this.getPlugin(), "economy",
+                        "Manage your player's balance!",
+                        "apex.economy", false, "eco"),
+                new BalanceCommand(this.getPlugin(), "balance",
+                        "Check a player's balance!",
+                        "apex.balance", false, "bal", "money"));
         this.registerVault();
     }
 
@@ -39,6 +49,7 @@ public class EconomyModule extends Module {
     public void terminate() {
         this.saveConfig();
         this.unregisterVault();
+        this.getPlugin().getCommandHandler().unregister("balance", "economy");
     }
 
     @Override

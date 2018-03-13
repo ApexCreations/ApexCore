@@ -3,6 +3,7 @@ package io.apexcreations.core.modules.chat;
 
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.modules.Module;
+import io.apexcreations.core.modules.chat.commands.ClearChatCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class ChatModule extends Module {
@@ -17,10 +18,14 @@ public class ChatModule extends Module {
 
   @Override
   public void initialize() {
+    this.getPlugin().getCommandHandler().register(new ClearChatCommand(this.getPlugin(), "clearchat",
+            "Clear global chat!",
+            "apex.clearchat", false, "cc"));
   }
 
   @Override
   public void terminate() {
+    this.getPlugin().getCommandHandler().unregister("clearchat");
   }
 
   @Override

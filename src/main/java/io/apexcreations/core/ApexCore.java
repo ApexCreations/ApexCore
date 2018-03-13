@@ -88,4 +88,8 @@ public class ApexCore extends JavaPlugin {
     public ApexMapCache<String, SubCommand> getSubCommandCache() {
         return this.subCommandCache;
     }
+
+    public CommandHandler getCommandHandler() {
+        return this.commandHandler;
+    }
 }
