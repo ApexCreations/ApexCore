@@ -1,5 +1,6 @@
 package io.apexcreations.core.modules.economy.commands.sub;
 
+import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.SubCommand;
 import io.apexcreations.core.modules.economy.account.Account;
@@ -12,9 +13,9 @@ import org.bukkit.entity.Player;
 
 public class BalancePlayerSubCommand extends SubCommand {
 
-  public BalancePlayerSubCommand(String name, String info, String permission, boolean playerOnly,
+  public BalancePlayerSubCommand(ApexCore apexCore, String name, String info, String permission, boolean playerOnly,
       String... aliases) {
-    super(name, info, permission, playerOnly, aliases);
+    super(apexCore, name, info, permission, playerOnly, aliases);
   }
 
   @Override
@@ -23,7 +24,7 @@ public class BalancePlayerSubCommand extends SubCommand {
     Player player = Bukkit.getPlayer(args[0]);
 
     if (player == null) {
-      MessageBuilder.create("&c&lERROR &7Could not find player!").withPrefix().send(commandSender);
+      MessageBuilder.create("&c&lERROR &7Could not find player!").withPrefix(PREFIX).send(commandSender);
       return;
     }
 
@@ -31,7 +32,7 @@ public class BalancePlayerSubCommand extends SubCommand {
         .get(player.getUniqueId());
 
     if (!optionalApexPlayer.isPresent()) {
-      MessageBuilder.create("&c&lERROR &7Could not find player data!").withPrefix()
+      MessageBuilder.create("&c&lERROR &7Could not find player data!").withPrefix(PREFIX)
           .send(commandSender);
       return;
     }
@@ -39,7 +40,7 @@ public class BalancePlayerSubCommand extends SubCommand {
     ApexPlayer apexPlayer = optionalApexPlayer.get();
 
     if (apexPlayer.getAccount() == null) {
-      MessageBuilder.create("&c&lERROR &7Could not find player account!").withPrefix()
+      MessageBuilder.create("&c&lERROR &7Could not find player account!").withPrefix(PREFIX)
           .send(commandSender);
       return;
     }

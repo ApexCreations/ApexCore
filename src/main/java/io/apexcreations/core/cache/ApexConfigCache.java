@@ -1,6 +1,5 @@
 package io.apexcreations.core.cache;
 
-import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.utils.Utils;
 import org.bukkit.Location;
@@ -8,57 +7,64 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class ApexConfigCache {
 
-  private final FileConfiguration config;
-  @Inject
-  private ApexCore apexCore;
-  private boolean teleportToSpawnOnJoin;
-  private Location spawnLocation;
+    private final FileConfiguration config;
+    private ApexCore apexCore;
+    private boolean teleportToSpawnOnJoin;
+    private Location spawnLocation;
+    private String prefix;
 
-  public ApexConfigCache() {
-    this.config = this.apexCore.getConfig();
-    this.load();
-  }
-
-  private void load() {
-    this.teleportToSpawnOnJoin = this.config.getBoolean("spawn.teleportOnJoin", false);
-    if (this.config.isSet("spawn.location")) {
-      this.spawnLocation = Utils.fromString(this.config.getString("spawn.location"));
+    public ApexConfigCache(ApexCore apexCore) {
+        this.apexCore = apexCore;
+        this.config = this.apexCore.getConfig();
+        this.load();
     }
-  }
 
-  public void save() {
-    this.config.set("spawn.teleportOnJoin", this.teleportToSpawnOnJoin);
-    if (this.spawnLocation != null) {
-      this.config.set("spawn.location", Utils.toString(this.spawnLocation));
+    private void load() {
+        this.teleportToSpawnOnJoin = this.config.getBoolean("spawn.teleportOnJoin", false);
+        if (this.config.isSet("spawn.location")) {
+            this.spawnLocation = Utils.fromString(this.config.getString("spawn.location"));
+        }
+
+        this.prefix = this.getConfig().getString("prefix", "&c&lApex&r");
     }
-    this.saveConfig();
-  }
 
-  private void saveConfig() {
-    this.apexCore.saveConfig();
-  }
+    public void save() {
+        this.config.set("spawn.teleportOnJoin", this.teleportToSpawnOnJoin);
+        if (this.spawnLocation != null) {
+            this.config.set("spawn.location", Utils.toString(this.spawnLocation));
+        }
+        this.saveConfig();
+    }
 
-  public FileConfiguration getConfig() {
-    return this.config;
-  }
+    private void saveConfig() {
+        this.apexCore.saveConfig();
+    }
 
-  public Location getSpawnLocation() {
-    return this.spawnLocation;
-  }
+    public FileConfiguration getConfig() {
+        return this.config;
+    }
 
-  public void setSpawnLocation(Location spawnLocation) {
-    this.spawnLocation = spawnLocation;
-  }
+    public Location getSpawnLocation() {
+        return this.spawnLocation;
+    }
 
-  public boolean isSpawnSet() {
-    return this.spawnLocation != null;
-  }
+    public void setSpawnLocation(Location spawnLocation) {
+        this.spawnLocation = spawnLocation;
+    }
 
-  public boolean shouldTeleportToSpawnOnJoin() {
-    return this.teleportToSpawnOnJoin;
-  }
+    public boolean isSpawnSet() {
+        return this.spawnLocation != null;
+    }
 
-  public void setTeleportToSpawnOnJoin(boolean teleportToSpawnOnJoin) {
-    this.teleportToSpawnOnJoin = teleportToSpawnOnJoin;
-  }
+    public boolean shouldTeleportToSpawnOnJoin() {
+        return this.teleportToSpawnOnJoin;
+    }
+
+    public void setTeleportToSpawnOnJoin(boolean teleportToSpawnOnJoin) {
+        this.teleportToSpawnOnJoin = teleportToSpawnOnJoin;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
 }

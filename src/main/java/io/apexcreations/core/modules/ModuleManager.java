@@ -1,6 +1,5 @@
 package io.apexcreations.core.modules;
 
-import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.cache.ApexMapCache;
 import io.apexcreations.core.modules.chat.ChatModule;
@@ -16,10 +15,10 @@ public class ModuleManager {
     private final ApexMapCache<String, Module> moduleCache = new ApexMapCache<>(true);
     private final FileConfiguration config;
     private final File file;
-    @Inject
     private ApexCore apexCore;
 
-    public ModuleManager() {
+    public ModuleManager(ApexCore apexCore) {
+        this.apexCore = apexCore;
         this.apexCore.saveResource(this.apexCore.getDataFolder() + "/modules/modules.yml", false);
         this.file = new File(this.apexCore.getDataFolder(), "/modules/modules.yml");
         this.config = YamlConfiguration.loadConfiguration(this.file);
@@ -27,11 +26,11 @@ public class ModuleManager {
 
     public void handleModules() {
         this.register(
-                new ChatModule(config, "Chat", "Handles all chat related activities"),
+                new ChatModule(apexCore, config, "Chat", "Handles all chat related activities"),
 
-                new StaffModule(config, "Staff", "For things like staff chat and staff mode"),
+                new StaffModule(apexCore, config, "Staff", "For things like staff chat and staff mode"),
 
-                new EconomyModule(config, "Economy", "For player balances and server economy"));
+                new EconomyModule(apexCore, config, "Economy", "For player balances and server economy"));
     }
 
     public void handleFullTermination() {

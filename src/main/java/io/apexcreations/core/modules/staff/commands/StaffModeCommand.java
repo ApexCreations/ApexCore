@@ -1,18 +1,18 @@
 package io.apexcreations.core.modules.staff.commands;
 
+import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.ApexCommand;
 import io.apexcreations.core.players.ApexPlayer;
+import java.util.Optional;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Optional;
-
 public class StaffModeCommand extends ApexCommand {
     
-    public StaffModeCommand(String name, String description, String permission, boolean playerOnly, String... aliases) {
-        super(name, description, permission, playerOnly, aliases);
+    public StaffModeCommand(ApexCore apexCore, String name, String description, String permission, boolean playerOnly, String... aliases) {
+        super(apexCore, name, description, permission, playerOnly, aliases);
     }
     
     @Override

@@ -1,62 +1,60 @@
 package io.apexcreations.core.commands;
 
-import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
-import io.apexcreations.core.modules.economy.commands.BalanceCommand;
-import io.apexcreations.core.modules.chat.commands.ClearChatCommand;
-import io.apexcreations.core.modules.economy.commands.EconomyCommand;
 import io.apexcreations.core.commands.command.SetSpawnCommand;
 import io.apexcreations.core.commands.command.SpawnCommand;
 import io.apexcreations.core.commands.command.TeleportCommand;
+import io.apexcreations.core.modules.chat.commands.ClearChatCommand;
+import io.apexcreations.core.modules.economy.commands.BalanceCommand;
+import io.apexcreations.core.modules.economy.commands.EconomyCommand;
 import io.apexcreations.core.modules.staff.commands.StaffChatCommand;
+import io.apexcreations.core.modules.staff.commands.StaffModeCommand;
 import java.lang.reflect.Field;
 import java.util.HashMap;
-
-import io.apexcreations.core.modules.staff.commands.StaffModeCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
 
 public class CommandHandler {
 
-  @Inject
   private ApexCore apexCore;
   private CommandMap commandMap;
 
-  public CommandHandler() {
+  public CommandHandler(ApexCore apexCore) {
+    this.apexCore = apexCore;
     this.accessCommandMap();
   }
 
-  public void handleCommands() {
+    public void handleCommands() {
     this.register(
-        new StaffChatCommand("staffchat",
+        new StaffChatCommand(apexCore, "staffchat",
             "Use this for staff chat",
             "apex.staffchat", true, "sc"),
 
-        new SetSpawnCommand("setspawn",
+        new SetSpawnCommand(apexCore,"setspawn",
             "Set the spawn for the server/world",
             "apex.setspawn", true, "ss"),
 
-        new SpawnCommand("spawn", "Teleport to spawn",
+        new SpawnCommand(apexCore, "spawn", "Teleport to spawn",
             "apex.spawn", true),
 
-        new BalanceCommand("balance",
+        new BalanceCommand(apexCore, "balance",
             "Check a player's balance!",
             "apex.balance", false, "bal", "money"),
 
-        new EconomyCommand("economy",
+        new EconomyCommand(apexCore, "economy",
             "Manage your player's balance!",
             "apex.economy", false, "eco"),
 
-        new ClearChatCommand("clearchat",
+        new ClearChatCommand(apexCore, "clearchat",
             "Clear global chat!",
             "apex.clearchat", false, "cc"),
 
-        new TeleportCommand("teleport",
+        new TeleportCommand(apexCore, "teleport",
             "Teleport to a player",
             "apex.teleport", true, "tp"));
         
-        new StaffModeCommand("staffmode",
+        new StaffModeCommand(apexCore, "staffmode",
                 "Toggles your staff mode",
                 "apex.staffmode", true, "sm");
   }

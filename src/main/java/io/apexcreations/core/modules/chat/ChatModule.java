@@ -1,6 +1,7 @@
 package io.apexcreations.core.modules.chat;
 
 
+import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.modules.Module;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -10,8 +11,8 @@ public class ChatModule extends Module {
   private boolean chatSlowed, chatStopped;
   private int slowTime;
 
-  public ChatModule(FileConfiguration config, String name, String description) {
-    super(config, name, description);
+  public ChatModule(ApexCore apexCore, FileConfiguration config, String name, String description) {
+    super(apexCore, config, name, description);
   }
 
   @Override

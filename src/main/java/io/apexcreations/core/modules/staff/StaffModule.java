@@ -1,12 +1,13 @@
 package io.apexcreations.core.modules.staff;
 
+import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.modules.Module;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class StaffModule extends Module {
 
-  public StaffModule(FileConfiguration config, String name, String description) {
-    super(config, name, description);
+  public StaffModule(ApexCore apexCore, FileConfiguration config, String name, String description) {
+    super(apexCore, config, name, description);
   }
 
   @Override

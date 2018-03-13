@@ -1,4 +1,4 @@
-package io.apexcreations.core.main.cache;
+package io.apexcreations.core.cache;
 
 import java.util.Collections;
 import java.util.HashSet;

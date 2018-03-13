@@ -1,6 +1,5 @@
 package io.apexcreations.core.modules.economy;
 
-import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.exceptions.MaxMoneyException;
 import io.apexcreations.core.modules.economy.account.Account;
@@ -19,13 +18,13 @@ import org.bukkit.OfflinePlayer;
  * Please avoid using any of the deprecated methods as they are <b>NOT</b> implemented.
  */
 public class ApexEconomy implements Economy {
-  @Inject
   private ApexCore apexCore;
   
   private final EconomyModule economyModule;
   
-  public ApexEconomy(EconomyModule economyModule) {
+  public ApexEconomy(ApexCore apexCore, EconomyModule economyModule) {
     this.economyModule = economyModule;
+    this.apexCore = apexCore;
   }
 
   @Override
@@ -167,7 +166,7 @@ public class ApexEconomy implements Economy {
 
     if (!optionalPlayer.isPresent()) {
       this.apexCore.getPlayerCache()
-          .add(offlinePlayer.getUniqueId(), new ApexPlayerImpl(offlinePlayer.getUniqueId()));
+          .add(offlinePlayer.getUniqueId(), new ApexPlayerImpl(apexCore, offlinePlayer.getUniqueId()));
     }
     return true;
   }

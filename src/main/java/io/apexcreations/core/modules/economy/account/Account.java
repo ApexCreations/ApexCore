@@ -1,6 +1,5 @@
 package io.apexcreations.core.modules.economy.account;
 
-import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.exceptions.MaxMoneyException;
 import io.apexcreations.core.modules.Module;
@@ -14,10 +13,10 @@ public class Account {
     private final UUID accountOwner;
     private BigDecimal balance;
     private EconomyModule economyModule;
-    @Inject
     private ApexCore apexCore;
 
-    public Account(UUID accountOwner) {
+    public Account(ApexCore apexCore, UUID accountOwner) {
+        this.apexCore = apexCore;
         this.accountOwner = accountOwner;
         this.load();
     }

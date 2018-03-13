@@ -1,6 +1,7 @@
 package io.apexcreations.core.commands.command;
 
 
+import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.ApexCommand;
 import org.bukkit.command.CommandSender;
@@ -8,9 +9,9 @@ import org.bukkit.entity.Player;
 
 public class SetSpawnCommand extends ApexCommand {
 
-  public SetSpawnCommand(String name, String description, String permission, boolean playerOnly,
+  public SetSpawnCommand(ApexCore apexCore, String name, String description, String permission, boolean playerOnly,
       String... aliases) {
-    super(name, description, permission, playerOnly, aliases);
+    super(apexCore, name, description, permission, playerOnly, aliases);
   }
 
   @Override

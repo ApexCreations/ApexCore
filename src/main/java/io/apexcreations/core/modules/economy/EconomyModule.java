@@ -1,10 +1,7 @@
 package io.apexcreations.core.modules.economy;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
-import io.apexcreations.core.cache.ApexMapCache;
+import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.modules.Module;
-import io.apexcreations.core.players.ApexPlayer;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,13 +12,10 @@ public class EconomyModule extends Module {
     private String currencySymbol, economyName, currencyNameSingular, currencyNamePlural;
     private int maxBalance, minBalance, defaultBalance;
     private ApexEconomy apexEconomy;
-    @Inject
-    @Named("PlayerCache")
-    private ApexMapCache<String, ApexPlayer> playerCache;
 
 
-    public EconomyModule(FileConfiguration config, String name, String description) {
-        super(config, name, description);
+    public EconomyModule(ApexCore apexCore, FileConfiguration config, String name, String description) {
+        super(apexCore, config, name, description);
     }
 
     @Override
@@ -61,7 +55,7 @@ public class EconomyModule extends Module {
 
     private void registerVault() {
         if (Bukkit.getServer().getPluginManager().getPlugin("Vault") != null) {
-            this.apexEconomy = new ApexEconomy(this);
+            this.apexEconomy = new ApexEconomy(this.getPlugin(), this);
             Bukkit.getServer().getServicesManager()
                     .register(Economy.class, this.apexEconomy, this.getPlugin(),
                             ServicePriority.Highest);

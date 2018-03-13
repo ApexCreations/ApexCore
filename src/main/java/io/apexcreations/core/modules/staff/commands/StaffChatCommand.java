@@ -1,5 +1,6 @@
 package io.apexcreations.core.modules.staff.commands;
 
+import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.ApexCommand;
 import io.apexcreations.core.players.ApexPlayer;
@@ -10,9 +11,9 @@ import org.bukkit.entity.Player;
 
 public class StaffChatCommand extends ApexCommand {
 
-  public StaffChatCommand(String name, String description, String permission, boolean playerOnly,
+  public StaffChatCommand(ApexCore apexCore, String name, String description, String permission, boolean playerOnly,
       String... aliases) {
-    super(name, description, permission, playerOnly, aliases);
+    super(apexCore, name, description, permission, playerOnly, aliases);
     this.setUsage(ChatColor.RED + "/" + this.getLabel() + " <message>");
 
   }
@@ -31,7 +32,7 @@ public class StaffChatCommand extends ApexCommand {
 
     if (!optionalPlayer.isPresent()) {
       // Only way this is possible is if they weren't loaded on join
-      MessageBuilder.create("&4Something went wrong, please relog.").withPrefix().send(player);
+      MessageBuilder.create("&4Something went wrong, please relog.").withPrefix(PREFIX).send(player);
       return false;
     }
 
@@ -40,11 +41,11 @@ public class StaffChatCommand extends ApexCommand {
     apexPlayer.setStaffChat(!apexPlayer.isInStaffChat());
 
     if (apexPlayer.isInStaffChat()) {
-      MessageBuilder.create("&eYou are now in staff chat").withPrefix().send(player);
+      MessageBuilder.create("&eYou are now in staff chat").withPrefix(PREFIX).send(player);
       return true;
     }
 
-    MessageBuilder.create("&eYou are no longer in staff chat").withPrefix().send(player);
+    MessageBuilder.create("&eYou are no longer in staff chat").withPrefix(PREFIX).send(player);
     return true;
   }
 }

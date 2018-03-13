@@ -1,6 +1,5 @@
 package io.apexcreations.core.commands;
 
-import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.builders.MessageBuilder;
 import java.util.Arrays;
@@ -15,20 +14,21 @@ public abstract class ApexCommand extends Command {
   private String name;
   private String permission;
   private boolean playerOnly;
-  @Inject
   private ApexCore apexCore;
+  public String PREFIX;
 
-  public ApexCommand(String name) {
-    this(name, false);
+  public ApexCommand(ApexCore apexCore, String name) {
+    this(apexCore, name, false);
   }
 
-  public ApexCommand(String name, boolean playerOnly) {
-    this(name, "Apex Command", "apexcore." + name, playerOnly);
+  public ApexCommand(ApexCore apexCore, String name, boolean playerOnly) {
+    this(apexCore, name, "Apex Command", "apexcore." + name, playerOnly);
   }
 
-  public ApexCommand(String name, String description, String permission, boolean playerOnly,
+  public ApexCommand(ApexCore apexCore, String name, String description, String permission, boolean playerOnly,
       String... aliases) {
     super(name);
+    this.apexCore = apexCore;
     this.name = name;
     this.permission = permission;
     this.setDescription(description);
@@ -36,13 +36,14 @@ public abstract class ApexCommand extends Command {
     this.playerOnly = playerOnly;
     this.setAliases(Arrays.asList(aliases));
     this.setPermissionMessage(ChatColor.RED + "You do not have permission for this command!");
+    this.PREFIX = this.getApexCore().getApexConfigCache().getPrefix();
   }
 
   // Maybe handle usage messages in here in the future
   @Override
   public boolean execute(CommandSender commandSender, String label, String[] args) {
     if (!(commandSender instanceof Player) && this.playerOnly) {
-      MessageBuilder.create("&cThis command is for players only!").withPrefix().send(commandSender);
+      MessageBuilder.create("&cThis command is for players only!").withPrefix(PREFIX).send(commandSender);
       return true;
     }
     if (!commandSender.hasPermission(this.permission)) {
@@ -72,7 +73,7 @@ public abstract class ApexCommand extends Command {
   }
 
   private void sendNoPermission(CommandSender commandSender) {
-    MessageBuilder.create(ChatColor.RED + this.getPermissionMessage()).withPrefix()
+    MessageBuilder.create(ChatColor.RED + this.getPermissionMessage()).withPrefix(PREFIX)
         .send(commandSender);
   }
 

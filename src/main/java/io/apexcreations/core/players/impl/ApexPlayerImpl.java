@@ -1,5 +1,6 @@
 package io.apexcreations.core.players.impl;
 
+import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.modules.economy.account.Account;
 import io.apexcreations.core.players.ApexPlayer;
 import java.util.Collections;
@@ -15,9 +16,9 @@ public class ApexPlayerImpl implements ApexPlayer {
   private final Map<String, Location> homes;
   private boolean staffChat, staffMode;
 
-  public ApexPlayerImpl(UUID uuid) {
+  public ApexPlayerImpl(ApexCore apexCore, UUID uuid) {
     this.uniqueId = uuid;
-    this.account = new Account(this.uniqueId);
+    this.account = new Account(apexCore, this.uniqueId);
     this.homes = new HashMap<>();
   }
 

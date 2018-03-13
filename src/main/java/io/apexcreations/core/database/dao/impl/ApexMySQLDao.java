@@ -72,7 +72,7 @@ public class ApexMySQLDao implements io.apexcreations.core.main.database.dao.Ape
       } catch (SQLException e) {
         e.printStackTrace();
       }
-      ApexPlayer apexPlayer = new ApexPlayerImpl(uniqueId);
+      ApexPlayer apexPlayer = new ApexPlayerImpl(apexCore, uniqueId);
       try {
         apexPlayer.setStaffChat(resultSet.getBoolean("staffChatEnabled"));
         apexPlayer.getAccount().setBalance(resultSet.getBigDecimal("economyBalance"));

@@ -1,5 +1,6 @@
 package io.apexcreations.core.modules.economy.commands.sub;
 
+import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.builders.MessageBuilder;
 import io.apexcreations.core.commands.SubCommand;
 import io.apexcreations.core.exceptions.MaxMoneyException;
@@ -16,9 +17,9 @@ import org.bukkit.entity.Player;
 
 public class EconomyGiveSubCommand extends SubCommand {
 
-  public EconomyGiveSubCommand(String name, String info, String permission, boolean playerOnly,
+  public EconomyGiveSubCommand(ApexCore apexCore, String name, String info, String permission, boolean playerOnly,
       String... aliases) {
-    super(name, info, permission, playerOnly, aliases);
+    super(apexCore, name, info, permission, playerOnly, aliases);
   }
 
   @Override
@@ -51,7 +52,7 @@ public class EconomyGiveSubCommand extends SubCommand {
     ApexPlayer apexPlayer = optionalApexPlayer.get();
 
     if (apexPlayer.getAccount() == null) {
-      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player account!").withPrefix()
+      MessageBuilder.create("&c&lERROR &7&l>> &cCould not find player account!").withPrefix(PREFIX)
           .send(commandSender);
       return;
     }

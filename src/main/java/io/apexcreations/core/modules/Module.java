@@ -1,6 +1,5 @@
 package io.apexcreations.core.modules;
 
-import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
 import java.util.logging.Logger;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,10 +9,10 @@ public abstract class Module {
     private final String name, description;
     private final FileConfiguration config;
     private boolean enabled;
-    @Inject
     private ApexCore apexCore;
 
-    public Module(FileConfiguration config, String name, String description) {
+    public Module(ApexCore apexCore, FileConfiguration config, String name, String description) {
+        this.apexCore = apexCore;
         this.name = name;
         this.description = description;
         this.config = config;

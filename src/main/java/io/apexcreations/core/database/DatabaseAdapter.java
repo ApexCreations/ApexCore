@@ -1,7 +1,7 @@
 package io.apexcreations.core.database;
 
-import com.google.inject.Inject;
 import io.apexcreations.core.ApexCore;
+import io.apexcreations.core.database.MySQL.ConnectionBuilder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,18 +13,17 @@ import org.bukkit.Bukkit;
 public class DatabaseAdapter {
 
   private ExecutorService executor;
-  @Inject
   private ApexCore apexCore;
   private MySQL sql;
 
-  public DatabaseAdapter(String host, int port, String user, String password,
-      String database) {
-    try {
-      this.sql = new MySQL(host, port, user, password, database);
-      this.executor = Executors.newCachedThreadPool();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  private DatabaseAdapter(ApexCore apexCore, MySQL sql) {
+    this.apexCore = apexCore;
+    this.sql = sql;
+    this.executor = Executors.newCachedThreadPool();
+  }
+
+  public DatabaseAdapter(ApexCore apexCore, ConnectionBuilder connectionBuilder) throws Exception {
+    this(apexCore, connectionBuilder.build());
   }
 
   public void update(PreparedStatement statement) {
@@ -76,6 +75,5 @@ public class DatabaseAdapter {
   public MySQL getMySQL() {
     return this.sql;
   }
-
   // TODO: Mongo
 }
