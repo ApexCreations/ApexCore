@@ -1,6 +1,5 @@
 package io.apexcreations.core.builders;
 
-import io.apexcreations.core.ApexCore;
 import java.util.Arrays;
 import java.util.function.Consumer;
 import org.bukkit.Bukkit;
@@ -11,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 public class InventoryBuilder implements Listener {
 
@@ -80,6 +80,10 @@ public class InventoryBuilder implements Listener {
     return this;
   }
 
+  public int getEmptySlot() {
+    return this.inventory.firstEmpty();
+  }
+
   private String translate(String s) {
     return ChatColor.translateAlternateColorCodes('&', s);
   }
@@ -96,8 +100,8 @@ public class InventoryBuilder implements Listener {
     return this.inventory;
   }
 
-  public InventoryBuilder registerAsListener(ApexCore apexCore) {
-    Bukkit.getServer().getPluginManager().registerEvents(this, apexCore);
+  public InventoryBuilder registerAsListener(Plugin plugin) {
+    Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
     return this;
   }
 
