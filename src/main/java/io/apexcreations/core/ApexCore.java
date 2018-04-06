@@ -18,7 +18,7 @@ public class ApexCore extends JavaPlugin {
 
     private final ApexMapCache<String, SubCommand> subCommandCache = new ApexMapCache<>(true);
     private final ApexMapCache<UUID, ApexPlayer> apexPlayerCache = new ApexMapCache<>(true);
-    private final ApexConfigCache apexConfigCache = new ApexConfigCache(this);
+    private ApexConfigCache apexConfigCache;
     private CommandHandler commandHandler;
     private DatabaseAdapter databaseAdapter;
     private ModuleManager moduleManager;
@@ -26,6 +26,7 @@ public class ApexCore extends JavaPlugin {
     @Override
     public void onEnable() {
         this.saveDefaultConfig();
+        this.apexConfigCache = new ApexConfigCache(this);
         this.handleDatabase();
         this.handleListeners();
         this.commandHandler = new CommandHandler(this);

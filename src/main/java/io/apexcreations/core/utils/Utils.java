@@ -16,16 +16,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Utils {
 
-    private static DecimalFormat decimalFormat;
+    private static DecimalFormat DECIMAL_FORMAT = new DecimalFormat();
 
-    private static DecimalFormat getDecimalFormat() {
-        if (decimalFormat == null) {
-            decimalFormat = new DecimalFormat();
-            decimalFormat.setMaximumFractionDigits(2);
-            decimalFormat.setMinimumFractionDigits(0);
-            decimalFormat.setGroupingUsed(false);
-        }
-        return decimalFormat;
+    static {
+        DECIMAL_FORMAT.setMaximumFractionDigits(2);
+        DECIMAL_FORMAT.setMinimumFractionDigits(0);
+        DECIMAL_FORMAT.setGroupingUsed(false);
     }
 
     public static boolean isDouble(String s) {
@@ -61,13 +57,15 @@ public class Utils {
     }
 
     public static String toString(Location location) {
-        return (location.getWorld().getName() + ":" + location.getX()
+        return (location
+                .getWorld().getName() + ":" +
+                location.getX()
                 + ":" + location.getY() + ":" + location.getZ() + ":"
                 + location.getYaw() + ":" + location.getPitch());
     }
 
     public static String formatCurrency(BigDecimal bigDecimal) {
-        return getDecimalFormat().format(bigDecimal);
+        return DECIMAL_FORMAT.format(bigDecimal);
     }
 
     public static Location fromString(String string) {

@@ -25,7 +25,7 @@ public class JoinEvent implements Listener {
 
         if (this.apexCore.getApexConfigCache().isSpawnSet() &&
                 this.apexCore.getApexConfigCache().shouldTeleportToSpawnOnJoin()) {
-            player.teleport(this.apexCore.getApexConfigCache().getSpawnLocation());
+            player.teleport(this.apexCore.getApexConfigCache().getSpawnLocation().clone());
         }
     }
 }

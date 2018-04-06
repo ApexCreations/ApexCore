@@ -19,7 +19,7 @@ public class ModuleManager {
 
     public ModuleManager(ApexCore apexCore) {
         this.apexCore = apexCore;
-        this.apexCore.saveResource(this.apexCore.getDataFolder() + "/modules/modules.yml", false);
+        this.apexCore.saveResource("modules/modules.yml", false);
         this.file = new File(this.apexCore.getDataFolder(), "/modules/modules.yml");
         this.config = YamlConfiguration.loadConfiguration(this.file);
     }
@@ -28,9 +28,11 @@ public class ModuleManager {
         this.register(
                 new ChatModule(apexCore, config, "Chat", "Handles all chat related activities"),
 
-                new StaffModule(apexCore, config, "Staff", "For things like staff chat and staff mode"),
+                new StaffModule(apexCore, config, "Staff",
+                        "For things like staff chat and staff mode"),
 
-                new EconomyModule(apexCore, config, "Economy", "For player balances and server economy"));
+                new EconomyModule(apexCore, config, "Economy",
+                        "For player balances and server economy"));
     }
 
     public void handleFullTermination() {
@@ -45,7 +47,9 @@ public class ModuleManager {
     private void register(Module module) {
         if (!this.config.isSet(module.getName())) {
             this.apexCore.getLogger()
-                    .warning("Could not find configuration section for module `%s`. Disabling...");
+                    .warning(String.format(
+                            "Could not find configuration section for module `%s`. Disabling...",
+                            module.getName()));
             module.setEnabled(false);
             return;
         }
