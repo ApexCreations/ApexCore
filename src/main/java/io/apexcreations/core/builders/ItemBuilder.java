@@ -1,4 +1,4 @@
-package io.apexcreations.core.main.builders;
+package io.apexcreations.core.builders;
 
 import java.util.ArrayList;
 import java.util.Arrays;

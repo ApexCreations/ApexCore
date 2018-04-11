@@ -15,7 +15,6 @@ public class TeleportCommand extends ApexCommand {
       String... aliases) {
     super(apexCore, name, description, permission, playerOnly, aliases);
     this.setUsage(ChatColor.RED + "/" + this.getLabel() + " <player>");
-
   }
 
   @Override

@@ -3,7 +3,6 @@ package io.apexcreations.core;
 import io.apexcreations.core.cache.ApexConfigCache;
 import io.apexcreations.core.cache.ApexMapCache;
 import io.apexcreations.core.commands.CommandHandler;
-import io.apexcreations.core.commands.SubCommand;
 import io.apexcreations.core.database.DatabaseAdapter;
 import io.apexcreations.core.database.MySQL;
 import io.apexcreations.core.listeners.JoinEvent;
@@ -15,8 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ApexCore extends JavaPlugin {
-
-    private final ApexMapCache<String, SubCommand> subCommandCache = new ApexMapCache<>(true);
     private final ApexMapCache<UUID, ApexPlayer> apexPlayerCache = new ApexMapCache<>(true);
     private ApexConfigCache apexConfigCache;
     private CommandHandler commandHandler;
@@ -84,10 +81,6 @@ public class ApexCore extends JavaPlugin {
 
     public ApexMapCache<UUID, ApexPlayer> getPlayerCache() {
         return this.apexPlayerCache;
-    }
-
-    public ApexMapCache<String, SubCommand> getSubCommandCache() {
-        return this.subCommandCache;
     }
 
     public CommandHandler getCommandHandler() {

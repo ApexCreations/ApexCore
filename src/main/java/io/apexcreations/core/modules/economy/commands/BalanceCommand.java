@@ -19,7 +19,7 @@ public class BalanceCommand extends ApexCommand {
             boolean playerOnly,
             String... aliases) {
         super(apexCore, name, description, permission, playerOnly, aliases);
-        this.getApexCore().getSubCommandCache().add("other",
+        this.getSubCommandCache().add("other",
                 new BalancePlayerSubCommand(apexCore, "other", "Check the balance of a player's account!",
                         "apex.balance.other", false));
     }

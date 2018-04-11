@@ -2,6 +2,7 @@ package io.apexcreations.core.commands;
 
 import io.apexcreations.core.ApexCore;
 import io.apexcreations.core.builders.MessageBuilder;
+import io.apexcreations.core.cache.ApexMapCache;
 import java.util.Arrays;
 import java.util.Optional;
 import org.bukkit.ChatColor;
@@ -11,6 +12,7 @@ import org.bukkit.entity.Player;
 
 public abstract class ApexCommand extends Command {
 
+  private final ApexMapCache<String, SubCommand> subCommandCache = new ApexMapCache<>(true);
   private String name;
   private String permission;
   private boolean playerOnly;
@@ -69,7 +71,11 @@ public abstract class ApexCommand extends Command {
   public abstract boolean executeCommand(CommandSender commandSender, String label, String[] args);
 
   private Optional<SubCommand> getSubCommand(String args) {
-    return this.getApexCore().getSubCommandCache().get(args);
+    return this.getSubCommandCache().get(args);
+  }
+
+  public ApexMapCache<String, SubCommand> getSubCommandCache() {
+    return this.subCommandCache;
   }
 
   private void sendNoPermission(CommandSender commandSender) {
